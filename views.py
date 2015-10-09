@@ -13,3 +13,12 @@ def index(request):
 			'userid': get_user(request).id,
 			'username': get_user(request).username,
 			})
+
+def signin(request):
+	pass
+
+def signout(request):
+	pass
+
+def quiz(request):
+	pass

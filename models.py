@@ -3,15 +3,16 @@ from django.contrib.auth.models import User
 
 
 class Teacher(User):
-	number_of_quizzes = models.IntegerField(default=0)
+	number_of_annals = models.IntegerField(default=0)
 
 	def __str__(self):
 		return self.username
 
 
-class Quiz(models.Model):
+class Annal(models.Model):
+	# An annal is the container of questions and their answers
 	teacher = models.ForeignKey(Teacher)
-	quiz_name = models.CharField(max_length=128)
+	annal_name = models.CharField(max_length=128)
 	created = models.DateTimeField()
 	enabled = models.BooleanField(default=True)
 	number_of_questions = models.IntegerField(default=0)
@@ -21,7 +22,7 @@ class Quiz(models.Model):
 
 
 class Question(models.Model):
-	quiz = models.ForeignKey(Quiz)
+	annal = models.ForeignKey(Annal)
 	question_text = models.CharField(max_length=512)
 	# question_type: 0 for written answer, 1 for m-choice, 2 for m-choice m-answer
 	question_type = models.IntegerField(default=1)
@@ -59,11 +60,11 @@ class Student(models.Model):
 		return self.student_name
 
 
-class Result(models.Model):
+class Quiz(models.Model):
 	student = models.ForeignKey(Student)
-	quiz = models.ForeignKey(Quiz)
-	secret_code = models.CharField(max_length=16)
+	annal = models.ForeignKey(Annal)
+	quiz_code = models.CharField(max_length=16)
 	score = models.IntegerField(default=0)
 
 	def __str__(self):
-		return student + " :: " + quiz + " :: " + str(score)
+		return student + " :: " + annal + " :: " + str(score)
