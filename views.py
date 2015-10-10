@@ -22,8 +22,11 @@ def signin(request):
 					password=request.POST['password'])
 				if user and user.is_active:
 					# account exists and is enabled
-					return render(request, "what/index.html",
-						{"message": "login_success"})
+					return render(request, "what/index.html", {
+						"message": "login_success",
+						"userid": get_user(request).id,
+						"username": get_user(request).username,
+						})
 				elif user:
 					# account exists but is disabled
 					return render(request, "what/login.html",
@@ -43,4 +46,24 @@ def signout(request):
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
 def quiz(request, quiz_code):
-	pass
+	try:
+		quiz = Quiz.objects.get(quiz_code=quiz_code)
+		if quiz:
+			questions = Question.objects.filter(annal=quiz.annal)
+			answers = []
+			for q in questions:
+				answers.append(Question.objects.filter(question=q))
+			return render(request, "what/quiz.html", {
+				"quiz": quiz,
+				"student": quiz.student,
+				"questions": questions,
+				"answer": answers,
+				})
+	except DoesNotExist:
+		return render(request, "what/quiz.html", {
+			"quiz_code": quiz_code,
+			"message": "invalid_code",
+			})
+	except MultipleObjectsReturned:
+		# shouldn't happen because quiz_code must be unique
+		raise

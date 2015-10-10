@@ -15,6 +15,8 @@ class Annal(models.Model):
 	annal_name = models.CharField(max_length=128)
 	created = models.DateTimeField()
 	enabled = models.BooleanField(default=True)
+	auto_disable = models.BooleanField(default=False)
+	auto_disable_date = models.DateTimeField(null=True, blank=True)
 	# Annal duration is in seconds
 	annal_duration = models.IntegerField(default=300)
 	number_of_questions = models.IntegerField(default=0)
