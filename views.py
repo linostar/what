@@ -18,7 +18,8 @@ def signin(request):
 	pass
 
 def signout(request):
-	pass
+	logout(request)
+	return render(request, "what/logout.html", {"message": "logout"})
 
-def quiz(request):
+def quiz(request, quiz_code):
 	pass
