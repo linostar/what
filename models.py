@@ -15,10 +15,13 @@ class Annal(models.Model):
 	annal_name = models.CharField(max_length=128)
 	created = models.DateTimeField()
 	enabled = models.BooleanField(default=True)
+	# Annal duration is in seconds
+	annal_duration = models.IntegerField(default=300)
 	number_of_questions = models.IntegerField(default=0)
+	show_correct_answers_at_end = models.BooleanField(default=False)
 
 	def __str__(self):
-		return self.quiz_name
+		return self.annal_name
 
 
 class Question(models.Model):
