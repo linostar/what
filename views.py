@@ -15,11 +15,32 @@ def index(request):
 			})
 
 def signin(request):
-	pass
+	try:
+		if request.method == "POST":
+			if request.POST['username'] and request.POST['password']:
+				user = authenticate(username=request.POST['username'],
+					password=request.POST['password'])
+				if user and user.is_active:
+					# account exists and is enabled
+					return render(request, "what/index.html",
+						{"message": "login_success"})
+				elif user:
+					# account exists but is disabled
+					return render(request, "what/login.html",
+						{"message": "account_disabled"})
+				else:
+					# username or password incorrect
+					return render(request, "what/login.html",
+						{"message": "login_error"})
+		else:
+			# show the login form
+			return render(request, "what/login.html")
+	except KeyError:
+		return render(request, "what/login.html", {"message": "login_missing"})
 
 def signout(request):
 	logout(request)
-	return render(request, "what/logout.html", {"message": "logout"})
+	return render(request, "what/logout.html", {"message": "logout_success"})
 
 def quiz(request, quiz_code):
 	pass
