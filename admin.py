@@ -3,7 +3,7 @@ from django.contrib import admin
 from what.models import Teacher, Student, Quiz, Annal, Question, Answer
 
 class AnnalAdmin(admin.ModelAdmin):
-	list_display = ["annal_name", "teacher", "enabled"]
+	list_display = ["annal_name", "teacher", "enabled", "created_on"]
 	search_fields = ["annal_name"]
 
 

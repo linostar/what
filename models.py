@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -14,7 +16,7 @@ class Annal(models.Model):
 	# An annal is the container of questions and their answers
 	teacher = models.ForeignKey(Teacher)
 	annal_name = models.CharField(max_length=128)
-	created = models.DateTimeField()
+	created_on = models.DateTimeField(default=datetime.now)
 	enabled = models.BooleanField(default=True)
 	auto_disable = models.BooleanField(default=False)
 	auto_disable_date = models.DateTimeField(null=True, blank=True)
