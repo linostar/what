@@ -52,7 +52,7 @@ def quiz(request, quiz_code):
 			questions = Question.objects.filter(annal=quiz.annal)
 			answers = []
 			for q in questions:
-				answers.append(Question.objects.filter(question=q))
+				answers.append(Answer.objects.filter(question=q))
 			return render(request, "what/quiz.html", {
 				"quiz": quiz,
 				"student": quiz.student,
@@ -64,6 +64,6 @@ def quiz(request, quiz_code):
 			"quiz_code": quiz_code,
 			"message": "invalid_code",
 			})
-	except MultipleObjectsReturned:
+	except Quiz.MultipleObjectsReturned:
 		# shouldn't happen because quiz_code must be unique
 		raise
