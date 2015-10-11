@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user
 
-from Interactive.what.models import Teacher, Student, Quiz, Question, Answer, Result
+from what.models import Teacher, Student, Quiz, Question, Answer, Annal
 
 def index(request):
 	if not request.user.is_authenticated():
@@ -59,7 +59,7 @@ def quiz(request, quiz_code):
 				"questions": questions,
 				"answer": answers,
 				})
-	except DoesNotExist:
+	except Quiz.DoesNotExist:
 		return render(request, "what/quiz.html", {
 			"quiz_code": quiz_code,
 			"message": "invalid_code",
