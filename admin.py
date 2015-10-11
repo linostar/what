@@ -22,11 +22,23 @@ class AnswerAdmin(admin.ModelAdmin):
 
 
 class TeacherAdmin(admin.ModelAdmin):
-	list_display = ["user"]
+	list_display = ["get_user"]
+
+	def get_user(self, obj):
+		return obj.user.username
+
+	get_user.short_description = "Teacher"
+	get_user.admin_order_field = "user__username"
 
 
 class QuizAdmin(admin.ModelAdmin):
-	list_display = ["student", "annal", "score"]
+	list_display = ["get_student", "annal", "score"]
+
+	def get_student(self, obj):
+		return obj.student.student_name
+
+	get_student.short_description = "Quiz for"
+	get_student.admin_order_field = "student__student_name"
 
 
 admin.site.register(Annal, AnnalAdmin)
