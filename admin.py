@@ -13,8 +13,9 @@ class AnnalAdmin(admin.ModelAdmin):
 		return super().get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):
-		obj.teacher.number_of_annals += 1
-		obj.teacher.save()
+		if not obj.id:
+			obj.teacher.number_of_annals += 1
+			obj.teacher.save()
 		obj.save()
 
 	def delete_model(self, request, obj):
@@ -37,8 +38,9 @@ class QuestionAdmin(admin.ModelAdmin):
 		return obj.question_text
 
 	def save_model(self, request, obj, form, change):
-		obj.annal.number_of_questions += 1
-		obj.annal.save()
+		if not obj.id:
+			obj.annal.number_of_questions += 1
+			obj.annal.save()
 		obj.save()
 
 	def delete_model(self, request, obj):
@@ -105,8 +107,9 @@ class QuizAdmin(admin.ModelAdmin):
 		return super().get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):
-		obj.student.number_of_quizzes += 1
-		obj.student.save()
+		if not obj.id:
+			obj.student.number_of_quizzes += 1
+			obj.student.save()
 		obj.save()
 
 	def delete_model(self, request, obj):
