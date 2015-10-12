@@ -97,11 +97,14 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class QuizAdmin(admin.ModelAdmin):
-	list_display = ["quiz_code", "get_student", "annal", "score"]
+	list_display = ["get_url", "get_student", "annal", "score"]
 	actions = ["delete_selected"]
 
 	def get_student(self, obj):
 		return obj.student.student_name
+
+	def get_url(self, obj):
+		return Utils.get_quiz_url(obj.quiz_code)
 
 	def get_form(self, request, obj=None, **kwargs):
 		self.exclude = ["quiz_code", "score"]
@@ -127,6 +130,8 @@ class QuizAdmin(admin.ModelAdmin):
 
 	get_student.short_description = "Quiz for"
 	get_student.admin_order_field = "student__student_name"
+	get_url.short_description = "Quiz link"
+	get_url.admin_order_field = "quiz_code"
 
 
 admin.site.register(Annal, AnnalAdmin)
