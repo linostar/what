@@ -21,4 +21,4 @@ class Utils:
 
 	@staticmethod
 	def get_result_url(code):
-		return Utils.SITE_URL + "/result/" + code
+		return Utils.SITE_URL + "/quiz/result/" + code

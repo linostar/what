@@ -58,9 +58,29 @@ def quiz(request, quiz_code):
 				"student": quiz.student,
 				"questions": questions,
 				"answer": answers,
+				"message": "show_quiz",
 				})
 	except Quiz.DoesNotExist:
 		return render(request, "what/quiz.html", {
+			"quiz_code": quiz_code,
+			"message": "invalid_code",
+			})
+	except Quiz.MultipleObjectsReturned:
+		# shouldn't happen because quiz_code must be unique
+		raise
+
+def result(request, quiz_code):
+	try:
+		quiz = Quiz.objects.get(quiz_code=quiz_code)
+		if quiz:
+			return render(request, "what/result.html", {
+				"quiz_code": quiz_code,
+				"score": quiz.score,
+				"student": quiz.student,
+				"message": "show_result",
+				})
+	except Quiz.DoesNotExist:
+		return render(request, "what/result.html", {
 			"quiz_code": quiz_code,
 			"message": "invalid_code",
 			})
