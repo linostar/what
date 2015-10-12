@@ -5,6 +5,17 @@ from django.contrib.auth import authenticate, login, logout, get_user
 
 from what.models import Teacher, Student, Quiz, Question, Answer, Annal
 
+
+def handler404(request):
+	response = render(request, "what/404.html")
+	response.status_code = 404
+	return response
+
+def handler500(request):
+	response = render(request, "what/500.html")
+	response.status_code = 500
+	return response
+
 def index(request):
 	if not request.user.is_authenticated():
 		return redirect("login")
