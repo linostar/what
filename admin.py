@@ -32,7 +32,7 @@ class AnnalAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-	list_display = ["get_question", "annal"]
+	list_display = ["get_question", "points_rewarded", "annal"]
 	actions = ["delete_selected"]
 
 	def get_question(self, obj):
@@ -97,7 +97,8 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class QuizAdmin(admin.ModelAdmin):
-	list_display = ["get_url", "get_student", "annal", "score"]
+	list_display = ["get_url", "get_student", "annal", "score",
+	"max_score", "number_of_questions"]
 	actions = ["delete_selected"]
 
 	def get_student(self, obj):
@@ -107,7 +108,7 @@ class QuizAdmin(admin.ModelAdmin):
 		return Utils.get_quiz_url(obj.quiz_code)
 
 	def get_form(self, request, obj=None, **kwargs):
-		self.exclude = ["quiz_code", "score"]
+		self.exclude = ["quiz_code", "score", "max_score"]
 		return super().get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):

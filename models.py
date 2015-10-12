@@ -34,6 +34,7 @@ class Question(models.Model):
 	question_text = models.CharField(max_length=512)
 	# question_type: 0 for written answer, 1 for m-choice, 2 for m-choice m-answer
 	question_type = models.IntegerField(default=1)
+	points_rewarded = models.IntegerField(default=1)
 
 	def __str__(self):
 		# use truncated question_text
@@ -73,3 +74,5 @@ class Quiz(models.Model):
 	annal = models.ForeignKey(Annal)
 	quiz_code = models.CharField(max_length=16)
 	score = models.IntegerField(default=0)
+	max_score = models.IntegerField(default=0)
+	number_of_questions = models.IntegerField(default=0)

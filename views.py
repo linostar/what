@@ -76,6 +76,8 @@ def result(request, quiz_code):
 			return render(request, "what/result.html", {
 				"quiz_code": quiz_code,
 				"score": quiz.score,
+				"max_score": quiz.max_score,
+				"number_of_questions": quiz.number_of_questions,
 				"student": quiz.student,
 				"message": "show_result",
 				})
