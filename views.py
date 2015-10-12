@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user
@@ -47,31 +47,37 @@ def signout(request):
 
 def quiz(request, quiz_code):
 	try:
-		quiz = Quiz.objects.get(quiz_code=quiz_code)
-		if quiz:
-			questions = Question.objects.filter(annal=quiz.annal)
-			answers = []
-			for q in questions:
-				answers.append(Answer.objects.filter(question=q))
-			return render(request, "what/quiz.html", {
-				"quiz": quiz,
-				"student": quiz.student,
-				"questions": questions,
-				"answer": answers,
-				"message": "show_quiz",
-				})
-	except Quiz.DoesNotExist:
-		return render(request, "what/quiz.html", {
-			"quiz_code": quiz_code,
-			"message": "invalid_code",
-			})
+		if request.method == "POST":
+			pass
+			return redirect("result", quiz_code=quiz_code)
+		else:
+			# quiz = Quiz.objects.get(quiz_code=quiz_code)
+			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
+			if quiz:
+				questions = Question.objects.filter(annal=quiz.annal)
+				answers = []
+				for q in questions:
+					answers.append(Answer.objects.filter(question=q))
+				return render(request, "what/quiz.html", {
+					"quiz": quiz,
+					"student": quiz.student,
+					"questions": questions,
+					"answer": answers,
+					"message": "show_quiz",
+					})
+	# except Quiz.DoesNotExist:
+	# 	return render(request, "what/quiz.html", {
+	# 		"quiz_code": quiz_code,
+	# 		"message": "invalid_code",
+	# 		})
 	except Quiz.MultipleObjectsReturned:
 		# shouldn't happen because quiz_code must be unique
 		raise
 
 def result(request, quiz_code):
 	try:
-		quiz = Quiz.objects.get(quiz_code=quiz_code)
+		# quiz = Quiz.objects.get(quiz_code=quiz_code)
+		quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 		if quiz:
 			return render(request, "what/result.html", {
 				"quiz_code": quiz_code,
@@ -81,11 +87,11 @@ def result(request, quiz_code):
 				"student": quiz.student,
 				"message": "show_result",
 				})
-	except Quiz.DoesNotExist:
-		return render(request, "what/result.html", {
-			"quiz_code": quiz_code,
-			"message": "invalid_code",
-			})
+	# except Quiz.DoesNotExist:
+	# 	return render(request, "what/result.html", {
+	# 		"quiz_code": quiz_code,
+	# 		"message": "invalid_code",
+	# 		})
 	except Quiz.MultipleObjectsReturned:
 		# shouldn't happen because quiz_code must be unique
 		raise
