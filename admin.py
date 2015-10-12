@@ -6,6 +6,7 @@ class AnnalAdmin(admin.ModelAdmin):
 	list_display = ["annal_name", "teacher", "enabled", "number_of_questions",
 	"created_on"]
 	search_fields = ["annal_name"]
+	actions = ["delete_selected"]
 
 	def get_form(self, request, obj=None, **kwargs):
 		self.exclude = ["created_on", "number_of_questions"]
@@ -21,9 +22,16 @@ class AnnalAdmin(admin.ModelAdmin):
 		obj.teacher.save()
 		obj.delete()
 
+	def delete_selected(self, request, queryset):
+		for obj in queryset:
+			obj.teacher.number_of_annals -= 1
+			obj.teacher.save()
+			obj.delete()
+
 
 class QuestionAdmin(admin.ModelAdmin):
 	list_display = ["get_question", "annal"]
+	actions = ["delete_selected"]
 
 	def get_question(self, obj):
 		return obj.question_text
@@ -37,6 +45,12 @@ class QuestionAdmin(admin.ModelAdmin):
 		obj.annal.number_of_questions -= 1
 		obj.annal.save()
 		obj.delete()
+
+	def delete_selected(self, request, queryset):
+		for obj in queryset:
+			obj.annal.number_of_questions -= 1
+			obj.annal.save()
+			obj.delete()
 
 	get_question.short_description = "Question"
 	get_question.admin_order_field = "question_text"
@@ -81,6 +95,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 class QuizAdmin(admin.ModelAdmin):
 	list_display = ["get_student", "annal", "score"]
+	actions = ["delete_selected"]
 
 	def get_student(self, obj):
 		return obj.student.student_name
@@ -98,6 +113,12 @@ class QuizAdmin(admin.ModelAdmin):
 		obj.student.number_of_quizzes -= 1
 		obj.student.save()
 		obj.delete()
+
+	def delete_selected(self, request, queryset):
+		for obj in queryset:
+			obj.student.number_of_quizzes -= 1
+			obj.student.save()
+			obj.delete()
 
 	get_student.short_description = "Quiz for"
 	get_student.admin_order_field = "student__student_name"
