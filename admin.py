@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from what.utils import Utils
 from what.models import Teacher, Student, Quiz, Annal, Question, Answer
 
 class AnnalAdmin(admin.ModelAdmin):
@@ -96,7 +97,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class QuizAdmin(admin.ModelAdmin):
-	list_display = ["get_student", "annal", "score"]
+	list_display = ["quiz_code", "get_student", "annal", "score"]
 	actions = ["delete_selected"]
 
 	def get_student(self, obj):
@@ -108,6 +109,7 @@ class QuizAdmin(admin.ModelAdmin):
 
 	def save_model(self, request, obj, form, change):
 		if not obj.id:
+			obj.quiz_code = Utils.generate_quiz_code()
 			obj.student.number_of_quizzes += 1
 			obj.student.save()
 		obj.save()
