@@ -8,9 +8,10 @@
 	<title>{% block title %}Quiz{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap.min.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-theme.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'what/css/what-style.css' %}" />
 </head>
 <body>
-	<div id="content">
+	<div class="container" role="main">
 	{% block content %}{% endblock %}
 	</div>
 	<script src="{% static 'what/js/jquery-2.1.4.min.js' %}"></script>

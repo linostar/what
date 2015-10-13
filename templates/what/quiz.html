@@ -3,5 +3,16 @@
 {% block title %}Quiz{% endblock %}
 
 {% block content %}
-
+{% if message == "quiz_submitted" %}
+<div class="alert alert-danger" role="alert">
+	<b>Stop!</b> This quiz has already been submitted. You cannot take it twice.
+</div>
+{% elif message == "show_quiz" %}
+<form action="" method="POST">
+{% csrf_token %}
+{% for q in questions %}
+<h3>{{ q.question_text }}</h3>
+{% endfor %}
+</form>
+{% endif %}
 {% endblock %}
