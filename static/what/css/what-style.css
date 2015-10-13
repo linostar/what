@@ -1,3 +1,7 @@
+body {
+	background: linear-gradient(to left, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
+}
+
 .answers {
 	cursor: pointer;
 }
@@ -8,4 +12,65 @@
 
 .yellow {
 	background-color: #ffff66;
+}
+
+.label-orange {
+	background-color: #d0a12f;
+}
+
+.circle {
+	background: -moz-linear-gradient(-45deg, #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%);
+	color: white;
+	margin-top: 1.5em;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50%;
+	width: 4em;
+	position: relative;
+}
+
+.circle-border {
+	border: 3px solid #aa5500;
+}
+
+.circle-solid{
+	background-color: whitesmoke;
+}
+
+.circle:before {
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+
+.circle-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+}
+
+.time-text {
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 2vw;
+	line-height: 2vw;
+	font-size: 2vw;
+}
+
+.label-time {
+	margin-top: auto;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+.time-container {
+	position: fixed;
 }
