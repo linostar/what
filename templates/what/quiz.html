@@ -12,14 +12,21 @@
 <form action="" method="POST">
 {% csrf_token %}
 <h3>Questions</h3>
+<div class="row">
+<div class="col-sm-5">
 {% for i in indexes %}
 <div class="list-group">
 <div class="list-group-item active"><b>{{ forloop.counter }}.</b>&nbsp;&nbsp;{{ questions|question:i }}</div>
+<div id="question{{ questions|qid:i }}">
 {% for answer in answers|index:i %}
-<div class="list-group-item">{{ answer }}</div>
+<div class="list-group-item answers answer-q{{ questions|qid:i }}" id="answer{{ answer.id }}">{{ answer.answer_text }}</div>
 {% endfor %}
+<input type="hidden" class="chosen-answer" name="chosen-answer-q{{ questions|qid:i }}" id="chosen-answer-q{{ questions|qid:i }}" value=""/>
+</div>
 </div>
 {% endfor %}
+</div>
+</div>
 <input type="submit" name="submit" id="submit" value="End Quiz"/>
 </form>
 {% endif %}

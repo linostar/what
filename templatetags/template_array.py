@@ -11,5 +11,5 @@ def question(list, index):
 	return list[index].question_text
 
 @register.filter
-def answer(list, index):
-	return list[index].answer_text
+def qid(list, index):
+	return list[index].id
