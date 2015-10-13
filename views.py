@@ -69,10 +69,11 @@ def quiz(request, quiz_code):
 					"message": "quiz_submitted"
 					})
 			else:
-				questions = Question.objects.filter(annal=quiz.annal)
+				questions = Question.objects.filter(annal=quiz.annal).order_by(
+					"?")[:quiz.number_of_questions]
 				answers = []
 				for q in questions:
-					answers.append(Answer.objects.filter(question=q))
+					answers.append(Answer.objects.filter(question=q).order_by("?"))
 				return render(request, "what/quiz.html", {
 					"quiz": quiz,
 					"student": quiz.student,
