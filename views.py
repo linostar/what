@@ -62,9 +62,13 @@ def quiz(request, quiz_code):
 			pass
 			return redirect("result", quiz_code=quiz_code)
 		else:
-			# quiz = Quiz.objects.get(quiz_code=quiz_code)
 			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
-			if quiz:
+			if quiz.submitted:
+				return render(request, "what/quiz.html", {
+					"student": quiz.student,
+					"message": "quiz_submitted"
+					})
+			else:
 				questions = Question.objects.filter(annal=quiz.annal)
 				answers = []
 				for q in questions:
@@ -76,20 +80,19 @@ def quiz(request, quiz_code):
 					"answer": answers,
 					"message": "show_quiz",
 					})
-	# except Quiz.DoesNotExist:
-	# 	return render(request, "what/quiz.html", {
-	# 		"quiz_code": quiz_code,
-	# 		"message": "invalid_code",
-	# 		})
 	except Quiz.MultipleObjectsReturned:
 		# shouldn't happen because quiz_code must be unique
 		raise
 
 def result(request, quiz_code):
 	try:
-		# quiz = Quiz.objects.get(quiz_code=quiz_code)
 		quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
-		if quiz:
+		if not quiz.submitted:
+			return render(request, "what/result.html", {
+					"student": quiz.student,
+					"message": "quiz_not_submitted"
+					})
+		else:
 			return render(request, "what/result.html", {
 				"quiz_code": quiz_code,
 				"score": quiz.score,
@@ -98,11 +101,6 @@ def result(request, quiz_code):
 				"student": quiz.student,
 				"message": "show_result",
 				})
-	# except Quiz.DoesNotExist:
-	# 	return render(request, "what/result.html", {
-	# 		"quiz_code": quiz_code,
-	# 		"message": "invalid_code",
-	# 		})
 	except Quiz.MultipleObjectsReturned:
 		# shouldn't happen because quiz_code must be unique
 		raise

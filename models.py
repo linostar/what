@@ -76,3 +76,4 @@ class Quiz(models.Model):
 	score = models.IntegerField(default=0)
 	max_score = models.IntegerField(default=0)
 	number_of_questions = models.IntegerField(default=0)
+	submitted = models.BooleanField(default=False)
