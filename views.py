@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user
 
 from what.models import Teacher, Student, Quiz, Question, Answer, Annal
+from what.utils import Utils
 
 
 def handler404(request):
@@ -66,7 +67,8 @@ def quiz(request, quiz_code):
 			if quiz.submitted:
 				return render(request, "what/quiz.html", {
 					"student": quiz.student,
-					"message": "quiz_submitted"
+					"result_url": Utils.get_result_url(quiz_code),
+					"message": "quiz_submitted",
 					})
 			else:
 				questions = Question.objects.filter(annal=quiz.annal).order_by(

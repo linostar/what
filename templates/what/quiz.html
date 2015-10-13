@@ -8,6 +8,9 @@
 <div class="alert alert-danger" role="alert">
 	<b>Stop!</b> This quiz has already been submitted. You cannot take it twice.
 </div>
+<div class="well">
+	<a href="{{ result_url }}">Click here</a> if you want to see your score on this quiz.
+</div>
 {% elif message == "show_quiz" %}
 <form action="" method="POST">
 {% csrf_token %}
