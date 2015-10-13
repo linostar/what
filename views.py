@@ -76,8 +76,9 @@ def quiz(request, quiz_code):
 				return render(request, "what/quiz.html", {
 					"quiz": quiz,
 					"student": quiz.student,
-					"questions": questions,
-					"answer": answers,
+					"indexes": range(len(questions)),
+					"questions": list(questions),
+					"answers": answers,
 					"message": "show_quiz",
 					})
 	except Quiz.MultipleObjectsReturned:
