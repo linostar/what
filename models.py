@@ -24,6 +24,7 @@ class Annal(models.Model):
 	annal_duration = models.IntegerField(default=300)
 	number_of_questions = models.IntegerField(default=0)
 	show_correct_answers_at_end = models.BooleanField(default=False)
+	rules = models.TextField(null=True, blank=True)
 
 	def __str__(self):
 		return self.annal_name
@@ -77,3 +78,9 @@ class Quiz(models.Model):
 	max_score = models.IntegerField(default=0)
 	number_of_questions = models.IntegerField(default=0)
 	submitted = models.BooleanField(default=False)
+	# time remaining in the clock when the student finishes (in seconds)
+	finish_time = models.IntegerField(default=0)
+
+
+class Setting(models.Model):
+	language = models.CharField(max_length=4, default="en")
