@@ -22,3 +22,10 @@ class Utils:
 	@staticmethod
 	def get_result_url(code):
 		return Utils.SITE_URL + "/quiz/result/" + code
+
+	@staticmethod
+	def format_duration(duration):
+		hours = duration // 3600
+		minutes = (duration - hours * 3600) // 60
+		seconds = duration % 60
+		return "{:02d}:{:02d}:{:02d}".format(hours, minutes, seconds)

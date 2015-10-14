@@ -78,6 +78,8 @@ def quiz(request, quiz_code):
 					answers.append(Answer.objects.filter(question=q).order_by("?"))
 				return render(request, "what/quiz.html", {
 					"quiz": quiz,
+					"teacher": quiz.annal.teacher.user,
+					"duration": Utils.format_duration(quiz.annal.annal_duration),
 					"student": quiz.student,
 					"indexes": range(len(questions)),
 					"questions": list(questions),

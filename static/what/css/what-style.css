@@ -14,6 +14,18 @@ body {
 	background-color: #ffff66;
 }
 
+.font-blue {
+	color: blue;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.font-purple {
+	color: purple;
+	font-weight: bold;
+	font-style: italic;
+}
+
 .label-orange {
 	background-color: #d0a12f;
 }
@@ -84,6 +96,7 @@ body {
 }
 
 .tips-cell {
+	width: 16em;
 	padding-left: 3em;
 	vertical-align: top;
 	text-align: center;
@@ -105,4 +118,8 @@ body {
 	width: 100%;
 	text-align: center;
 	margin-top: 3em;
+}
+
+.panel-left {
+	text-align: left !important;
 }
