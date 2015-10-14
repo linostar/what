@@ -80,6 +80,7 @@ class Quiz(models.Model):
 	submitted = models.BooleanField(default=False)
 	# time remaining in the clock when the student finishes (in seconds)
 	finish_time = models.IntegerField(default=0)
+	start_time = models.DateTimeField(blank=True, null=True)
 
 
 class Setting(models.Model):

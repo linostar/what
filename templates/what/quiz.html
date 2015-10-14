@@ -3,13 +3,12 @@
 
 {% block title %}Quiz{% endblock %}
 
-{% if message == "show_quiz" %}
-	{% block user %}
-		Good luck, <b>{{ student.student_name }}</b>
-	{% endblock %}
-	{% block navbar-title %}Taking the Quiz{% endblock %}
-	{% block navbar-rules %}Rules{% endblock %}
-{% endif %}
+{% block user %}
+	{{ user_message }} <b>{{ student.student_name }}</b>
+{% endblock %}
+
+{% block navbar-title %}Taking the Quiz{% endblock %}
+{% block navbar-rules %}Rules{% endblock %}
 
 {% block content %}
 {% if message == "quiz_submitted" %}
@@ -21,7 +20,6 @@
 </div>
 {% elif message == "show_quiz" %}
 <div class="row">
-
 	<div class="col-sm-7">
 		<div class="form-container">
 		<form action="" method="POST" id="form-submit">
@@ -44,7 +42,6 @@
 		</form>
 		</div>
 	</div>
-
 	<div class="col-sm-5">
 		<div class="time-container">
 		<table>
@@ -94,7 +91,6 @@
 		</table>
 		</div>
 	</div>
-
 </div>
 
 {% endif %}

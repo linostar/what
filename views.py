@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -60,7 +62,9 @@ def signout(request):
 def quiz(request, quiz_code):
 	try:
 		if request.method == "POST":
-			pass
+			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
+			quiz.submitted = True
+			quiz.save()
 			return redirect("result", quiz_code=quiz_code)
 		else:
 			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
@@ -68,9 +72,12 @@ def quiz(request, quiz_code):
 				return render(request, "what/quiz.html", {
 					"student": quiz.student,
 					"result_url": Utils.get_result_url(quiz_code),
+					"user_message": "Hello,",
 					"message": "quiz_submitted",
 					})
 			else:
+				quiz.start_time = datetime.now()
+				quiz.save()
 				questions = Question.objects.filter(annal=quiz.annal).order_by(
 					"?")[:quiz.number_of_questions]
 				answers = []
@@ -84,6 +91,7 @@ def quiz(request, quiz_code):
 					"indexes": range(len(questions)),
 					"questions": list(questions),
 					"answers": answers,
+					"user_message": "Good luck,",
 					"message": "show_quiz",
 					})
 	except Quiz.MultipleObjectsReturned:

@@ -29,6 +29,7 @@ $(document).ready(function() {
 		var remaining_time = parseInt($(".time-text").attr("title"));
 		if (remaining_time <= 0) {
 			clearInterval(timer);
+			$("#form-submit").submit();
 		}
 		else {
 			var display_time = "";
