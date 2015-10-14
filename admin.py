@@ -60,7 +60,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 
 class AnswerAdmin(admin.ModelAdmin):
-	list_display = ["get_answer", "question", "get_annal"]
+	list_display = ["get_answer", "question", "get_annal", "answer_is_correct"]
 
 	def get_answer(self, obj):
 		return obj.answer_text
@@ -99,7 +99,7 @@ class StudentAdmin(admin.ModelAdmin):
 class QuizAdmin(admin.ModelAdmin):
 	list_display = ["get_url", "get_student", "annal", "score",
 	"max_score", "number_of_questions", "submitted", "start_time",
-	"finish_time"]
+	"get_finish_time"]
 	actions = ["delete_selected"]
 
 	def get_student(self, obj):
@@ -107,6 +107,9 @@ class QuizAdmin(admin.ModelAdmin):
 
 	def get_url(self, obj):
 		return Utils.get_quiz_url(obj.quiz_code)
+
+	def get_finish_time(self, obj):
+		return Utils.format_duration(obj.annal.annal_duration-obj.finish_time)
 
 	def get_form(self, request, obj=None, **kwargs):
 		self.exclude = ["quiz_code", "score", "max_score"]
@@ -134,6 +137,8 @@ class QuizAdmin(admin.ModelAdmin):
 	get_student.admin_order_field = "student__student_name"
 	get_url.short_description = "Quiz link"
 	get_url.admin_order_field = "quiz_code"
+	get_finish_time.short_description = "Finished in"
+	get_finish_time.admin_order_field = "-finish_time"
 
 
 admin.site.register(Annal, AnnalAdmin)

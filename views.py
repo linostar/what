@@ -88,7 +88,7 @@ def quiz(request, quiz_code):
 							score += question.points_rewarded
 				quiz.score = score
 				quiz.max_score = max_score
-				quiz.finish_time = max(int(request.POST['remaining-time-hidden']), 0)
+				quiz.finish_time = max(int(request.POST.get("remaining-time-hidden", 0)), 0)
 				quiz.save()
 				return redirect("result", quiz_code=quiz_code)
 			else:
