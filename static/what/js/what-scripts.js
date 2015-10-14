@@ -8,12 +8,14 @@ $(document).ready(function() {
 
 	$("#navbar-rules").click(function() {
 		var rules = $("#rules-hidden").attr("value") || "No rules.";
+		var rules_title = $("#rules-title-hidden").attr("value");
+		var rules_close = $("#close-hidden").attr("value");
 		bootbox.dialog({
-			title: "Rules",
+			title: rules_title,
 			message: rules,
 			buttons: {
 				main: {
-					label: "Close",
+					label: rules_close,
 					className: "btn-primary"
 				}
 			}

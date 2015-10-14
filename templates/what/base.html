@@ -7,16 +7,17 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{% block title %}Quiz{% endblock %}</title>
+	<title>{% block title %}{% trans "Quiz" %}{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap.min.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-theme.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-rtl.min.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/what-style.css' %}" />
 </head>
 <body role="document">
 	<div class="container" role="main">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<div class="navbar-header navbar-right">
+				<div class="navbar-header navbar-end">
 					<span class="navbar-brand">{% block user %}{% endblock %}</span>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
@@ -37,7 +38,7 @@
 				<div class="col-sm-4">
 				</div>
 				<div class="col-sm-4 footer-copyright">
-					<p>© 2015 <a href="mailto:info@poirot-zone.ml">Hercule Poirot</a>. All Rights Reserved.</p>
+					{% trans "<p>© 2015 <a href='mailto:info@poirot-zone.ml'>Hercule Poirot</a>. All Rights Reserved.</p>" %}
 				</div>
 			</div>
 		</div>

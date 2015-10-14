@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 22:21+0300\n"
+"POT-Creation-Date: 2015-10-14 23:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "Not Found"
 msgstr ""
 
 #: templates/what/404.html:6 templates/what/500.html:6
-#: templates/what/quiz.html:5
+#: templates/what/base.html:10 templates/what/quiz.html:5
 msgid "Quiz"
 msgstr ""
 
@@ -48,66 +48,76 @@ msgid ""
 "ml'>the admin</a> about the situation."
 msgstr ""
 
+#: templates/what/base.html:41
+msgid ""
+"<p>© 2015 <a href='mailto:info@poirot-zone.ml'>Hercule Poirot</a>. All "
+"Rights Reserved.</p>"
+msgstr ""
+
 #: templates/what/quiz.html:11
 msgid "Taking the Quiz"
 msgstr ""
 
-#: templates/what/quiz.html:12
+#: templates/what/quiz.html:12 templates/what/quiz.html.py:17
 msgid "Rules"
 msgstr ""
 
-#: templates/what/quiz.html:20
+#: templates/what/quiz.html:18
+msgid "Close"
+msgstr ""
+
+#: templates/what/quiz.html:22
 msgid ""
 "<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
 msgstr ""
 
-#: templates/what/quiz.html:23
+#: templates/what/quiz.html:25
 #, python-format
 msgid ""
 "<a href='%(result_url)s'>Click here</a> if you want to see your score on "
 "this quiz."
 msgstr ""
 
-#: templates/what/quiz.html:27
+#: templates/what/quiz.html:29
 msgid "This quiz has already been expired. You cannot take it twice."
 msgstr ""
 
-#: templates/what/quiz.html:30
+#: templates/what/quiz.html:32
 #, python-format
 msgid "You may proceed to see <a href='%(result_url)s'>the result</a>."
 msgstr ""
 
-#: templates/what/quiz.html:62
+#: templates/what/quiz.html:64
 msgid "Time remaining"
 msgstr ""
 
-#: templates/what/quiz.html:68
+#: templates/what/quiz.html:70
 msgid "Go!"
 msgstr ""
 
-#: templates/what/quiz.html:74
+#: templates/what/quiz.html:76
 msgid "End Quiz"
 msgstr ""
 
-#: templates/what/quiz.html:79
+#: templates/what/quiz.html:81
 msgid "Quiz made by"
 msgstr ""
 
-#: templates/what/quiz.html:87
+#: templates/what/quiz.html:89
 msgid "Total duration"
 msgstr ""
 
-#: templates/what/quiz.html:95
+#: templates/what/quiz.html:97
 msgid "Notes"
 msgstr ""
 
-#: templates/what/quiz.html:98
+#: templates/what/quiz.html:100
 msgid ""
 "<p><span class='font-blue'>Blue questions</span> have only 1 correct answer."
 "</p>"
 msgstr ""
 
-#: templates/what/quiz.html:99
+#: templates/what/quiz.html:101
 msgid ""
 "<p><span class='font-purple'>Purple questions</span> have 1 or more correct "
 "answers.</p>"
