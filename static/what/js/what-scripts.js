@@ -25,6 +25,7 @@ $(document).ready(function() {
 	});
 
 	var timer = setInterval(function() {
+		var ending_soon = false;
 		var remaining_time = parseInt($(".time-text").attr("title"));
 		if (remaining_time <= 0) {
 			clearInterval(timer);
@@ -35,6 +36,14 @@ $(document).ready(function() {
 			var minutes;
 			var seconds;
 			remaining_time--;
+			if (remaining_time <= 30)
+				ending_soon = true;
+			else
+				ending_soon = false;
+			if (ending_soon) {
+				$(".circle").css("background", "linear-gradient(135deg, #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%)");
+				$(".circle-border").css("border", "3px solid #882222");
+			}
 			if (remaining_time < 60) {
 				seconds = remaining_time.toString();
 				display_time = seconds;

@@ -31,7 +31,7 @@ body {
 }
 
 .circle {
-	background: -moz-linear-gradient(-45deg, #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%);
+	background: linear-gradient(135deg, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%);
 	color: white;
 	margin-top: 1.5em;
 	margin-left: auto;
@@ -42,7 +42,7 @@ body {
 }
 
 .circle-border {
-	border: 3px solid #aa5500;
+	border: 3px solid #668855;
 }
 
 .circle-solid{
@@ -98,6 +98,11 @@ body {
 .tips-cell {
 	width: 16em;
 	padding-left: 3em;
+	vertical-align: top;
+	text-align: center;
+}
+
+.time-cell {
 	vertical-align: top;
 	text-align: center;
 }
