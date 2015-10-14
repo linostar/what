@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user
 
-from what.models import Teacher, Student, Quiz, Question, Answer, Annal
+from what.models import Teacher, Student, Quiz, Question, Answer, Annal, Setting
 from what.utils import Utils
 
 
