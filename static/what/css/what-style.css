@@ -1,3 +1,8 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+
 body {
 	background: linear-gradient(to left, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
 }
@@ -128,4 +133,20 @@ body {
 
 .panel-left {
 	text-align: left !important;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	font-size: 1em;
+	width: 100%;
+	text-align: center;
+}
+
+.footer-copyright {
+	width: 26%;
+	color: white;
+	background-color: #222222;
+	padding-top: 0.6em;
+	border-radius: 25px 25px 0 0;
 }
