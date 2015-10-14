@@ -1,14 +1,15 @@
 {% extends "what/base.html" %}
 {% load template_array %}
+{% load i18n %}
 
-{% block title %}Quiz{% endblock %}
+{% block title %}{% trans "Quiz" %}{% endblock %}
 
 {% block user %}
 	{{ user_message }} <b>{{ student.student_name }}</b>
 {% endblock %}
 
-{% block navbar-title %}Taking the Quiz{% endblock %}
-{% block navbar-rules %}Rules{% endblock %}
+{% block navbar-title %}{% trans "Taking the Quiz" %}{% endblock %}
+{% block navbar-rules %}{% trans "Rules" %}{% endblock %}
 
 {% block content %}
 <form id="form-hidden" action="">
@@ -16,17 +17,17 @@
 </form>
 {% if message == "quiz_submitted" %}
 <div class="alert alert-danger" role="alert">
-	<b>Stop!</b> This quiz has already been submitted. You cannot take it twice.
+	{% trans "<b>Stop!</b> This quiz has already been submitted. You cannot take it twice." %}
 </div>
 <div class="well">
-	<a href="{{ result_url }}">Click here</a> if you want to see your score on this quiz.
+	{% trans "<a href="{{ result_url }}">Click here</a> if you want to see your score on this quiz." %}
 </div>
 {% elif message == "quiz_expired" %}
 <div class="alert alert-danger" role="alert">
-	This quiz has already been expired. You cannot take it twice.
+	{% trans "This quiz has already been expired. You cannot take it twice." %}
 </div>
 <div class="well">
-	You may proceed to see <a href="{{ result_url }}">the result</a>.
+	{% trans "You may proceed to see <a href='{{ result_url }}'>the result</a>." %}
 </div>
 {% elif message == "show_quiz" %}
 <div class="row">
@@ -35,7 +36,7 @@
 		<form action="" method="POST" id="form-submit">
 		{% csrf_token %}
 		<h2>
-			<span class="label label-primary label-orange">Questions</span>
+			<span class="label label-primary label-orange">{{ quiz.annal.annal_name }}</span>
 		</h2>
 		<br/>
 		{% for i in indexes %}
@@ -58,24 +59,24 @@
 		<table>
 		<tr><td class="time-cell">
 			<h3>
-				<span class="well label-time">Time remaining</span>
+				<span class="well label-time">{% trans "Time remaining" %}</span>
 			</h3>
 			<h1>
 				<div class="circle circle-border">
 					<div class="circle-inner">
 						<div class="time-text" title="{{ quiz.annal.annal_duration }}">
-							Go!
+							{% trans "Go!" %}
 						</div>
 					</div>
 				</div>
 			</h1>
 			<div class="button-end">
-				<button type="button" class="btn btn-lg btn-danger" id="submit-button">End Quiz</button>
+				<button type="button" class="btn btn-lg btn-danger" id="submit-button">{% trans "End Quiz" %}</button>
 			</div>
 		</td><td class="tips-cell">
 			<div class="panel panel-warning">
 				<div class="panel-heading">
-					<h3 class="panel-title">Quiz made by</h3>
+					<h3 class="panel-title">{% trans "Quiz made by" %}</h3>
 				</div>
 				<div class="panel-body">
 					{{ teacher }}
@@ -83,7 +84,7 @@
 			</div>
 			<div class="panel panel-warning">
 				<div class="panel-heading">
-					<h3 class="panel-title">Total duration</h3>
+					<h3 class="panel-title">{% trans "Total duration" %}</h3>
 				</div>
 				<div class="panel-body">
 					{{ duration }}
@@ -91,11 +92,11 @@
 			</div>
 			<div class="panel panel-warning">
 				<div class="panel-heading">
-					<h3 class="panel-title">Note</h3>
+					<h3 class="panel-title">{% trans "Notes" %}</h3>
 				</div>
 				<div class="panel-body panel-left">
-					<p><span class="font-blue">Blue questions</span> have only 1 correct answer.</p>
-					<p><span class="font-purple">Purple questions</span> have 1 or more correct answers.</p>
+					{% trans "<p><span class='font-blue'>Blue questions</span> have only 1 correct answer.</p>" %}
+					{% trans "<p><span class='font-purple'>Purple questions</span> have 1 or more correct answers.</p>" %}
 				</div>
 			</div>
 		</td></tr>

@@ -5,6 +5,7 @@ from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user
+from django.utils.translation import ugettext as _
 
 from what.models import Teacher, Student, Quiz, Question, Answer, Annal, Setting
 from what.utils import Utils
@@ -73,7 +74,7 @@ def quiz(request, quiz_code):
 					"student": quiz.student,
 					"rules": quiz.annal.rules,
 					"result_url": Utils.get_result_url(quiz_code),
-					"user_message": "Hello,",
+					"user_message": _("Hello,"),
 					"message": "quiz_expired",
 					})
 			elif quiz.start_time:
@@ -107,7 +108,7 @@ def quiz(request, quiz_code):
 					"student": quiz.student,
 					"rules": quiz.annal.rules,
 					"result_url": Utils.get_result_url(quiz_code),
-					"user_message": "Hello,",
+					"user_message": _("Hello,"),
 					"message": "quiz_submitted",
 					})
 			else:
@@ -119,7 +120,7 @@ def quiz(request, quiz_code):
 						"student": quiz.student,
 						"rules": quiz.annal.rules,
 						"result_url": Utils.get_result_url(quiz_code),
-						"user_message": "Hello,",
+						"user_message": _("Hello,"),
 						"message": "quiz_expired",
 						})
 				# show the questions and start the quiz
@@ -139,7 +140,7 @@ def quiz(request, quiz_code):
 					"indexes": range(len(questions)),
 					"questions": list(questions),
 					"answers": answers,
-					"user_message": "Good luck,",
+					"user_message": _("Good luck,"),
 					"message": "show_quiz",
 					})
 	except Quiz.MultipleObjectsReturned:
@@ -153,7 +154,7 @@ def result(request, quiz_code):
 			return render(request, "what/result.html", {
 					"student": quiz.student,
 					"quiz_url": Utils.get_quiz_url(quiz_code),
-					"user_message": "Hello,",
+					"user_message": _("Hello,"),
 					"message": "quiz_not_submitted"
 					})
 		else:
@@ -166,7 +167,7 @@ def result(request, quiz_code):
 					quiz.annal.annal_duration - quiz.finish_time),
 				"number_of_questions": quiz.number_of_questions,
 				"student": quiz.student,
-				"user_message": "Hello,",
+				"user_message": _("Hello,"),
 				"message": "show_result",
 				})
 	except Quiz.MultipleObjectsReturned:

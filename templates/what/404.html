@@ -1,13 +1,14 @@
 {% extends "what/base.html" %}
+{% load i18n %}
 
-{% block title %}>Not Found{% endblock %}
+{% block title %}{% trans "Not Found" %}{% endblock %}
 
-{% block navbar-title %}Quiz{% endblock %}
+{% block navbar-title %}{% trans "Quiz" %}{% endblock %}
 
 {% block content %}
-	<h1>Not Found</h1>
-	<h3>This page does not exist.</h3>
+	<h1>{% trans "Not Found" %}</h1>
+	<h3>{% trans "This page does not exist." %}</h3>
 	<div>
-		<a href="javascript:window.history.go(-1)">Go back</a>
+		<a href="javascript:window.history.go(-1)">{% trans "Go back" %}</a>
 	</div>
 {% endblock %}

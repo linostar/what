@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-14 21:59+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: templates/what/404.html:4 templates/what/404.html.py:9
+msgid "Not Found"
+msgstr ""
+
+#: templates/what/404.html:6 templates/what/500.html:6
+#: templates/what/quiz.html:5
+msgid "Quiz"
+msgstr ""
+
+#: templates/what/404.html:10
+msgid "This page does not exist."
+msgstr ""
+
+#: templates/what/404.html:12 templates/what/500.html:13
+msgid "Go back"
+msgstr ""
+
+#: templates/what/500.html:4 templates/what/500.html.py:9
+msgid "Server Error"
+msgstr ""
+
+#: templates/what/500.html:10
+msgid "The server encountered an error with the page."
+msgstr ""
+
+#: templates/what/500.html:11
+msgid ""
+"If the problem persists, please inform <a href='mailto:admin@poirot-zone."
+"ml'>the admin</a> about the situation."
+msgstr ""
+
+#: templates/what/quiz.html:11
+msgid "Taking the Quiz"
+msgstr ""
+
+#: templates/what/quiz.html:12
+msgid "Rules"
+msgstr ""
+
+#: templates/what/quiz.html:20
+msgid ""
+"<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
+msgstr ""
+
+#: templates/what/quiz.html:23
+msgid "<a href="
+msgstr ""
+
+#: templates/what/quiz.html:27
+msgid "This quiz has already been expired. You cannot take it twice."
+msgstr ""
+
+#: templates/what/quiz.html:30
+msgid "You may proceed to see <a href='{{ result_url }}'>the result</a>."
+msgstr ""
+
+#: templates/what/quiz.html:62
+msgid "Time remaining"
+msgstr ""
+
+#: templates/what/quiz.html:68
+msgid "Go!"
+msgstr ""
+
+#: templates/what/quiz.html:74
+msgid "End Quiz"
+msgstr ""
+
+#: templates/what/quiz.html:79
+msgid "Quiz made by"
+msgstr ""
+
+#: templates/what/quiz.html:87
+msgid "Total duration"
+msgstr ""
+
+#: templates/what/quiz.html:95
+msgid "Notes"
+msgstr ""
+
+#: templates/what/quiz.html:98
+msgid ""
+"<p><span class='font-blue'>Blue questions</span> have only 1 correct answer."
+"</p>"
+msgstr ""
+
+#: templates/what/quiz.html:99
+msgid ""
+"<p><span class='font-purple'>Purple questions</span> have 1 or more correct "
+"answers.</p>"
+msgstr ""
+
+#: templates/what/result.html:4
+msgid "Result"
+msgstr ""
+
+#: templates/what/result.html:10
+msgid "Results"
+msgstr ""
+
+#: templates/what/result.html:15
+msgid "<b>No result!</b> This quiz has not been taken yet."
+msgstr ""
+
+#: templates/what/result.html:18
+#, python-format
+msgid "<a href='%(quiz_url)s'>Click here</a> to take the quiz."
+msgstr ""
+
+#: templates/what/result.html:27
+#, python-format
+msgid "Results for <b>%(student)s</b>"
+msgstr ""
+
+#: templates/what/result.html:30
+#, python-format
+msgid ""
+"<p>Quiz <b><em>%(quiz_name)s</em></b> was taken on %(start_time)s UTC.</p>"
+msgstr ""
+
+#: templates/what/result.html:31
+#, python-format
+msgid "<p>The quiz contained <b>%(number_of_questions)s</b> questions.</p>"
+msgstr ""
+
+#: templates/what/result.html:32
+#, python-format
+msgid "<p>Score is: <b>%(score)s/100</b>.</p>"
+msgstr ""
+
+#: templates/what/result.html:33
+#, python-format
+msgid "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
+msgstr ""
+
+#: views.py:77 views.py:111 views.py:123 views.py:157 views.py:170
+msgid "Hello,"
+msgstr ""
+
+#: views.py:143
+msgid "Good luck,"
+msgstr ""

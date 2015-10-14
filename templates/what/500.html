@@ -1,14 +1,15 @@
 {% extends "what/base.html" %}
+{% load i18n %}
 
-{% block title %}>Server Error{% endblock %}
+{% block title %}>{% trans "Server Error" %}{% endblock %}
 
-{% block navbar-title %}Quiz{% endblock %}
+{% block navbar-title %}{% trans "Quiz" %}{% endblock %}
 
 {% block content %}
-	<h1>Server Error</h1>
-	<h3>The server encountered an error with the page.</h3>
-	<h3>If the problem persists, please inform <a href="mailto:admin@poirot-zone.ml">the admin</a> about the situation.</h3>
+	<h1>{% trans "Server Error" %}</h1>
+	<h3>{% trans "The server encountered an error with the page." %}</h3>
+	<h3>{% trans "If the problem persists, please inform <a href='mailto:admin@poirot-zone.ml'>the admin</a> about the situation." %}</h3>
 	<div>
-		<a href="javascript:window.history.go(-1)">Go back</a>
+		<a href="javascript:window.history.go(-1)">{% trans "Go back" %}</a>
 	</div>
 {% endblock %}

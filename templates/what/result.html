@@ -1,20 +1,21 @@
 {% extends "what/base.html" %}
+{% load i18n %}
 
-{% block title %}Result{% endblock %}
+{% block title %}{% trans "Result" %}{% endblock %}
 
 {% block user %}
 	{{ user_message }} <b>{{ student.student_name }}</b>
 {% endblock %}
 
-{% block navbar-title %}Results{% endblock %}
+{% block navbar-title %}{% trans "Results" %}{% endblock %}
 
 {% block content %}
 {% if message == "quiz_not_submitted" %}
 <div class="alert alert-danger" role="alert">
-	<b>No result!</b> This quiz has not been taken yet.
+	{% trans "<b>No result!</b> This quiz has not been taken yet." %}
 </div>
 <div class="well">
-	<a href="{{ quiz_url }}">Click here</a> to take the quiz.
+	{% blocktrans %}<a href='{{ quiz_url }}'>Click here</a> to take the quiz.{% endblocktrans %}
 </div>
 {% elif message == "show_result" %}
 <div class="row">
@@ -23,13 +24,13 @@
 	<div class="col-sm-6">
 		<div class="panel panel-success">
 			<div class="panel-heading">
-				Results for <b>{{ student }}</b>
+				{% blocktrans %}Results for <b>{{ student }}</b>{% endblocktrans %}
 			</div>
 			<div class="panel-body">
-				<p>Quiz <b><em>{{ quiz_name }}</em></b> was taken on {{ start_time }} UTC.</p>
-				<p>The quiz contained <b>{{ number_of_questions }}</b> questions.</p>
-				<p>Score is: <b>{{ score }}/100</b>.</p>
-				<p>Quiz finished in <b>{{ finish_time }}</b>.</p>
+				{% blocktrans %}<p>Quiz <b><em>{{ quiz_name }}</em></b> was taken on {{ start_time }} UTC.</p>{% endblocktrans %}
+				{% blocktrans %}<p>The quiz contained <b>{{ number_of_questions }}</b> questions.</p>{% endblocktrans %}
+				{% blocktrans %}<p>Score is: <b>{{ score }}/100</b>.</p>{% endblocktrans %}
+				{% blocktrans %}<p>Quiz finished in <b>{{ finish_time }}</b>.</p>{% endblocktrans %}
 			</div>
 		</div>
 	</div>
