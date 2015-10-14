@@ -109,10 +109,10 @@ class QuizAdmin(admin.ModelAdmin):
 		return Utils.get_quiz_url(obj.quiz_code)
 
 	def get_finish_time(self, obj):
-		return Utils.format_duration(obj.annal.annal_duration-obj.finish_time)
+		return Utils.format_duration(obj.annal.annal_duration - obj.finish_time)
 
 	def get_form(self, request, obj=None, **kwargs):
-		self.exclude = ["quiz_code", "score", "max_score"]
+		self.exclude = ["quiz_code", "score", "max_score", "finish_time"]
 		return super().get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):

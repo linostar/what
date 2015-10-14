@@ -80,12 +80,16 @@ def quiz(request, quiz_code):
 				score = 0
 				max_score = 0
 				for key in request.POST.keys():
-					if key.startswith("chosen-answer-q"):
-						answer = get_object_or_404(Answer, id=int(request.POST[key]))
-						question = get_object_or_404(Question, id=int(key[15:]))
-						max_score += question.points_rewarded
-						if answer.answer_is_correct:
-							score += question.points_rewarded
+					if key.startswith("chosen-answer-q") and len(key) > 15:
+						try:
+							answer = get_object_or_404(Answer, id=int(request.POST[key]))
+							question = get_object_or_404(Question, id=int(key[15:]))
+							max_score += question.points_rewarded
+							if answer.answer_is_correct:
+								score += question.points_rewarded
+						except ValueError:
+							# non-int instead of question/answer id
+							continue
 				quiz.score = score
 				quiz.max_score = max_score
 				quiz.finish_time = max(int(request.POST.get("remaining-time-hidden", 0)), 0)
