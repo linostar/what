@@ -2,6 +2,37 @@
 
 {% block title %}Result{% endblock %}
 
-{% block content %}
+{% block user %}
+	{{ user_message }} <b>{{ student.student_name }}</b>
+{% endblock %}
 
+{% block navbar-title %}Results{% endblock %}
+
+{% block content %}
+{% if message == "quiz_not_submitted" %}
+<div class="alert alert-danger" role="alert">
+	<b>No result!</b> This quiz has not been taken yet.
+</div>
+<div class="well">
+	<a href="{{ quiz_url }}">Click here</a> to take the quiz.
+</div>
+{% elif message == "show_result" %}
+<div class="row">
+	<div class="col-sm-3">
+	</div>
+	<div class="col-sm-6">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				Results for <b>{{ student }}</b>
+			</div>
+			<div class="panel-body">
+				<p>Quiz <b><em>{{ quiz_name }}</em></b> was taken on {{ start_time }} UTC.</p>
+				<p>The quiz contained <b>{{ number_of_questions }}</b> questions.</p>
+				<p>Their score was: <b>{{ score }}/100</b>.</p>
+				<p>They finished the quiz in <b>{{ finish_time }}</b>.</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
 {% endblock %}

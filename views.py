@@ -80,11 +80,11 @@ def quiz(request, quiz_code):
 				score = 0
 				max_score = 0
 				for key in request.POST.keys():
-					if key.startswith("chosen-answer-q") and len(key) > 15:
+					if key.startswith("chosen-answer-q"):
 						try:
-							answer = get_object_or_404(Answer, id=int(request.POST[key]))
 							question = get_object_or_404(Question, id=int(key[15:]))
 							max_score += question.points_rewarded
+							answer = get_object_or_404(Answer, id=int(request.POST[key]))
 							if answer.answer_is_correct:
 								score += question.points_rewarded
 						except ValueError:
@@ -148,15 +148,21 @@ def result(request, quiz_code):
 		if not quiz.submitted:
 			return render(request, "what/result.html", {
 					"student": quiz.student,
+					"quiz_url": Utils.get_quiz_url(quiz_code),
+					"user_message": "Hello,",
 					"message": "quiz_not_submitted"
 					})
 		else:
 			return render(request, "what/result.html", {
 				"quiz_code": quiz_code,
-				"score": quiz.score,
-				"max_score": quiz.max_score,
+				"quiz_name": quiz.annal.annal_name,
+				"score": round(quiz.score * 100 / quiz.max_score),
+				"start_time": quiz.start_time,
+				"finish_time": Utils.format_duration(
+					quiz.annal.annal_duration - quiz.finish_time),
 				"number_of_questions": quiz.number_of_questions,
 				"student": quiz.student,
+				"user_message": "Hello,",
 				"message": "show_result",
 				})
 	except Quiz.MultipleObjectsReturned:
