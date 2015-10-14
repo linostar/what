@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 	var timer = setInterval(function() {
 		var ending_soon = false;
-		var remaining_time = parseInt($(".time-text").attr("title"));
+		var remaining_time = parseInt($("#remaining-time-hidden").attr("value"));
 		if (remaining_time <= 0) {
 			clearInterval(timer);
 			$("#form-submit").submit();
@@ -60,7 +60,7 @@ $(document).ready(function() {
 				seconds = remaining_time % 60;
 				display_time = hours + ":" + pad(minutes) + ":" + pad(seconds);
 			}
-			$(".time-text").attr("title", remaining_time.toString());
+			$("#remaining-time-hidden").val(remaining_time.toString());
 			$(".time-text").text(display_time);
 		}
 	}, 1000);

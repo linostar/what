@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user
@@ -67,11 +68,32 @@ def quiz(request, quiz_code):
 			quiz.submitted = True
 			if quiz.start_time and Utils.quiz_expired(quiz):
 				# quiz has already expired
-				pass
+				quiz.save()
+				return render(request, "what/quiz.html", {
+					"student": quiz.student,
+					"result_url": Utils.get_result_url(quiz_code),
+					"user_message": "Hello,",
+					"message": "quiz_expired",
+					})
+			elif quiz.start_time:
+				# calculate the score
+				score = 0
+				max_score = 0
+				for key in request.POST.keys():
+					if key.startswith("chosen-answer-q"):
+						answer = get_object_or_404(Answer, id=int(request.POST[key]))
+						question = get_object_or_404(Question, id=int(key[15:]))
+						max_score += question.points_rewarded
+						if answer.answer_is_correct:
+							score += question.points_rewarded
+				quiz.score = score
+				quiz.max_score = max_score
+				quiz.finish_time = max(int(request.POST['remaining-time-hidden']), 0)
+				quiz.save()
+				return redirect("result", quiz_code=quiz_code)
 			else:
-				pass
-			quiz.save()
-			return redirect("result", quiz_code=quiz_code)
+				# dude, how did you get here?!
+				raise Http404
 		else:
 			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 			if quiz.submitted:

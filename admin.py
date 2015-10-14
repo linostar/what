@@ -98,7 +98,8 @@ class StudentAdmin(admin.ModelAdmin):
 
 class QuizAdmin(admin.ModelAdmin):
 	list_display = ["get_url", "get_student", "annal", "score",
-	"max_score", "number_of_questions", "submitted", "start_time"]
+	"max_score", "number_of_questions", "submitted", "start_time",
+	"finish_time"]
 	actions = ["delete_selected"]
 
 	def get_student(self, obj):

@@ -1,7 +1,7 @@
 import string
 import random
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 class Utils:
@@ -35,6 +35,7 @@ class Utils:
 
 	@staticmethod
 	def quiz_expired(quiz):
-		now = datetime.now()
+		now = datetime.now(timezone.utc)
 		end = quiz.start_time + timedelta(0, quiz.annal.annal_duration)
+		end += timedelta(0, 10) # 10 seconds mercy time
 		return now >= end
