@@ -1,6 +1,9 @@
 import string
 import random
 
+from datetime import datetime, timedelta
+
+
 class Utils:
 	"""utility functions for the app"""
 
@@ -29,3 +32,9 @@ class Utils:
 		minutes = (duration - hours * 3600) // 60
 		seconds = duration % 60
 		return "{:02d}:{:02d}:{:02d}".format(hours, minutes, seconds)
+
+	@staticmethod
+	def quiz_expired(quiz):
+		now = datetime.now()
+		end = quiz.start_time + timedelta(0, quiz.annal.annal_duration)
+		return now >= end

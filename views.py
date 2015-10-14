@@ -62,13 +62,20 @@ def signout(request):
 def quiz(request, quiz_code):
 	try:
 		if request.method == "POST":
+			# quiz answered are POSTed
 			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 			quiz.submitted = True
+			if quiz.start_time and Utils.quiz_expired(quiz):
+				# quiz has already expired
+				pass
+			else:
+				pass
 			quiz.save()
 			return redirect("result", quiz_code=quiz_code)
 		else:
 			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 			if quiz.submitted:
+				# User cannot take the quiz twice
 				return render(request, "what/quiz.html", {
 					"student": quiz.student,
 					"result_url": Utils.get_result_url(quiz_code),
@@ -76,6 +83,17 @@ def quiz(request, quiz_code):
 					"message": "quiz_submitted",
 					})
 			else:
+				if quiz.start_time and Utils.quiz_expired(quiz):
+					# quiz time has already expired
+					quiz.submitted = True
+					quiz.save()
+					return render(request, "what/quiz.html", {
+						"student": quiz.student,
+						"result_url": Utils.get_result_url(quiz_code),
+						"user_message": "Hello,",
+						"message": "quiz_expired",
+						})
+				# show the questions and start the quiz
 				quiz.start_time = datetime.now()
 				quiz.save()
 				questions = Question.objects.filter(annal=quiz.annal).order_by(

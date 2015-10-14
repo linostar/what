@@ -84,4 +84,4 @@ class Quiz(models.Model):
 
 
 class Setting(models.Model):
-	language = models.CharField(max_length=4, default="en")
+	language = models.CharField(max_length=8, default="en")
