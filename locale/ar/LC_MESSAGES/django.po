@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 21:59+0300\n"
+"POT-Creation-Date: 2015-10-14 22:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,143 +21,157 @@ msgstr ""
 
 #: templates/what/404.html:4 templates/what/404.html.py:9
 msgid "Not Found"
-msgstr ""
+msgstr "صفحة غير موجودة"
 
 #: templates/what/404.html:6 templates/what/500.html:6
 #: templates/what/quiz.html:5
 msgid "Quiz"
-msgstr ""
+msgstr "اختبار"
 
 #: templates/what/404.html:10
 msgid "This page does not exist."
-msgstr ""
+msgstr "هذه الصفحة غير موجودة."
 
 #: templates/what/404.html:12 templates/what/500.html:13
 msgid "Go back"
-msgstr ""
+msgstr "عودة"
 
 #: templates/what/500.html:4 templates/what/500.html.py:9
 msgid "Server Error"
-msgstr ""
+msgstr "خطأ في السيرفر"
 
 #: templates/what/500.html:10
 msgid "The server encountered an error with the page."
-msgstr ""
+msgstr "واجه السيرفر خطأ أثناء معالجة هذه الصفحة."
 
 #: templates/what/500.html:11
 msgid ""
 "If the problem persists, please inform <a href='mailto:admin@poirot-zone."
 "ml'>the admin</a> about the situation."
 msgstr ""
+"إن تكررت المشكلة، يُرجى التواصل مع <a href='mailto:admin@poirot-zone.ml'>مدير "
+"الموقع</a> وإبلاغه بالأمر."
 
 #: templates/what/quiz.html:11
 msgid "Taking the Quiz"
-msgstr ""
+msgstr "الاختبار قيد الإجراء"
 
 #: templates/what/quiz.html:12
 msgid "Rules"
-msgstr ""
+msgstr "القوانين"
 
 #: templates/what/quiz.html:20
 msgid ""
 "<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
 msgstr ""
+"<b>توقف!</b> لقد أجريت هذا الاختبار من قبل، ولا يمكنك تقديمه مجددًا."
 
 #: templates/what/quiz.html:23
-msgid "<a href="
+#, python-format
+msgid ""
+"<a href='%(result_url)s'>Click here</a> if you want to see your score on "
+"this quiz."
 msgstr ""
+"<a href='%(result_url)s'>اضغط هنا</a> لمشاهدة درجتك في "
+"هذا الاختبار."
 
 #: templates/what/quiz.html:27
 msgid "This quiz has already been expired. You cannot take it twice."
-msgstr ""
+msgstr "انتهى زمن إجراء هذا الاختبار. لا يمكنك تقديمه مجددًا."
 
 #: templates/what/quiz.html:30
-msgid "You may proceed to see <a href='{{ result_url }}'>the result</a>."
-msgstr ""
+#, python-format
+msgid "You may proceed to see <a href='%(result_url)s'>the result</a>."
+msgstr "يمكنك زيارة <a href='%(result_url)s'>صفحة الدرجات</a>."
 
 #: templates/what/quiz.html:62
 msgid "Time remaining"
-msgstr ""
+msgstr "الوقت المتبقي"
 
 #: templates/what/quiz.html:68
 msgid "Go!"
-msgstr ""
+msgstr "انطلق!"
 
 #: templates/what/quiz.html:74
 msgid "End Quiz"
-msgstr ""
+msgstr "إنهاء الاختبار"
 
 #: templates/what/quiz.html:79
 msgid "Quiz made by"
-msgstr ""
+msgstr "مؤلف الاختبار"
 
 #: templates/what/quiz.html:87
 msgid "Total duration"
-msgstr ""
+msgstr "مدة الاختبار"
 
 #: templates/what/quiz.html:95
 msgid "Notes"
-msgstr ""
+msgstr "ملاحظات"
 
 #: templates/what/quiz.html:98
 msgid ""
 "<p><span class='font-blue'>Blue questions</span> have only 1 correct answer."
 "</p>"
 msgstr ""
+"<p><span class='font-blue'>الأسئلة الزرقاء</span> تحتمل إجابة واحدة."
+"</p>"
 
 #: templates/what/quiz.html:99
 msgid ""
 "<p><span class='font-purple'>Purple questions</span> have 1 or more correct "
 "answers.</p>"
 msgstr ""
+"<p><span class='font-purple'>الأسئلة البنفسجية</span> قد تحتمل عدة "
+"إجابات.</p>"
 
 #: templates/what/result.html:4
 msgid "Result"
-msgstr ""
+msgstr "النتيجة"
 
 #: templates/what/result.html:10
 msgid "Results"
-msgstr ""
+msgstr "الدرجات"
 
 #: templates/what/result.html:15
 msgid "<b>No result!</b> This quiz has not been taken yet."
-msgstr ""
+msgstr "<b>الدرجات غير متاحة!</b> لم تقدّم هذا الاختبار بعد."
 
 #: templates/what/result.html:18
 #, python-format
 msgid "<a href='%(quiz_url)s'>Click here</a> to take the quiz."
-msgstr ""
+msgstr "<a href='%(quiz_url)s'>اضغط هنا</a> لإجراء الاختبار."
 
 #: templates/what/result.html:27
 #, python-format
 msgid "Results for <b>%(student)s</b>"
-msgstr ""
+msgstr "نتيجة <b>%(student)s</b>"
 
 #: templates/what/result.html:30
 #, python-format
 msgid ""
 "<p>Quiz <b><em>%(quiz_name)s</em></b> was taken on %(start_time)s UTC.</p>"
 msgstr ""
+"<p>أُجري الاختبار <b><em>%(quiz_name)s</em></b> في %(start_time)s بتوقيت غرينتش.</p>"
 
 #: templates/what/result.html:31
 #, python-format
 msgid "<p>The quiz contained <b>%(number_of_questions)s</b> questions.</p>"
-msgstr ""
+msgstr "<p>احتوى الاختبار على <b>%(number_of_questions)s</b> أسئلة/سؤالًا.</p>"
 
 #: templates/what/result.html:32
 #, python-format
 msgid "<p>Score is: <b>%(score)s/100</b>.</p>"
-msgstr ""
+msgstr "<p>النتيجة النهائية: <b>%(score)s/100</b>.</p>"
 
 #: templates/what/result.html:33
 #, python-format
 msgid "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
-msgstr ""
+msgstr "<p>مدة اجتياز الاختبار: <b>%(finish_time)s</b>.</p>"
 
 #: views.py:77 views.py:111 views.py:123 views.py:157 views.py:170
 msgid "Hello,"
-msgstr ""
+msgstr "مرحبًا،"
 
 #: views.py:143
 msgid "Good luck,"
-msgstr ""
+msgstr "حظًا طيبًا،"

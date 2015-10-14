@@ -20,14 +20,14 @@
 	{% trans "<b>Stop!</b> This quiz has already been submitted. You cannot take it twice." %}
 </div>
 <div class="well">
-	{% trans "<a href="{{ result_url }}">Click here</a> if you want to see your score on this quiz." %}
+	{% blocktrans %}<a href='{{ result_url }}'>Click here</a> if you want to see your score on this quiz.{% endblocktrans %}
 </div>
 {% elif message == "quiz_expired" %}
 <div class="alert alert-danger" role="alert">
 	{% trans "This quiz has already been expired. You cannot take it twice." %}
 </div>
 <div class="well">
-	{% trans "You may proceed to see <a href='{{ result_url }}'>the result</a>." %}
+	{% blocktrans %}You may proceed to see <a href='{{ result_url }}'>the result</a>.{% endblocktrans %}
 </div>
 {% elif message == "show_quiz" %}
 <div class="row">

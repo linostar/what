@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 21:59+0300\n"
+"POT-Creation-Date: 2015-10-14 22:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,7 +62,10 @@ msgid ""
 msgstr ""
 
 #: templates/what/quiz.html:23
-msgid "<a href="
+#, python-format
+msgid ""
+"<a href='%(result_url)s'>Click here</a> if you want to see your score on "
+"this quiz."
 msgstr ""
 
 #: templates/what/quiz.html:27
@@ -70,7 +73,8 @@ msgid "This quiz has already been expired. You cannot take it twice."
 msgstr ""
 
 #: templates/what/quiz.html:30
-msgid "You may proceed to see <a href='{{ result_url }}'>the result</a>."
+#, python-format
+msgid "You may proceed to see <a href='%(result_url)s'>the result</a>."
 msgstr ""
 
 #: templates/what/quiz.html:62
