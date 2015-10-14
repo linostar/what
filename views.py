@@ -71,6 +71,7 @@ def quiz(request, quiz_code):
 				quiz.save()
 				return render(request, "what/quiz.html", {
 					"student": quiz.student,
+					"rules": quiz.annal.rules,
 					"result_url": Utils.get_result_url(quiz_code),
 					"user_message": "Hello,",
 					"message": "quiz_expired",
@@ -104,6 +105,7 @@ def quiz(request, quiz_code):
 				# User cannot take the quiz twice
 				return render(request, "what/quiz.html", {
 					"student": quiz.student,
+					"rules": quiz.annal.rules,
 					"result_url": Utils.get_result_url(quiz_code),
 					"user_message": "Hello,",
 					"message": "quiz_submitted",
@@ -115,6 +117,7 @@ def quiz(request, quiz_code):
 					quiz.save()
 					return render(request, "what/quiz.html", {
 						"student": quiz.student,
+						"rules": quiz.annal.rules,
 						"result_url": Utils.get_result_url(quiz_code),
 						"user_message": "Hello,",
 						"message": "quiz_expired",
@@ -129,6 +132,7 @@ def quiz(request, quiz_code):
 					answers.append(Answer.objects.filter(question=q).order_by("?"))
 				return render(request, "what/quiz.html", {
 					"quiz": quiz,
+					"rules": quiz.annal.rules,
 					"teacher": quiz.annal.teacher.user,
 					"duration": Utils.format_duration(quiz.annal.annal_duration),
 					"student": quiz.student,

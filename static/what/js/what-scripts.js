@@ -6,6 +6,20 @@ $(document).ready(function() {
 			return num + "";
 	}
 
+	$("#navbar-rules").click(function() {
+		var rules = $("#rules-hidden").attr("value") || "No rules.";
+		bootbox.dialog({
+			title: "Rules",
+			message: rules,
+			buttons: {
+				main: {
+					label: "Close",
+					className: "btn-primary"
+				}
+			}
+		});
+	});
+
 	$(".answers").click(function() {
 		if ($(this).hasClass("yellow")) {
 			$(this).removeClass("yellow");

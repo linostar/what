@@ -11,6 +11,9 @@
 {% block navbar-rules %}Rules{% endblock %}
 
 {% block content %}
+<form id="form-hidden" action="">
+<input type="hidden" id="rules-hidden" value="{{ rules }}">
+</form>
 {% if message == "quiz_submitted" %}
 <div class="alert alert-danger" role="alert">
 	<b>Stop!</b> This quiz has already been submitted. You cannot take it twice.
