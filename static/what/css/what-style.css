@@ -59,9 +59,9 @@ body {
 	left: 0;
 	bottom: 0;
 	right: 0;
-	height: 2vw;
-	line-height: 2vw;
-	font-size: 2vw;
+	height: 20%;
+	line-height: 100%;
+	font-size: 70%;
 }
 
 .label-time {
@@ -69,8 +69,40 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
+	font-size: 90%;
+	line-height: 50% !important;
+	height: 20% !important;
 }
 
 .time-container {
 	position: fixed;
+	margin-top: 5em;
+}
+
+.form-container {
+	margin-top: 5em;
+}
+
+.tips-cell {
+	padding-left: 3em;
+	vertical-align: top;
+	text-align: center;
+}
+
+.quiz-table {
+	width: 100%;
+}
+
+.quiz-cell {
+	vertical-align: top;
+}
+
+.col1-cell {
+	width: 60%;
+}
+
+.button-end {
+	width: 100%;
+	text-align: center;
+	margin-top: 3em;
 }

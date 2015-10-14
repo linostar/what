@@ -20,6 +20,10 @@ $(document).ready(function() {
 		}		
 	});
 
+	$("#submit-button").click(function() {
+		$("#form-submit").submit();
+	});
+
 	var timer = setInterval(function() {
 		var remaining_time = parseInt($(".time-text").attr("title"));
 		if (remaining_time <= 0) {
