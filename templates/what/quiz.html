@@ -5,8 +5,10 @@
 
 {% if message == "show_quiz" %}
 	{% block user %}
-		<b>{{ student.student_name }}</b>
+		Good luck, <b>{{ student.student_name }}</b>
 	{% endblock %}
+	{% block navbar-title %}Taking the Quiz{% endblock %}
+	{% block navbar-rules %}Rules{% endblock %}
 {% endif %}
 
 {% block content %}

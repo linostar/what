@@ -15,12 +15,12 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header navbar-right">
-					<span class="navbar-brand">Good luck, {% block user %}{% endblock %}</span>
+					<span class="navbar-brand">{% block user %}{% endblock %}</span>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Taking the Quiz</a></li>
-						<li><a href="#">Rules</a></li>
+						<li class="active"><a href="#">{% block navbar-title %}{% endblock %}</a></li>
+						<li><a href="#">{% block navbar-rules %}{% endblock %}</a></li>
 					</ul>
 				</div>
 			</div>

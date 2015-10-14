@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Server Error</title>
-</head>
-<body>
+{% extends "what/base.html" %}
+
+{% block title %}>Server Error{% endblock %}
+
+{% block navbar-title %}Quiz{% endblock %}
+
+{% block content %}
 	<h1>Server Error</h1>
 	<h3>The server encountered an error with the page.</h3>
 	<h3>If the problem persists, please inform <a href="mailto:admin@poirot-zone.ml">the admin</a> about the situation.</h3>
 	<div>
 		<a href="javascript:window.history.go(-1)">Go back</a>
 	</div>
-</body>
-</html>
+{% endblock %}
