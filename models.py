@@ -42,6 +42,8 @@ class Question(models.Model):
 	def __str__(self):
 		# use truncated question_text
 		cut = 40
+		if len(self.question_text) < cut:
+			return self.question_text
 		sep = self.question_text.rfind(" ", 0, cut)
 		if sep == -1:
 			return self.question_text[:cut]
@@ -57,6 +59,8 @@ class Answer(models.Model):
 	def __str__(self):
 		# use truncated answer_text
 		cut = 40
+		if len(self.answer_text) < cut:
+			return self.answer_text
 		sep = self.answer_text.rfind(" ", 0, cut)
 		if sep == -1:
 			return self.answer_text[:cut]

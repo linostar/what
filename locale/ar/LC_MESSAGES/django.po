@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-15 10:04+0300\n"
+"POT-Creation-Date: 2015-10-15 18:44+0300\n"
 "PO-Revision-Date: 2015-10-15 10:08+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,9 +23,9 @@ msgid "Not Found"
 msgstr "خطأ في الصفحة"
 
 #: templates/what/404.html:6 templates/what/500.html:6
-#: templates/what/base.html:10 templates/what/quiz.html:5
-msgid "Quiz"
-msgstr "اختبار"
+#: templates/what/base.html:10 templates/what/base.html.py:25
+msgid "Home"
+msgstr "الرئيسية"
 
 #: templates/what/404.html:10
 msgid "This page does not exist."
@@ -59,6 +59,10 @@ msgstr ""
 "<p>جميع الحقوق محفوظة لصاحب الموقع <a href='mailto:info@poirot-zone."
 "ml'>بوارو</a> © 2015.</p>"
 
+#: templates/what/quiz.html:5
+msgid "Quiz"
+msgstr "اختبار"
+
 #: templates/what/quiz.html:11
 msgid "Taking the Quiz"
 msgstr "الاختبار قيد الإجراء"
@@ -76,14 +80,11 @@ msgid ""
 "<b>Sorry!</b> This quiz is currently disabled, either by the admin or "
 "because it expired."
 msgstr ""
-"<b>المعذرة!</b> هذا الاختبار غير متاح حاليًا، إما لأن المشرف عطّله أو لأن "
-"وقت تقديمه قد انتهى."
+"<b>المعذرة!</b> هذا الاختبار غير متاح حاليًا، إما لأن المشرف عطّله أو لأن وقت "
+"تقديمه قد انتهى."
 
 #: templates/what/quiz.html:25
 #, python-format
-#| msgid ""
-#| "<a href='%(result_url)s'>Click here</a> if you want to see your score on "
-#| "this quiz."
 msgid ""
 "<a href='%(result_url)s'>Click here</a> to see your score on this quiz if "
 "you took it before."
@@ -196,11 +197,11 @@ msgstr "<p>النتيجة النهائية: <b>%(score)s/100</b>.</p>"
 msgid "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
 msgstr "<p>مدة اجتياز الاختبار: <b>%(finish_time)s</b>.</p>"
 
-#: views.py:77 views.py:120 views.py:129 views.py:141 views.py:175
-#: views.py:188
+#: views.py:77 views.py:121 views.py:130 views.py:142 views.py:180
+#: views.py:193
 msgid "Hello,"
 msgstr "مرحبًا،"
 
-#: views.py:161
+#: views.py:166
 msgid "Good luck,"
 msgstr "حظًا طيبًا،"

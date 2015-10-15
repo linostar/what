@@ -81,17 +81,20 @@ def quiz(request, quiz_code):
 				# calculate the score
 				score = 0
 				max_score = 0
+				student_answers = []
 				for key in request.POST.keys():
 					if key.startswith("chosen-answer-q"):
 						try:
 							question = get_object_or_404(Question, id=int(key[15:]))
 							max_score += question.points_rewarded
 							answer = get_object_or_404(Answer, id=int(request.POST[key]))
+							student_answers.append(answer)
 							if answer.answer_is_correct:
 								score += question.points_rewarded
 						except ValueError:
 							# non-int instead of question/answer id
 							continue
+				quiz.student_answers = student_answers
 				quiz.score = score
 				quiz.max_score = max_score
 				quiz.finish_time = max(int(request.POST.get("remaining-time-hidden", 0)), 0)
@@ -174,6 +177,7 @@ def result(request, quiz_code):
 	try:
 		quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 		if not quiz.submitted:
+			# quiz is not submitted yet
 			return render(request, "what/result.html", {
 					"student": quiz.student,
 					"quiz_url": Utils.get_quiz_url(quiz_code),
@@ -181,6 +185,7 @@ def result(request, quiz_code):
 					"message": "quiz_not_submitted"
 					})
 		else:
+			# display results
 			return render(request, "what/result.html", {
 				"quiz_code": quiz_code,
 				"quiz_name": quiz.annal.annal_name,
