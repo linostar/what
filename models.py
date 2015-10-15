@@ -18,6 +18,8 @@ class Annal(models.Model):
 	annal_name = models.CharField(max_length=128)
 	created_on = models.DateTimeField(default=datetime.now)
 	enabled = models.BooleanField(default=True)
+	auto_enable = models.BooleanField(default=False)
+	auto_enable_date = models.DateTimeField(null=True, blank=True)
 	auto_disable = models.BooleanField(default=False)
 	auto_disable_date = models.DateTimeField(null=True, blank=True)
 	# Annal duration is in seconds

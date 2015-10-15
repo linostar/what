@@ -41,3 +41,8 @@ class Utils:
 		end = quiz.start_time + timedelta(0, quiz.annal.annal_duration)
 		end += timedelta(0, 10) # 10 seconds mercy time
 		return now >= end
+
+	@staticmethod
+	def date_is_in_past(d):
+		now = datetime.now(timezone.utc)
+		return now >= d

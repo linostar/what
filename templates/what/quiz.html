@@ -17,7 +17,21 @@
 <input type="hidden" id="rules-title-hidden" value='{% trans "Rules" %}'>
 <input type="hidden" id="close-hidden" value='{% trans "Close" %}'>
 </form>
-{% if message == "quiz_submitted" %}
+{% if message == "quiz_disabled" %}
+<div class="alert alert-danger" role="alert">
+	{% trans "<b>Sorry!</b> This quiz is currently disabled, either by the admin or because it expired." %}
+</div>
+<div class="well">
+	{% blocktrans %}<a href='{{ result_url }}'>Click here</a> to see your score on this quiz if you took it before.{% endblocktrans %}
+</div>
+{% elif message == "quiz_expired" %}
+<div class="alert alert-danger" role="alert">
+	{% trans "This quiz has already been expired. You cannot take it twice." %}
+</div>
+<div class="well">
+	{% blocktrans %}You may proceed to see <a href='{{ result_url }}'>the result</a>.{% endblocktrans %}
+</div>
+{% elif message == "quiz_submitted" %}
 <div class="alert alert-danger" role="alert">
 	{% trans "<b>Stop!</b> This quiz has already been submitted. You cannot take it twice." %}
 </div>

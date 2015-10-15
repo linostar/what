@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 23:09+0300\n"
+"POT-Creation-Date: 2015-10-15 10:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,53 +72,70 @@ msgstr "Close"
 
 #: templates/what/quiz.html:22
 msgid ""
-"<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
+"<b>Sorry!</b> This quiz is currently disabled, either by the admin or "
+"because it expired."
 msgstr ""
-"<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
+"<b>Sorry!</b> This quiz is currently disabled, either by the admin or "
+"because it expired."
 
 #: templates/what/quiz.html:25
 #, python-format
 msgid ""
+"<a href='%(result_url)s'>Click here</a> to see your score on this quiz if "
+"you took it before."
+msgstr ""
+"<a href='%(result_url)s'>Click here</a> to see your score on this quiz if "
+"you took it before."
+
+#: templates/what/quiz.html:29 templates/what/quiz.html.py:43
+msgid "This quiz has already been expired. You cannot take it twice."
+msgstr "This quiz has already been expired. You cannot take it twice."
+
+#: templates/what/quiz.html:32 templates/what/quiz.html.py:46
+#, python-format
+msgid "You may proceed to see <a href='%(result_url)s'>the result</a>."
+msgstr "You may proceed to see <a href='%(result_url)s'>the result</a>."
+
+#: templates/what/quiz.html:36
+msgid ""
+"<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
+msgstr ""
+"<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
+
+#: templates/what/quiz.html:39
+#, python-format
+msgid ""
 "<a href='%(result_url)s'>Click here</a> if you want to see your score on "
 "this quiz."
 msgstr ""
 "<a href='%(result_url)s'>Click here</a> if you want to see your score on "
 "this quiz."
 
-#: templates/what/quiz.html:29
-msgid "This quiz has already been expired. You cannot take it twice."
-msgstr "This quiz has already been expired. You cannot take it twice."
-
-#: templates/what/quiz.html:32
-#, python-format
-msgid "You may proceed to see <a href='%(result_url)s'>the result</a>."
-msgstr "You may proceed to see <a href='%(result_url)s'>the result</a>."
-
-#: templates/what/quiz.html:64
+#: templates/what/quiz.html:78
 msgid "Time remaining"
 msgstr "Time remaining"
 
-#: templates/what/quiz.html:70
+#: templates/what/quiz.html:84
 msgid "Go!"
 msgstr "Go!"
 
-#: templates/what/quiz.html:76
+#: templates/what/quiz.html:90
 msgid "End Quiz"
 msgstr "End Quiz"
 
-#: templates/what/quiz.html:81
+#: templates/what/quiz.html:95
 msgid "Quiz made by"
 msgstr "Quiz made by"
 
-#: templates/what/quiz.html:89
+#: templates/what/quiz.html:103
 msgid "Total duration"
 msgstr "Total duration"
 
-#: templates/what/quiz.html:97
+#: templates/what/quiz.html:111
 msgid "Notes"
 msgstr "Notes"
 
-#: templates/what/quiz.html:100
+#: templates/what/quiz.html:114
 msgid ""
 "<p><span class='font-blue'>Blue questions</span> have only 1 correct answer."
 "</p>"
@@ -126,7 +143,7 @@ msgstr ""
 "<p><span class='font-blue'>Blue questions</span> have only 1 correct answer."
 "</p>"
 
-#: templates/what/quiz.html:101
+#: templates/what/quiz.html:115
 msgid ""
 "<p><span class='font-purple'>Purple questions</span> have 1 or more correct "
 "answers.</p>"
@@ -178,10 +195,11 @@ msgstr "<p>Score is: <b>%(score)s/100</b>.</p>"
 msgid "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
 msgstr "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
 
-#: views.py:77 views.py:111 views.py:123 views.py:157 views.py:170
+#: views.py:77 views.py:120 views.py:129 views.py:141 views.py:175
+#: views.py:188
 msgid "Hello,"
 msgstr "Hello,"
 
-#: views.py:143
+#: views.py:161
 msgid "Good luck,"
 msgstr "Good luck,"
