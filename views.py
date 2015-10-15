@@ -103,14 +103,15 @@ def quiz(request, quiz_code):
 		else:
 			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 			is_enabled = quiz.annal.enabled
-			if quiz.annal.auto_enable and not quiz.annal.auto_enable_date:
+			if quiz.annal.auto_enable and quiz.annal.auto_enable_date:
 				if Utils.date_is_in_past(quiz.annal.auto_enable_date):
 					is_enabled = True
-			if quiz.annal.auto_disable and not quiz.annal.auto_disable_date:
+			if quiz.annal.auto_disable and quiz.annal.auto_disable_date:
 				if Utils.date_is_in_past(quiz.annal.auto_disable_date):
 					is_enabled = False
 			quiz.annal.enabled = is_enabled
 			quiz.annal.save()
+			quiz.save()
 			if not is_enabled:
 				# Quiz is disabled
 				return render(request, "what/quiz.html", {
