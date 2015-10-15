@@ -3,11 +3,13 @@ import random
 
 from datetime import datetime, timedelta, timezone
 
+from django.conf import settings
+
 
 class Utils:
 	"""utility functions for the app"""
 
-	SITE_URL = "http://46.101.254.74:9870"
+	SITE_URL = settings.SITE_URL
 	CODE_LENGTH = 8
 
 	@staticmethod
