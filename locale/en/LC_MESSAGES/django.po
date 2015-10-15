@@ -19,57 +19,62 @@ msgstr ""
 
 #: templates/what/404.html:4 templates/what/404.html.py:9
 msgid "Not Found"
-msgstr ""
+msgstr "Not Found"
 
 #: templates/what/404.html:6 templates/what/500.html:6
 #: templates/what/base.html:10 templates/what/quiz.html:5
 msgid "Quiz"
-msgstr ""
+msgstr "Quiz"
 
 #: templates/what/404.html:10
 msgid "This page does not exist."
-msgstr ""
+msgstr "This page does not exist."
 
 #: templates/what/404.html:12 templates/what/500.html:13
 msgid "Go back"
-msgstr ""
+msgstr "Go back"
 
 #: templates/what/500.html:4 templates/what/500.html.py:9
 msgid "Server Error"
-msgstr ""
+msgstr "Server Error"
 
 #: templates/what/500.html:10
 msgid "The server encountered an error with the page."
-msgstr ""
+msgstr "The server encountered an error with the page."
 
 #: templates/what/500.html:11
 msgid ""
 "If the problem persists, please inform <a href='mailto:admin@poirot-zone."
 "ml'>the admin</a> about the situation."
 msgstr ""
+"If the problem persists, please inform <a href='mailto:admin@poirot-zone."
+"ml'>the admin</a> about the situation."
 
 #: templates/what/base.html:41
 msgid ""
 "<p>© 2015 <a href='mailto:info@poirot-zone.ml'>Hercule Poirot</a>. All "
 "Rights Reserved.</p>"
 msgstr ""
+"<p>© 2015 <a href='mailto:info@poirot-zone.ml'>Hercule Poirot</a>. All "
+"Rights Reserved.</p>"
 
 #: templates/what/quiz.html:11
 msgid "Taking the Quiz"
-msgstr ""
+msgstr "Taking the Quiz"
 
 #: templates/what/quiz.html:12 templates/what/quiz.html.py:17
 msgid "Rules"
-msgstr ""
+msgstr "Rules"
 
 #: templates/what/quiz.html:18
 msgid "Close"
-msgstr ""
+msgstr "Close"
 
 #: templates/what/quiz.html:22
 msgid ""
 "<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
 msgstr ""
+"<b>Stop!</b> This quiz has already been submitted. You cannot take it twice."
 
 #: templates/what/quiz.html:25
 #, python-format
@@ -77,99 +82,106 @@ msgid ""
 "<a href='%(result_url)s'>Click here</a> if you want to see your score on "
 "this quiz."
 msgstr ""
+"<a href='%(result_url)s'>Click here</a> if you want to see your score on "
+"this quiz."
 
 #: templates/what/quiz.html:29
 msgid "This quiz has already been expired. You cannot take it twice."
-msgstr ""
+msgstr "This quiz has already been expired. You cannot take it twice."
 
 #: templates/what/quiz.html:32
 #, python-format
 msgid "You may proceed to see <a href='%(result_url)s'>the result</a>."
-msgstr ""
+msgstr "You may proceed to see <a href='%(result_url)s'>the result</a>."
 
 #: templates/what/quiz.html:64
 msgid "Time remaining"
-msgstr ""
+msgstr "Time remaining"
 
 #: templates/what/quiz.html:70
 msgid "Go!"
-msgstr ""
+msgstr "Go!"
 
 #: templates/what/quiz.html:76
 msgid "End Quiz"
-msgstr ""
+msgstr "End Quiz"
 
 #: templates/what/quiz.html:81
 msgid "Quiz made by"
-msgstr ""
+msgstr "Quiz made by"
 
 #: templates/what/quiz.html:89
 msgid "Total duration"
-msgstr ""
+msgstr "Total duration"
 
 #: templates/what/quiz.html:97
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 #: templates/what/quiz.html:100
 msgid ""
 "<p><span class='font-blue'>Blue questions</span> have only 1 correct answer."
 "</p>"
 msgstr ""
+"<p><span class='font-blue'>Blue questions</span> have only 1 correct answer."
+"</p>"
 
 #: templates/what/quiz.html:101
 msgid ""
 "<p><span class='font-purple'>Purple questions</span> have 1 or more correct "
 "answers.</p>"
 msgstr ""
+"<p><span class='font-purple'>Purple questions</span> have 1 or more correct "
+"answers.</p>"
 
 #: templates/what/result.html:4
 msgid "Result"
-msgstr ""
+msgstr "Result"
 
 #: templates/what/result.html:10
 msgid "Results"
-msgstr ""
+msgstr "Results"
 
 #: templates/what/result.html:15
 msgid "<b>No result!</b> This quiz has not been taken yet."
-msgstr ""
+msgstr "<b>No result!</b> This quiz has not been taken yet."
 
 #: templates/what/result.html:18
 #, python-format
 msgid "<a href='%(quiz_url)s'>Click here</a> to take the quiz."
-msgstr ""
+msgstr "<a href='%(quiz_url)s'>Click here</a> to take the quiz."
 
 #: templates/what/result.html:27
 #, python-format
 msgid "Results for <b>%(student)s</b>"
-msgstr ""
+msgstr "Results for <b>%(student)s</b>"
 
 #: templates/what/result.html:30
 #, python-format
 msgid ""
 "<p>Quiz <b><em>%(quiz_name)s</em></b> was taken on %(start_time)s UTC.</p>"
 msgstr ""
+"<p>Quiz <b><em>%(quiz_name)s</em></b> was taken on %(start_time)s UTC.</p>"
 
 #: templates/what/result.html:31
 #, python-format
 msgid "<p>The quiz contained <b>%(number_of_questions)s</b> questions.</p>"
-msgstr ""
+msgstr "<p>The quiz contained <b>%(number_of_questions)s</b> questions.</p>"
 
 #: templates/what/result.html:32
 #, python-format
 msgid "<p>Score is: <b>%(score)s/100</b>.</p>"
-msgstr ""
+msgstr "<p>Score is: <b>%(score)s/100</b>.</p>"
 
 #: templates/what/result.html:33
 #, python-format
 msgid "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
-msgstr ""
+msgstr "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
 
 #: views.py:77 views.py:111 views.py:123 views.py:157 views.py:170
 msgid "Hello,"
-msgstr ""
+msgstr "Hello,"
 
 #: views.py:143
 msgid "Good luck,"
-msgstr ""
+msgstr "Good luck,"

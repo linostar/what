@@ -86,6 +86,7 @@ class Quiz(models.Model):
 class Setting(models.Model):
 	language = models.CharField(max_length=8, default="en")
 	direction = models.CharField(max_length=3, default="ltr")
+	site_name = models.CharField(max_length=50, default="Interactive Tests")
 
 	def __str__(self):
-		return self.language
+		return self.site_name
