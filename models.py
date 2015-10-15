@@ -83,6 +83,8 @@ class Quiz(models.Model):
 	# time remaining in the clock when the student finishes (in seconds)
 	finish_time = models.IntegerField(default=0)
 	start_time = models.DateTimeField(blank=True, null=True)
+	selected_questions = models.ManyToManyField(Question, blank=True)
+	student_answers = models.ManyToManyField(Answer, blank=True)
 
 
 class Setting(models.Model):

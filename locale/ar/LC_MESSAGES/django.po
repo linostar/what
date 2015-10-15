@@ -20,7 +20,7 @@ msgstr ""
 
 #: templates/what/404.html:4 templates/what/404.html.py:9
 msgid "Not Found"
-msgstr "صفحة غير موجودة"
+msgstr "خطأ في الصفحة"
 
 #: templates/what/404.html:6 templates/what/500.html:6
 #: templates/what/base.html:10 templates/what/quiz.html:5
@@ -29,7 +29,7 @@ msgstr "اختبار"
 
 #: templates/what/404.html:10
 msgid "This page does not exist."
-msgstr "هذه الصفحة غير موجودة."
+msgstr "هذه الصفحة غير موجودة. قد تكون اتبعت الرابط الخطأ."
 
 #: templates/what/404.html:12 templates/what/500.html:13
 msgid "Go back"

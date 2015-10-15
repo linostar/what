@@ -144,9 +144,13 @@ def quiz(request, quiz_code):
 						})
 				# show the questions and start the quiz
 				quiz.start_time = datetime.now()
-				quiz.save()
-				questions = Question.objects.filter(annal=quiz.annal).order_by(
-					"?")[:quiz.number_of_questions]
+				if quiz.selected_questions.all():
+					questions = quiz.selected_questions.all()
+				else:
+					questions = Question.objects.filter(annal=quiz.annal).order_by(
+						"?")[:quiz.number_of_questions]
+					quiz.selected_questions.add(*questions)
+					quiz.save()
 				answers = []
 				for q in questions:
 					answers.append(Answer.objects.filter(question=q).order_by("?"))
