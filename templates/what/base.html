@@ -10,8 +10,11 @@
 	<title>{% block title %}{% trans "Home" %}{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap.min.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-theme.min.css' %}" />
+{% if request.session.direction == "rtl" %}
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-rtl.min.css' %}" />
+{% endif %}
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/what-style.css' %}" />
+
 </head>
 <body role="document">
 	<div class="container" role="main">
