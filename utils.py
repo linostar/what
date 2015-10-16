@@ -56,10 +56,11 @@ class Utils:
 		lang = "en"
 		direction = "ltr"
 		lang_settings = Setting.objects.first()
+		root_path = os.path.dirname(os.path.realpath(__file__))
 		if lang_settings:
 			if lang_settings.direction.lower() == "rtl":
 				direction= "rtl"
-			if os.path.exists("locale/" + lang_settings.language):
+			if os.path.exists(root_path + "/locale/" + lang_settings.language):
 				lang = lang_settings.language
 		translation.activate(lang)
 		request.LANGUAGE_CODE = translation.get_language()

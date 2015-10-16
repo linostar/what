@@ -181,6 +181,7 @@ def quiz(request, quiz_code):
 
 def result(request, quiz_code):
 	request = Utils.prepare_request(request)
+	print(request.session['lang'])
 	try:
 		quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 		if not quiz.submitted:
