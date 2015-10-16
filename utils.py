@@ -1,9 +1,13 @@
+import os
 import string
 import random
 
 from datetime import datetime, timedelta, timezone
 
 from django.conf import settings
+from django.utils import translation
+
+from what.models import Setting, Quiz
 
 
 class Utils:
@@ -46,3 +50,20 @@ class Utils:
 	def date_is_in_past(d):
 		now = datetime.now(timezone.utc)
 		return now >= d
+
+	@staticmethod
+	def prepare_request(request):
+		lang = "en"
+		direction = "ltr"
+		lang_settings = Setting.objects.first()
+		if lang_settings:
+			if lang_settings.direction.lower() == "rtl":
+				direction= "rtl"
+			if os.path.exists("locale/" + lang_settings.language):
+				lang = lang_settings.language
+		translation.activate(lang)
+		request.LANGUAGE_CODE = translation.get_language()
+		request.session['direction'] = direction
+		request.session['lang'] = lang
+		request.session['site_name'] = lang_settings.site_name
+		return request

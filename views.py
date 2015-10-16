@@ -12,16 +12,19 @@ from what.utils import Utils
 
 
 def handler404(request):
+	request = Utils.prepare_request(request)
 	response = render(request, "what/404.html")
 	response.status_code = 404
 	return response
 
 def handler500(request):
+	request = Utils.prepare_request(request)
 	response = render(request, "what/500.html")
 	response.status_code = 500
 	return response
 
 def index(request):
+	request = Utils.prepare_request(request)
 	if not request.user.is_authenticated():
 		return redirect("login")
 	else:
@@ -31,6 +34,7 @@ def index(request):
 			})
 
 def signin(request):
+	request = Utils.prepare_request(request)
 	try:
 		if request.method == "POST":
 			if request.POST['username'] and request.POST['password']:
@@ -58,10 +62,12 @@ def signin(request):
 		return render(request, "what/login.html", {"message": "login_missing"})
 
 def signout(request):
+	request = Utils.prepare_request(request)
 	logout(request)
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
 def quiz(request, quiz_code):
+	request = Utils.prepare_request(request)
 	try:
 		if request.method == "POST":
 			# quiz answered are POSTed
@@ -174,6 +180,7 @@ def quiz(request, quiz_code):
 		raise
 
 def result(request, quiz_code):
+	request = Utils.prepare_request(request)
 	try:
 		quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 		if not quiz.submitted:
