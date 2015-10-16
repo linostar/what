@@ -17,7 +17,15 @@
 
 </head>
 <body role="document">
-	<div class="container" role="main">
+		<div class="jumbotron">
+			<div class="container">
+			{% if request.session.site_name %}
+				<h2>{{ request.session.site_name }}</h2>
+			{% else %}
+				<h2>{% trans "Interactive Quizzes" %}</h2>
+			{% endif %}
+			</div>
+		</div>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header navbar-end">
@@ -31,6 +39,7 @@
 				</div>
 			</div>
 		</nav>
+	<div class="container" role="main">
 		<div class="page-container">
 			{% block content %}{% endblock %}
 		</div>

@@ -1,11 +1,24 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskufiarabic.css);
+
 html {
 	position: relative;
 	min-height: 100%;
 }
 
 body {
+	/* change the fonts to your liking */
 	font-family: Tahoma, Georgia, Serif;
 	background: linear-gradient(to left, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
+}
+
+.jumbotron {
+	margin-bottom: 0;
+	padding-bottom: 1em;
+	color: #ccffff;
+	text-align: center;
+	/* change the fonts to your liking */
+	font-family: 'Noto Sans Kufi Arabic', Tahoma;
+	background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
 }
 
 .answers {
@@ -94,11 +107,11 @@ body {
 
 .time-container {
 	position: fixed;
-	margin-top: 5em;
+	margin-top: 1em;
 }
 
 .page-container {
-	margin-top: 5em;
+	margin-top: 1em;
 	margin-bottom: 5em;
 }
 
