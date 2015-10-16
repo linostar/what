@@ -97,7 +97,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class QuizAdmin(admin.ModelAdmin):
-	list_display = ["get_url", "get_student", "annal", "score",
+	list_display = ["get_student", "get_url", "annal", "score",
 	"max_score", "number_of_questions", "submitted", "start_time",
 	"get_finish_time"]
 	actions = ["delete_selected"]

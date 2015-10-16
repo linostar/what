@@ -105,6 +105,10 @@ body {
 .tips-cell {
 	width: 16em;
 	padding-inline-start: 3em;
+	-khtml-padding-start: 3em;
+	-o-padding-start: 3em;
+	-webkit-padding-start: 3em;
+	padding-start: 3em;
 	vertical-align: top;
 	text-align: center;
 }
