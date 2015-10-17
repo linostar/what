@@ -43,10 +43,19 @@
 					<ul class="nav navbar-nav navbar-right">
 					{% endif %}
 						<li>
-							<select class="selectpicker lang-select">
-								<option>English</option>
-								<option>العربية</option>
-							</select>
+							<form id="form-change-locale" action="" method="POST">
+							{% csrf_token %}
+								<input type="hidden" id="locale-hidden" value=""/>
+								<select id="select-locale" class="selectpicker lang-select show-tick">
+								{% for loc in request.session.locales %}
+									{% if loc == request.session.lang %}
+									<option value="{{ loc }}" selected>{{ loc }}</option>
+									{% else %}
+									<option value="{{ loc }}">{{ loc }}</option>
+									{% endif %}
+								{% endfor %}
+								</select>
+							</form>
 						</li>
 					</ul>
 				</div>

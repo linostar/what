@@ -97,11 +97,11 @@ class Locale(models.Model):
 	direction = models.CharField(max_length=3, default="ltr")
 
 	def __str__(self):
-		return self.short_name
+		return self.full_name
 
 
 class Setting(models.Model):
-	locale = models.ForeignKey(Locale, null=True, blank=True)
+	locale = models.ForeignKey(Locale)
 	site_name = models.CharField(max_length=50, default="Interactive Tests")
 
 	def __str__(self):

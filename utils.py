@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, timezone
 from django.conf import settings
 from django.utils import translation
 
-from what.models import Setting, Quiz
+from what.models import Setting, Locale, Quiz
 
 
 class Utils:
@@ -52,19 +52,34 @@ class Utils:
 		return now >= d
 
 	@staticmethod
+	def locale_exists(locale):
+		root_path = os.path.dirname(os.path.realpath(__file__))
+		if os.path.exists(root_path + "/locale/" + locale):
+			return True
+
+	@staticmethod
 	def prepare_request(request):
 		lang = "en"
 		direction = "ltr"
+		locales = []
 		lang_settings = Setting.objects.first()
-		root_path = os.path.dirname(os.path.realpath(__file__))
+		for loc in Locale.objects.all():
+			if Utils.locale_exists(loc.short_name):
+				locales.append(loc.short_name)
 		if lang_settings:
 			if lang_settings.locale.direction.lower() == "rtl":
 				direction= "rtl"
-			if os.path.exists(root_path + "/locale/" + lang_settings.locale.short_name):
+			if Utils.locale_exists(lang_settings.locale.short_name):
 				lang = lang_settings.locale.short_name
+		if request.method == "POST" and "locale-hidden" in request.POST:
+			request.session['override_locale'] = request.POST['locale-hidden']
+		if "override_locale" in request.session:
+			if Utils.locale_exists(request.session['override_locale']):
+				lang = request.session['override_locale']
 		translation.activate(lang)
 		request.LANGUAGE_CODE = translation.get_language()
 		request.session['direction'] = direction
 		request.session['lang'] = lang
 		request.session['site_name'] = lang_settings.site_name
+		request.session['locales'] = locales
 		return request

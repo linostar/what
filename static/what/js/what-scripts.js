@@ -6,6 +6,13 @@ $(document).ready(function() {
 			return num + "";
 	}
 
+	$('.selectpicker').selectpicker();
+
+	$("#select-locale").change(function() {
+		$("#locale-hidden").val($("#select-locale").find("option:selected").val());
+		$("#form-change-locale").submit();
+	});
+
 	$("#navbar-rules").click(function() {
 		var rules = $("#rules-hidden").attr("value") || "No rules.";
 		var rules_title = $("#rules-title-hidden").attr("value");
