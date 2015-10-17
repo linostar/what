@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from what.utils import Utils
-from what.models import Teacher, Student, Quiz, Annal, Question, Answer, Setting
+from what.models import Teacher, Student, Quiz, Annal, Question, Answer, Setting, Locale
 
 class AnnalAdmin(admin.ModelAdmin):
 	list_display = ["annal_name", "teacher", "enabled", "number_of_questions",
@@ -147,4 +147,5 @@ admin.site.register(Student, StudentAdmin)
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
+admin.site.register(Locale)
 admin.site.register(Setting)

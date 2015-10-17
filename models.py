@@ -91,10 +91,19 @@ class Quiz(models.Model):
 	student_answers = models.ManyToManyField(Answer, blank=True)
 
 
-class Setting(models.Model):
-	language = models.CharField(max_length=8, default="en")
+class Locale(models.Model):
+	short_name = models.CharField(max_length=8, default="en")
+	full_name = models.CharField(max_length=32, default="English")
 	direction = models.CharField(max_length=3, default="ltr")
+
+	def __str__(self):
+		return self.short_name
+
+
+class Setting(models.Model):
+	locale = models.ForeignKey(Locale, null=True, blank=True)
 	site_name = models.CharField(max_length=50, default="Interactive Tests")
 
 	def __str__(self):
 		return self.site_name
+
