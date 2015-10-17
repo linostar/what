@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-15 18:44+0300\n"
+"POT-Creation-Date: 2015-10-17 09:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "Not Found"
 msgstr "Not Found"
 
 #: templates/what/404.html:6 templates/what/500.html:6
-#: templates/what/base.html:10 templates/what/base.html.py:25
+#: templates/what/base.html:10 templates/what/base.html.py:36
 msgid "Home"
 msgstr "Home"
 
@@ -50,7 +50,11 @@ msgstr ""
 "If the problem persists, please inform <a href='mailto:admin@poirot-zone."
 "ml'>the admin</a> about the situation."
 
-#: templates/what/base.html:41
+#: templates/what/base.html:25
+msgid "Interactive Quizzes"
+msgstr "Interactive Quizzes"
+
+#: templates/what/base.html:53
 msgid ""
 "<p>© 2015 <a href='mailto:info@poirot-zone.ml'>Hercule Poirot</a>. All "
 "Rights Reserved.</p>"
@@ -199,11 +203,11 @@ msgstr "<p>Score is: <b>%(score)s/100</b>.</p>"
 msgid "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
 msgstr "<p>Quiz finished in <b>%(finish_time)s</b>.</p>"
 
-#: views.py:77 views.py:121 views.py:130 views.py:142 views.py:180
-#: views.py:193
+#: views.py:83 views.py:133 views.py:142 views.py:154 views.py:194
+#: views.py:208
 msgid "Hello,"
 msgstr "Hello,"
 
-#: views.py:166
+#: views.py:178
 msgid "Good luck,"
 msgstr "Good luck,"
