@@ -7,7 +7,7 @@
 
 {% block content %}
 	<h1>{% trans "Not Found" %}</h1>
-	<h3>{% trans "This page does not exist." %}</h3>
+	<div class="alert alert-danger" role="alert">{% trans "This page does not exist." %}</div>
 	<div>
 		<a href="javascript:window.history.go(-1)">{% trans "Go back" %}</a>
 	</div>

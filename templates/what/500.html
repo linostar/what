@@ -7,8 +7,8 @@
 
 {% block content %}
 	<h1>{% trans "Server Error" %}</h1>
-	<h3>{% trans "The server encountered an error with the page." %}</h3>
-	<h3>{% trans "If the problem persists, please inform <a href='mailto:admin@poirot-zone.ml'>the admin</a> about the situation." %}</h3>
+	<div class="alert alert-danger" role="alert">{% trans "The server encountered an error with the page." %}</div>
+	<div class="alert alert-info" role="alert">{% trans "If the problem persists, please inform <a href='mailto:admin@poirot-zone.ml'>the admin</a> about the situation." %}</div>
 	<div>
 		<a href="javascript:window.history.go(-1)">{% trans "Go back" %}</a>
 	</div>
