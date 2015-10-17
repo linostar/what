@@ -167,3 +167,7 @@ body {
 	padding-top: 0.6em;
 	border-radius: 25px 25px 0 0;
 }
+
+.lang-select {
+	padding-top: 0.5em;
+}

@@ -10,6 +10,7 @@
 	<title>{% block title %}{% trans "Home" %}{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap.min.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-theme.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-select.min.css' %}" />
 {% if request.session.direction == "rtl" %}
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-rtl.min.css' %}" />
 {% endif %}
@@ -28,13 +29,25 @@
 		</div>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<div class="navbar-header navbar-end">
+				<div class="navbar-header">
 					<span class="navbar-brand">{% block user %}{% endblock %}</span>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">{% block navbar-title %}{% trans "Home" %}{% endblock %}</a></li>
 						<li><a id="navbar-rules" href="#">{% block navbar-rules %}{% endblock %}</a></li>
+					</ul>
+					{% if request.session.direction == "rtl" %}
+					<ul class="nav navbar-nav navbar-left">
+					{% else %}
+					<ul class="nav navbar-nav navbar-right">
+					{% endif %}
+						<li>
+							<select class="selectpicker lang-select">
+								<option>English</option>
+								<option>العربية</option>
+							</select>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -58,6 +71,7 @@
 	<script src="{% static 'what/js/jquery-2.1.4.min.js' %}"></script>
 	<script src="{% static 'what/js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'what/js/ie10-viewport-bug-workaround.js' %}"></script>
+	<script src="{% static 'what/js/bootstrap-select.min.js' %}"></script>
 	<script src="{% static 'what/js/bootbox.min.js' %}"></script>
 	<script src="{% static 'what/js/what-scripts.js' %}"></script>
 </body>
