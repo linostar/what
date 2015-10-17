@@ -196,10 +196,14 @@ def result(request, quiz_code):
 					})
 		else:
 			# display results
+			try:
+				score = round(quiz.score * 100 / quiz.max_score)
+			except ZeroDivisionError:
+				score = 0
 			return render(request, "what/result.html", {
 				"quiz_code": quiz_code,
 				"quiz_name": quiz.annal.annal_name,
-				"score": round(quiz.score * 100 / quiz.max_score),
+				"score": score,
 				"start_time": quiz.start_time,
 				"finish_time": Utils.format_duration(
 					quiz.annal.annal_duration - quiz.finish_time),
