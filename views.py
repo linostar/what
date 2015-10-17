@@ -69,7 +69,7 @@ def signout(request):
 def quiz(request, quiz_code):
 	request = Utils.prepare_request(request)
 	try:
-		if request.method == "POST":
+		if request.method == "POST" and "remaining-time-hidden" in request.POST:
 			# quiz answered are POSTed
 			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 			quiz.submitted = True

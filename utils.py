@@ -62,20 +62,23 @@ class Utils:
 		lang = "en"
 		direction = "ltr"
 		locales = []
+		locales_dir = {}
 		lang_settings = Setting.objects.first()
 		for loc in Locale.objects.all():
 			if Utils.locale_exists(loc.short_name):
 				locales.append([loc.short_name, loc.full_name])
-		if lang_settings:
+				locales_dir[loc.short_name] = loc.direction
+		if request.method == "POST" and "select-locale" in request.POST:
+			request.session['override_locale'] = request.POST['select-locale']
+		if "override_locale" in request.session:
+			if Utils.locale_exists(request.session['override_locale']):
+				lang = request.session['override_locale']
+				direction = locales_dir[lang]
+		elif lang_settings:
 			if lang_settings.locale.direction.lower() == "rtl":
 				direction= "rtl"
 			if Utils.locale_exists(lang_settings.locale.short_name):
 				lang = lang_settings.locale.short_name
-		if request.method == "POST" and "locale-hidden" in request.POST:
-			request.session['override_locale'] = request.POST['locale-hidden']
-		if "override_locale" in request.session:
-			if Utils.locale_exists(request.session['override_locale']):
-				lang = request.session['override_locale']
 		translation.activate(lang)
 		request.LANGUAGE_CODE = translation.get_language()
 		request.session['direction'] = direction

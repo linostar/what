@@ -46,10 +46,10 @@
 						<li>
 							<form id="form-change-locale" action="" method="POST">
 							{% csrf_token %}
-								<input type="hidden" id="locale-hidden" value=""/>
-								<select id="select-locale" class="selectpicker lang-select show-tick">
+								<input type="hidden" id="locale-hidden" name="locale-hidden" value="en"/>
+								<select id="select-locale" name="select-locale" class="selectpicker lang-select show-tick">
 								{% for loc in request.session.locales %}
-									{% if loc == request.session.lang %}
+									{% if loc|index:0 == request.session.lang %}
 									<option value="{{ loc|index:0 }}" selected>{{ loc|index:1 }}</option>
 									{% else %}
 									<option value="{{ loc|index:0 }}">{{ loc|index:1 }}</option>
