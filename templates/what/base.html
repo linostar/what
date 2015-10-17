@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
+{% load template_array %}
 
 <!DOCTYPE html>
 <html>
@@ -49,9 +50,9 @@
 								<select id="select-locale" class="selectpicker lang-select show-tick">
 								{% for loc in request.session.locales %}
 									{% if loc == request.session.lang %}
-									<option value="{{ loc }}" selected>{{ loc }}</option>
+									<option value="{{ loc|index:0 }}" selected>{{ loc|index:1 }}</option>
 									{% else %}
-									<option value="{{ loc }}">{{ loc }}</option>
+									<option value="{{ loc|index:0 }}">{{ loc|index:1 }}</option>
 									{% endif %}
 								{% endfor %}
 								</select>

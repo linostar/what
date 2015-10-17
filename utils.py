@@ -65,7 +65,7 @@ class Utils:
 		lang_settings = Setting.objects.first()
 		for loc in Locale.objects.all():
 			if Utils.locale_exists(loc.short_name):
-				locales.append(loc.short_name)
+				locales.append([loc.short_name, loc.full_name])
 		if lang_settings:
 			if lang_settings.locale.direction.lower() == "rtl":
 				direction= "rtl"
