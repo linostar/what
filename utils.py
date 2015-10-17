@@ -43,7 +43,7 @@ class Utils:
 	def quiz_expired(quiz):
 		now = datetime.now(timezone.utc)
 		end = quiz.start_time + timedelta(0, quiz.annal.annal_duration)
-		end += timedelta(0, 10) # 10 seconds mercy time
+		end += timedelta(0, 30) # 30 seconds mercy time
 		return now >= end
 
 	@staticmethod
