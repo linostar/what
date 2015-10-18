@@ -1,0 +1,45 @@
+{% extends "what/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Quiz" %}{% endblock %}
+
+{% block navbar-title %}{% trans "Login" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="login-container">
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4">
+	<center>
+	<br/>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>{% trans "Teacher Control Panel" %}</h3>
+		</div>
+		<div class="panel-body">
+			<form action="" method="POST" id="form-login">
+			{% csrf_token %}
+			<table id="table-login">
+				<tr>
+					<td><label for="form-username">{% trans "Username:" %}</label></td>
+					<td><input type="text" id="form-username" name="form-username" maxlength="64" size="30"/></td>
+				</tr>
+				<tr>
+					<td><label for="form-password">{% trans "Password:" %}</label></td>
+					<td><input type="password" id="form-password" name="form-password" maxlength="64" size="30"/></td>
+				</tr>
+				<tr>
+				<td colspan="2" class="td-center">
+				<button type="submit" id='button-submit' class="btn btn-primary">{% trans "Login" %}</button>
+				</td>
+				</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+	</center>
+	</div>
+</div>
+</div>
+{% endblock %}

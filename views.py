@@ -44,8 +44,8 @@ def signin(request):
 					# account exists and is enabled
 					return render(request, "what/index.html", {
 						"message": "login_success",
-						"userid": get_user(request).id,
-						"username": get_user(request).username,
+						"userid": user.id,
+						"username": user.username,
 						})
 				elif user:
 					# account exists but is disabled
@@ -57,7 +57,9 @@ def signin(request):
 						{"message": "login_error"})
 		else:
 			# show the login form
-			return render(request, "what/login.html")
+			return render(request, "what/login.html", {
+				"message": "form_login",
+				})
 	except KeyError:
 		return render(request, "what/login.html", {"message": "login_missing"})
 

@@ -171,3 +171,14 @@ body {
 .lang-select {
 	padding-top: 0.5em;
 }
+
+#table-login td {
+	vertical-align: middle;
+	padding: 0.2em 0.3em 0.2em 0;
+	text-align: start;
+}
+
+.td-center {
+	padding: 0.5em 0 0.5em 0 !important;
+	text-align: center !important;
+}
