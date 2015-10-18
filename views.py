@@ -37,9 +37,9 @@ def signin(request):
 	request = Utils.prepare_request(request)
 	try:
 		if request.method == "POST":
-			if request.POST['username'] and request.POST['password']:
-				user = authenticate(username=request.POST['username'],
-					password=request.POST['password'])
+			if request.POST['form-username'] and request.POST['form-password']:
+				user = authenticate(username=request.POST['form-username'],
+					password=request.POST['form-password'])
 				if user and user.is_active:
 					# account exists and is enabled
 					return render(request, "what/index.html", {
@@ -55,6 +55,11 @@ def signin(request):
 					# username or password incorrect
 					return render(request, "what/login.html",
 						{"message": "login_error"})
+			else:
+				# username and/or password missing
+				return render(request, "what/login.html", {
+					"message": "login_missing",
+					})
 		else:
 			# show the login form
 			return render(request, "what/login.html", {

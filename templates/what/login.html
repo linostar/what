@@ -6,6 +6,22 @@
 {% block navbar-title %}{% trans "Login" %}{% endblock %}
 
 {% block content %}
+{% if message == "account_disabled" %}
+<div class="alert alert-danger">
+	{% trans "This account is disabled." %}
+</div>
+<button type="button" class="btn btn-danger" onclick="window.history.go(-1)">{% trans "Go back" %}</button>
+{% elif message == "login_error" %}
+<div class="alert alert-danger">
+	{% trans "Username and/or password are incorrect." %}
+</div>
+<button type="button" class="btn btn-danger" onclick="window.history.go(-1)">{% trans "Go back" %}</button>
+{% elif message == "login_missing" %}
+<div class="alert alert-warning">
+	{% trans "Please enter your username and password in order to log in." %}
+</div>
+<button type="button" class="btn btn-warning" onclick="window.history.go(-1)">{% trans "Go back" %}</button>
+{% elif message == "form_login" %}
 <div class="row">
 <div class="login-container">
 	<div class="col-sm-4">
@@ -13,7 +29,7 @@
 	<div class="col-sm-4">
 	<center>
 	<br/>
-	<div class="panel panel-default">
+	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3>{% trans "Teacher Control Panel" %}</h3>
 		</div>
@@ -31,7 +47,7 @@
 				</tr>
 				<tr>
 				<td colspan="2" class="td-center">
-				<button type="submit" id='button-submit' class="btn btn-primary">{% trans "Login" %}</button>
+				<button type="submit" id='button-submit' class="btn btn-lg btn-primary">{% trans "Login" %}</button>
 				</td>
 				</tr>
 			</table>
@@ -42,4 +58,5 @@
 	</div>
 </div>
 </div>
+{% endif %}
 {% endblock %}
