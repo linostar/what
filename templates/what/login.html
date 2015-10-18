@@ -5,6 +5,12 @@
 
 {% block navbar-title %}{% trans "Login" %}{% endblock %}
 
+{% if request.session.username %}
+{% block user %}
+{% trans "Hello," %} <b>{{ request.session.username }}</b>
+{% endblock %}
+{% endif %}
+
 {% block content %}
 {% if message == "account_disabled" %}
 <div class="alert alert-danger">

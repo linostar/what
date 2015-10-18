@@ -36,13 +36,15 @@ def index(request):
 def signin(request):
 	request = Utils.prepare_request(request)
 	try:
-		if request.method == "POST":
+		if request.method == "POST" and "form-username" in request.POST:
 			if request.POST['form-username'] and request.POST['form-password']:
 				user = authenticate(username=request.POST['form-username'],
 					password=request.POST['form-password'])
 				if user and user.is_active:
 					# account exists and is enabled
-					return render(request, "what/index.html", {
+					request.session['username'] = user.username
+					request.session['userid'] = user.id
+					return render(request, "what/login.html", {
 						"message": "login_success",
 						"userid": user.id,
 						"username": user.username,
@@ -71,6 +73,8 @@ def signin(request):
 def signout(request):
 	request = Utils.prepare_request(request)
 	logout(request)
+	del request.session['username']
+	del request.session['userid']
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
 def quiz(request, quiz_code):
