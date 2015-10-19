@@ -1,0 +1,16 @@
+{% extends "what/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Quiz" %}{% endblock %}
+
+{% block navbar-title %}{% trans "Home" %}{% endblock %}
+
+{% if request.session.username %}
+{% block user %}
+{% trans "Hello," %} <b>{{ request.session.username }}</b>
+{% endblock %}
+{% endif %}
+
+{% block content %}
+Teacher Control Panel
+{% endblock %}

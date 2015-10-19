@@ -25,6 +25,10 @@ class Utils:
 		return quiz_code
 
 	@staticmethod
+	def get_app_url():
+		return Utils.SITE_URL + "/quiz/"
+
+	@staticmethod
 	def get_quiz_url(code):
 		return Utils.SITE_URL + "/quiz/" + code
 

@@ -44,10 +44,8 @@ def signin(request):
 					# account exists and is enabled
 					request.session['username'] = user.username
 					request.session['userid'] = user.id
-					return render(request, "what/login.html", {
-						"message": "login_success",
-						"userid": user.id,
-						"username": user.username,
+					return render(request, "what/redirect.html", {
+						"redirect_url": Utils.get_app_url() + "?message=login_success",
 						})
 				elif user:
 					# account exists but is disabled

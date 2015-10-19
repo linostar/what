@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="refresh" content="1; url={{ redirect_url }}" />
+	<title>{% trans "Redirecting" %}</title>
+</head>
+<body>
+<div class="well">
+	<p>{% blocktrans %}Welcome, <b>{{ request.session.username }}</b>.{% endblocktrans %}</p>
+	<p>{% blocktrans %}We will take you to your dashboard in a moment.{% endblocktrans %}</p>
+</div>
+</body>
+</html>
