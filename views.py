@@ -75,6 +75,30 @@ def signout(request):
 	del request.session['userid']
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
+def cp_students(request):
+	request = Utils.prepare_request(request)
+	return render(request, "what/cp_students.html", {})
+
+def cp_annals(request):
+	request = Utils.prepare_request(request)
+	return render(request, "what/cp_annals.html", {})
+
+def cp_questions(request):
+	request = Utils.prepare_request(request)
+	return render(request, "what/cp_questions.html", {})
+
+def cp_quizzes(request):
+	request = Utils.prepare_request(request)
+	return render(request, "what/cp_quizzes.html", {})
+
+def cp_teachers(request):
+	request = Utils.prepare_request(request)
+	return render(request, "what/cp_teachers.html", {})
+
+def cp_settings(request):
+	request = Utils.prepare_request(request)
+	return render(request, "what/cp_settings.html", {})
+
 def quiz(request, quiz_code):
 	request = Utils.prepare_request(request)
 	try:
