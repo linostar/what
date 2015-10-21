@@ -71,8 +71,10 @@ def signin(request):
 def signout(request):
 	request = Utils.prepare_request(request)
 	logout(request)
-	del request.session['username']
-	del request.session['userid']
+	if "username" in request.session:
+		del request.session['username']
+	if "userid" in request.session:
+		del request.session['userid']
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
 def cp_students(request):

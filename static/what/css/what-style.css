@@ -187,3 +187,12 @@ body {
 	margin-top: 2em;
 	text-align: center;
 }
+
+.user-dropdown-arrow {
+	display: inline;
+	font-size: 80%;
+}
+
+#user-drop-list {
+	top: 0;
+}
