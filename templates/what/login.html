@@ -7,7 +7,9 @@
 
 {% if request.session.username %}
 {% block user %}
-{% trans "Hello," %} <b>{{ request.session.username }}</b>
+{% if request.session.userid %}
+	{% trans "Hello," %} <b>{{ request.session.username }}</b>
+{% endif %}
 {% endblock %}
 {% endif %}
 

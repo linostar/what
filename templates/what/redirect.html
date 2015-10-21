@@ -1,15 +1,38 @@
+{% load staticfiles %}
 {% load i18n %}
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="refresh" content="1; url={{ redirect_url }}" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-theme.min.css' %}" />
+{% if request.session.direction == "rtl" %}
+	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-rtl.min.css' %}" />
+{% endif %}
+	<meta http-equiv="refresh" content="2; url={{ redirect_url }}" />
 	<title>{% trans "Redirecting" %}</title>
 </head>
 <body>
-<div class="well">
-	<p>{% blocktrans %}Welcome, <b>{{ request.session.username }}</b>.{% endblocktrans %}</p>
-	<p>{% blocktrans %}We will take you to your dashboard in a moment.{% endblocktrans %}</p>
+<br/>
+<center>
+<div class="row">
+	<div class="col-sm-3">
+	</div>
+	<div class="col-sm-6">
+		<div class="well">
+		
+			<p>{% trans "Welcome," %} <b>{{ request.session.username }}</b>.</p>
+			<p>{% blocktrans %}We will take you to your dashboard in a moment.{% endblocktrans %}</p>
+		</div>
+	</div>
 </div>
+</center>
+
+<script src="{% static 'what/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'what/js/ie10-viewport-bug-workaround.js' %}"></script>
+<script src="{% static 'what/js/bootstrap-select.min.js' %}"></script>
 </body>
 </html>

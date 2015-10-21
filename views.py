@@ -25,13 +25,10 @@ def handler500(request):
 
 def index(request):
 	request = Utils.prepare_request(request)
-	if not request.user.is_authenticated():
+	if not "userid" in request.session:
 		return redirect("login")
 	else:
-		return render(request, "what/index.html", {
-			'userid': get_user(request).id,
-			'username': get_user(request).username,
-			})
+		return render(request, "what/index.html")
 
 def signin(request):
 	request = Utils.prepare_request(request)

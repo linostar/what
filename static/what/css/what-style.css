@@ -196,3 +196,12 @@ body {
 #user-drop-list {
 	top: 0;
 }
+
+#login-success-alert {
+	position: absolute;
+	text-align: center;
+	top: -1em;
+	left: 0;
+	width: 100%;
+	z-index: 10;
+}

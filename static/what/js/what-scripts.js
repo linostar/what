@@ -47,6 +47,9 @@ $(document).ready(function() {
 		$("#form-submit").submit();
 	});
 
+	$("#login-success-alert").fadeIn();
+	$("#login-success-alert").delay(3000).fadeOut();
+
 	var timer = setInterval(function() {
 		var ending_soon = false;
 		var remaining_time = parseInt($("#remaining-time-hidden").attr("value"));
