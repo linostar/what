@@ -13,11 +13,25 @@
 		<a href="#"><span class="caret"></span></a>
 	</span>
 	<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user-menu" id="user-drop-list">
-		<li><a href="#">Settings</a></li>
+		<li><a href="#">{% trans "Settings" %}</a></li>
 		<li class="divider"></li>
-		<li><a href="logout/">Logout</a></li>
+		<li><a href="logout/">{% trans "Logout" %}</a></li>
 	</ul>
 </div>
+{% endblock %}
+{% block navbar-cp %}
+<li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		{% trans "Quick Access" %} <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+		<li><a href="students/">{% trans "Students" %}</a></li>
+		<li><a href="annals/">{% trans "Annals" %}</a></li>
+		<li><a href="questions/">{% trans "Questions" %}</a></li>
+		<li><a href="quizzes/">{% trans "Quizzes" %}</a></li>
+		<li><a href="teachers/">{% trans "Teachers" %}</a></li>
+	</ul>
+</li>
 {% endblock %}
 {% endif %}
 

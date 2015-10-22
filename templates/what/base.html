@@ -36,7 +36,8 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">{% block navbar-title %}{% trans "Home" %}{% endblock %}</a></li>
-						<li><a id="navbar-rules" href="#">{% block navbar-rules %}{% endblock %}</a></li>
+						{% block navbar-rules %}{% endblock %}
+						{% block navbar-cp %}{% endblock %}
 					</ul>
 					{% if request.session.direction == "rtl" %}
 					<ul class="nav navbar-nav navbar-left">

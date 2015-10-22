@@ -9,7 +9,9 @@
 {% endblock %}
 
 {% block navbar-title %}{% trans "Taking the Quiz" %}{% endblock %}
-{% block navbar-rules %}{% trans "Rules" %}{% endblock %}
+{% block navbar-rules %}
+<li><a id="navbar-rules" href="#">{% trans "Rules" %}</a></li>
+{% endblock %}
 
 {% block content %}
 <form id="form-hidden" action="">
