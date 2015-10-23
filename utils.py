@@ -89,4 +89,5 @@ class Utils:
 		request.session['lang'] = lang
 		request.session['site_name'] = lang_settings.site_name
 		request.session['locales'] = locales
+		request.session['site_url'] = Utils.get_app_url()
 		return request

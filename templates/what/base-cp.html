@@ -1,8 +1,6 @@
 {% extends "what/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Quiz" %}{% endblock %}
-
 {% block navbar-title %}{% trans "Home" %}{% endblock %}
 
 {% if request.session.username %}
@@ -34,48 +32,3 @@
 </li>
 {% endblock %}
 {% endif %}
-
-
-
-{% block content %}
-{% if request.GET.message == "login_success" %}
-<div class="row">
-	<div class="col-sm-3">
-	</div>
-	<div class="col-sm-6">
-		<div class="alert alert-success" id="login-success-alert">
-			{% trans "You have been successfully logged in." %}
-		</div>
-	</div>
-</div>
-{% endif %}
-<div class="row">
-	<div class="col-sm-4">
-	</div>
-	<div class="col-sm-4">
-		<div class="list-group teacher-cp">
-			<div class="list-group-item active">
-				<b>{% trans "Teacher Control Panel" %}</b>
-			</div>
-			<div class="list-group-item">
-				<a href="students/">{% trans "Students" %}</a>
-			</div>
-			<div class="list-group-item">
-				<a href="annals/">{% trans "Annals" %}</a>
-			</div>
-			<div class="list-group-item">
-				<a href="questions/">{% trans "Questions" %}</a>
-			</div>
-			<div class="list-group-item">
-				<a href="quizzes/">{% trans "Quizzes" %}</a>
-			</div>
-			<div class="list-group-item">
-				<a href="teachers/">{% trans "Teachers" %}</a>
-			</div>
-			<div class="list-group-item">
-				<a href="settings/">{% trans "Global settings" %}</a>
-			</div>
-		</div>
-	</div>
-</div>
-{% endblock %}
