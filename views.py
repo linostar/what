@@ -76,7 +76,10 @@ def signout(request):
 
 def cp_students(request):
 	request = Utils.prepare_request(request)
-	return render(request, "what/cp_students.html", {})
+	students = Student.objects.all().order_by("student_name")
+	return render(request, "what/cp_students.html", {
+		"students": students,
+		})
 
 def cp_annals(request):
 	request = Utils.prepare_request(request)

@@ -1,0 +1,62 @@
+{% extends "what/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Students" %}{% endblock %}
+
+{% block navbar-title %}{% trans "Home" %}{% endblock %}
+
+{% if request.session.username %}
+{% block user %}
+{% trans "Hello," %} <b>{{ request.session.username }}</b>
+<div class="user-dropdown-arrow dropdown">
+	<span id="dropdown-user-menu" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a href="#"><span class="caret"></span></a>
+	</span>
+	<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user-menu" id="user-drop-list">
+		<li><a href="#">{% trans "Settings" %}</a></li>
+		<li class="divider"></li>
+		<li><a href="logout/">{% trans "Logout" %}</a></li>
+	</ul>
+</div>
+{% endblock %}
+{% block navbar-cp %}
+<li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		{% trans "Quick Access" %} <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+		<li><a href="students/">{% trans "Students" %}</a></li>
+		<li><a href="annals/">{% trans "Annals" %}</a></li>
+		<li><a href="questions/">{% trans "Questions" %}</a></li>
+		<li><a href="quizzes/">{% trans "Quizzes" %}</a></li>
+		<li><a href="teachers/">{% trans "Teachers" %}</a></li>
+	</ul>
+</li>
+{% endblock %}
+{% endif %}
+
+{% block content %}
+    <h2>{% trans "Students" %}</h2>
+    <form id="changelist-form" action="" method="post" novalidate>
+    {% csrf_token %}
+    <div></div>
+    <div class="results">
+    <table id="result-list" class="table-bordered">
+    <thead>
+    	<tr>
+    		<th><input type="checkbox" id="toggle-all"/></th>
+    		<th>{% trans "Student name" %}</th>
+    	</tr>
+    </thead>
+    <tbody>
+    	{% for student in students %}
+    	<tr>
+    		<td><input type="checkbox" name="sel-student-{{ student.id }}"/></td>
+    		<td>{{ student.student_name }}</td>
+    	</tr>
+    	{% endfor %}
+    </tbody>
+    </table>
+    </div>
+    </form>
+{% endblock %}
