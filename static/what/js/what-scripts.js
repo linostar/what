@@ -50,6 +50,13 @@ $(document).ready(function() {
 	$("#login-success-alert").fadeIn();
 	$("#login-success-alert").delay(3000).fadeOut();
 
+	$("#sel-toggle-all").change(function() {
+		if (this.checked)
+			$(".sel-item").prop("checked", true);
+		else
+			$(".sel-item").prop("checked", false);
+	});
+
 	var timer = setInterval(function() {
 		var ending_soon = false;
 		var remaining_time = parseInt($("#remaining-time-hidden").attr("value"));
