@@ -7,7 +7,9 @@
     <h2>{% trans "Students" %}</h2>
     <form id="changelist-form" action="" method="post" novalidate>
     {% csrf_token %}
-    <div></div>
+    <div>
+    	<button type="button" class="btn btn-sm btn-danger" name="delete-selected">Delete selected</button>
+    </div>
     <div class="results">
     <table id="result-list" class="table-bordered">
     <thead>
@@ -19,7 +21,7 @@
     <tbody>
     	{% for student in students %}
     	<tr>
-    		<td><input type="checkbox" name="sel-student-{{ student.id }}"/></td>
+    		<td><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
     		<td>{{ student.student_name }}</td>
     	</tr>
     	{% endfor %}
