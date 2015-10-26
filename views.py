@@ -74,30 +74,30 @@ def signout(request):
 		del request.session['userid']
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
-def cp_students(request):
+def cp_students(request, id=None):
 	request = Utils.prepare_request(request)
 	students = Student.objects.all().order_by("student_name")
 	return render(request, "what/cp_students.html", {
 		"students": students,
 		})
 
-def cp_annals(request):
+def cp_annals(request, id=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_annals.html", {})
 
-def cp_questions(request):
+def cp_questions(request, id=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_questions.html", {})
 
-def cp_quizzes(request):
+def cp_quizzes(request, id=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_quizzes.html", {})
 
-def cp_teachers(request):
+def cp_teachers(request, id=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_teachers.html", {})
 
-def cp_settings(request):
+def cp_settings(request, id=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_settings.html", {})
 
