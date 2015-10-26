@@ -29,6 +29,31 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#delete-selected").click(function() {
+		var confirm_yes = $("#confirm-yes").attr("value");
+		var confirm_no = $("#confirm-no").attr("value");
+		var confirm_title = $("#confirm-title").attr("value");
+		var confirm_message = $("#confirm-message").attr("value");
+		bootbox.dialog({
+			title: confirm_title,
+			message: confirm_message,
+			buttons: {
+				yes: {
+					label: confirm_yes,
+					className: "btn-danger",
+					callback: function () {
+						$("#changelist-action").val("delete");
+						$("#changelist-form").submit();
+					}
+				},
+				no: {
+					label: confirm_no,
+					className: "btn-primary"
+				}
+			}
+		});
+	});
+
 	$(".answers").click(function() {
 		if ($(this).hasClass("yellow")) {
 			$(this).removeClass("yellow");

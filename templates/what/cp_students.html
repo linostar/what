@@ -4,29 +4,36 @@
 {% block title %}{% trans "Students" %}{% endblock %}
 
 {% block content %}
-    <h2>{% trans "Students" %}</h2>
-    <form id="changelist-form" action="" method="post" novalidate>
-    {% csrf_token %}
-    <div>
-    	<button type="button" class="btn btn-sm btn-danger" name="delete-selected">Delete selected</button>
-    </div>
-    <div class="results">
-    <table id="result-list" class="table-bordered">
-    <thead>
-    	<tr>
-    		<th><input type="checkbox" id="sel-toggle-all"/></th>
-    		<th>{% trans "Student name" %}</th>
-    	</tr>
-    </thead>
-    <tbody>
-    	{% for student in students %}
-    	<tr>
-    		<td><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
-    		<td>{{ student.student_name }}</td>
-    	</tr>
-    	{% endfor %}
-    </tbody>
-    </table>
-    </div>
-    </form>
+	<h2>{% trans "Students" %}</h2>
+	<form id="changelist-form" action="" method="post" novalidate>
+	{% csrf_token %}
+	<input type="hidden" id="confirm-yes" value='{% trans "Yes" %}'/>
+	<input type="hidden" id="confirm-no" value='{% trans "No" %}'/>
+	<input type="hidden" id="confirm-title" value='{% trans "Confirmation" %}'/>
+	<input type="hidden" id="confirm-message" value='{% trans "Are you sure you want to delete the selected elements?" %}'/>
+	<input type="hidden" name="changelist-action" id="changelist-action" value=""/>
+	<div class="results">
+	<table id="result-list" class="table-bordered">
+	<thead>
+		<tr>
+			<th colspan="2">
+			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">Delete selected</button>
+			</th>
+		</tr>
+		<tr>
+			<th><input type="checkbox" id="sel-toggle-all"/></th>
+			<th>{% trans "Student name" %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for student in students %}
+		<tr>
+			<td><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
+			<td>{{ student.student_name }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	</table>
+	</div>
+	</form>
 {% endblock %}
