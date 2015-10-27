@@ -74,37 +74,40 @@ def signout(request):
 		del request.session['userid']
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
-def cp_students(request, id=None):
+def cp_students(request, eid=None):
 	request = Utils.prepare_request(request)
-	students = Student.objects.all().order_by("student_name")
-	return render(request, "what/cp_students.html", {
-		"students": students,
-		})
+	if eid:
+		pass
+	else:
+		students = Student.objects.all().order_by("student_name")
+		return render(request, "what/cp_students.html", {
+			"students": students,
+			})
 
-def cp_annals(request, id=None):
+def cp_annals(request, eid=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_annals.html", {})
 
-def cp_questions(request, id=None):
+def cp_questions(request, eid=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_questions.html", {})
 
-def cp_quizzes(request, id=None):
+def cp_quizzes(request, eid=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_quizzes.html", {})
 
-def cp_teachers(request, id=None):
+def cp_teachers(request, eid=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_teachers.html", {})
 
-def cp_settings(request, id=None):
+def cp_settings(request, eid=None):
 	request = Utils.prepare_request(request)
 	return render(request, "what/cp_settings.html", {})
 
 def quiz(request, quiz_code):
 	request = Utils.prepare_request(request)
 	try:
-		if request.method == "POST" and "remaining-time-hidden" in request.POST:
+		if request.method == "POST" and "remaining-time-heidden" in request.POST:
 			# quiz answered are POSTed
 			quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 			quiz.submitted = True
