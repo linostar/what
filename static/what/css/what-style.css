@@ -112,7 +112,7 @@ body {
 }
 
 .time-container {
-	position: fixed;
+
 	margin-top: 1em;
 }
 
@@ -219,4 +219,12 @@ body {
 
 #result-list td,th {
 	padding: 0.2em;
+}
+
+@media (max-width: 767px) {
+	.affix {
+		position: static;
+		width: auto;
+		top: 0;
+	}
 }
