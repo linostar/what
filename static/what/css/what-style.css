@@ -21,6 +21,12 @@ body {
 	background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
 }
 
+.annal-name {
+	display: inline-block;
+	background-color: white;
+	color: #1e5799;
+}
+
 .answers {
 	cursor: pointer;
 }
@@ -52,7 +58,7 @@ body {
 .circle {
 	background: linear-gradient(135deg, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%);
 	color: white;
-	margin-top: 1.5em;
+	margin-top: 1em;
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 50%;
@@ -137,6 +143,11 @@ body {
 
 .quiz-cell {
 	vertical-align: top;
+}
+
+.col-time-headers {
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .col1-cell {

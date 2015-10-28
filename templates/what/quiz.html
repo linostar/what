@@ -53,10 +53,11 @@
 		<div class="form-container">
 		<form action="" method="POST" id="form-submit">
 		{% csrf_token %}
-		<h2>
-			<span class="label label-primary label-orange">{{ quiz.annal.annal_name }}</span>
-		</h2>
-		<br/>
+		<h3>
+			<div class="panel annal-name">
+				<div class="panel-heading">{{ quiz.annal.annal_name }}</div>
+			</div>
+		</h3>
 		{% for i in indexes %}
 		<div class="list-group">
 			<div class="list-group-item active"><b>{{ forloop.counter }}.</b>&nbsp;&nbsp;{{ questions|question:i }}</div>
@@ -76,10 +77,12 @@
 		<div class="time-container">
 		<table>
 		<tr><td class="time-cell">
-			<h3>
-				<span class="well label-time">{% trans "Time remaining" %}</span>
-			</h3>
-			<h1>
+			<h4 class="col-time-headers">
+				<div class="panel">
+					<div class="panel-body">{% trans "Time remaining" %}</div>
+				</div>
+			</h4>
+			<h1 class="col-time-headers">
 				<div class="circle circle-border">
 					<div class="circle-inner">
 						<div class="time-text" title="{{ quiz.annal.annal_duration }}">
