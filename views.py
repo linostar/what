@@ -76,6 +76,8 @@ def signout(request):
 
 def cp_students(request, eid=None):
 	request = Utils.prepare_request(request)
+	if not "userid" in request.session:
+		return redirect("login")
 	if eid:
 		pass
 	else:
@@ -86,22 +88,32 @@ def cp_students(request, eid=None):
 
 def cp_annals(request, eid=None):
 	request = Utils.prepare_request(request)
+	if not "userid" in request.session:
+		return redirect("login")
 	return render(request, "what/cp_annals.html", {})
 
 def cp_questions(request, eid=None):
 	request = Utils.prepare_request(request)
+	if not "userid" in request.session:
+		return redirect("login")
 	return render(request, "what/cp_questions.html", {})
 
 def cp_quizzes(request, eid=None):
 	request = Utils.prepare_request(request)
+	if not "userid" in request.session:
+		return redirect("login")
 	return render(request, "what/cp_quizzes.html", {})
 
 def cp_teachers(request, eid=None):
 	request = Utils.prepare_request(request)
+	if not "userid" in request.session:
+		return redirect("login")
 	return render(request, "what/cp_teachers.html", {})
 
 def cp_settings(request, eid=None):
 	request = Utils.prepare_request(request)
+	if not "userid" in request.session:
+		return redirect("login")
 	return render(request, "what/cp_settings.html", {})
 
 def quiz(request, quiz_code):
