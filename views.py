@@ -10,6 +10,12 @@ from what.models import Teacher, Student, Quiz, Question, Answer, Annal, Setting
 from what.utils import Utils
 
 
+def prep_request(func):
+	def func_wrapper(request):
+		request = Utils.prepare_request(request)
+		return func(request)
+	return func_wrapper
+
 def check_login(func):
 	def func_wrapper(request):
 		request = Utils.prepare_request(request)
@@ -18,27 +24,24 @@ def check_login(func):
 		return func(request)
 	return func_wrapper
 
+@prep_request
 def handler404(request):
-	request = Utils.prepare_request(request)
 	response = render(request, "what/404.html")
 	response.status_code = 404
 	return response
 
+@prep_request
 def handler500(request):
-	request = Utils.prepare_request(request)
 	response = render(request, "what/500.html")
 	response.status_code = 500
 	return response
 
+@check_login
 def index(request):
-	request = Utils.prepare_request(request)
-	if not "userid" in request.session:
-		return redirect("login")
-	else:
 		return render(request, "what/index.html")
 
+@prep_request
 def signin(request):
-	request = Utils.prepare_request(request)
 	try:
 		if request.method == "POST" and "form-username" in request.POST:
 			if request.POST['form-username'] and request.POST['form-password']:
@@ -72,8 +75,8 @@ def signin(request):
 	except KeyError:
 		return render(request, "what/login.html", {"message": "login_missing"})
 
+@prep_request
 def signout(request):
-	request = Utils.prepare_request(request)
 	logout(request)
 	if "username" in request.session:
 		del request.session['username']
@@ -111,8 +114,8 @@ def cp_teachers(request, eid=None):
 def cp_settings(request, eid=None):
 	return render(request, "what/cp_settings.html", {})
 
+@prep_request
 def quiz(request, quiz_code):
-	request = Utils.prepare_request(request)
 	try:
 		if request.method == "POST" and "remaining-time-heidden" in request.POST:
 			# quiz answered are POSTed
@@ -227,8 +230,8 @@ def quiz(request, quiz_code):
 		# shouldn't happen because quiz_code must be unique
 		raise
 
+@prep_request
 def result(request, quiz_code):
-	request = Utils.prepare_request(request)
 	try:
 		quiz = get_object_or_404(Quiz, quiz_code=quiz_code)
 		if not quiz.submitted:
