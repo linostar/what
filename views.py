@@ -3,13 +3,20 @@ from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.utils.translation import ugettext as _
 
 from what.models import Teacher, Student, Quiz, Question, Answer, Annal, Setting
 from what.utils import Utils
 
+
+def check_login(func):
+	def func_wrapper(request):
+		request = Utils.prepare_request(request)
+		if not "userid" in request.session:
+			return redirect("login")
+		return func(request)
+	return func_wrapper
 
 def handler404(request):
 	request = Utils.prepare_request(request)
@@ -74,10 +81,8 @@ def signout(request):
 		del request.session['userid']
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
+@check_login
 def cp_students(request, eid=None):
-	request = Utils.prepare_request(request)
-	if not "userid" in request.session:
-		return redirect("login")
 	if eid:
 		pass
 	else:
@@ -86,34 +91,24 @@ def cp_students(request, eid=None):
 			"students": students,
 			})
 
+@check_login
 def cp_annals(request, eid=None):
-	request = Utils.prepare_request(request)
-	if not "userid" in request.session:
-		return redirect("login")
 	return render(request, "what/cp_annals.html", {})
 
+@check_login
 def cp_questions(request, eid=None):
-	request = Utils.prepare_request(request)
-	if not "userid" in request.session:
-		return redirect("login")
 	return render(request, "what/cp_questions.html", {})
 
+@check_login
 def cp_quizzes(request, eid=None):
-	request = Utils.prepare_request(request)
-	if not "userid" in request.session:
-		return redirect("login")
 	return render(request, "what/cp_quizzes.html", {})
 
+@check_login
 def cp_teachers(request, eid=None):
-	request = Utils.prepare_request(request)
-	if not "userid" in request.session:
-		return redirect("login")
 	return render(request, "what/cp_teachers.html", {})
 
+@check_login
 def cp_settings(request, eid=None):
-	request = Utils.prepare_request(request)
-	if not "userid" in request.session:
-		return redirect("login")
 	return render(request, "what/cp_settings.html", {})
 
 def quiz(request, quiz_code):
