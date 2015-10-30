@@ -116,7 +116,16 @@ def cp_student_quizzes(request, eid):
 
 @check_login
 def cp_annals(request, eid=None):
-	return render(request, "what/cp_annals.html", {})
+	if eid:
+		annal = get_object_or_404(Annal, id=eid)
+		return render(request, "what/cp_annals.html", {
+			"annal": annal,
+			})
+	else:
+		annals = Annal.objects.all().order_by("annal_name")
+		return render(request, "what/cp_annals.html", {
+			"annals": annals,
+			})
 
 @check_login
 def cp_questions(request, eid=None):
