@@ -11,17 +11,27 @@ from what.utils import Utils
 
 
 def prep_request(func):
-	def func_wrapper(request):
-		request = Utils.prepare_request(request)
-		return func(request)
+	def func_wrapper(*args, **kwargs):
+		request = Utils.prepare_request(args[0])
+		if len(args) > 1:
+			(*args,) = (request,) + args[1:]
+		else:
+			(*args,) = (request,)
+		return func(*args, **kwargs)
 	return func_wrapper
 
 def check_login(func):
-	def func_wrapper(request):
-		request = Utils.prepare_request(request)
+	def func_wrapper(*args, **kwargs):
+		request = Utils.prepare_request(args[0])
 		if not "userid" in request.session:
 			return redirect("login")
-		return func(request)
+		print(args)
+		if len(args) > 1:
+			(*args,) = (request,) + args[1:]
+		else:
+			(*args,) = (request,)
+		print(args)
+		return func(*args, **kwargs)
 	return func_wrapper
 
 @prep_request
@@ -87,12 +97,22 @@ def signout(request):
 @check_login
 def cp_students(request, eid=None):
 	if eid:
-		pass
+		student = get_object_or_404(Student, id=eid)
+		return render(request, "what/cp_students.html", {
+			"student": student,
+			})
 	else:
 		students = Student.objects.all().order_by("student_name")
 		return render(request, "what/cp_students.html", {
 			"students": students,
 			})
+
+@check_login
+def cp_student_quizzes(request, eid):
+	quizzes = Quiz.objects.filter(student__id=eid)
+	return render(request, "what/cp_students.html", {
+		"quizzes": quizzes,
+		})
 
 @check_login
 def cp_annals(request, eid=None):
