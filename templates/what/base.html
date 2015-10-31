@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load template_array %}
+{% load dajaxice_templatetags %}
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-rtl.min.css' %}" />
 {% endif %}
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/what-style.css' %}" />
-
+	{% dajaxice_js_import %}
 </head>
 <body role="document" dir="{{ request.session.direction }}">
 		<div class="jumbotron">
