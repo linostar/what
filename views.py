@@ -1,7 +1,8 @@
+import json
 from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.utils.translation import ugettext as _
@@ -25,12 +26,10 @@ def check_login(func):
 		request = Utils.prepare_request(args[0])
 		if not "userid" in request.session:
 			return redirect("login")
-		print(args)
 		if len(args) > 1:
 			(*args,) = (request,) + args[1:]
 		else:
 			(*args,) = (request,)
-		print(args)
 		return func(*args, **kwargs)
 	return func_wrapper
 
@@ -107,12 +106,11 @@ def cp_students(request, eid=None):
 			"students": students,
 			})
 
-@check_login
+#@check_login
 def cp_student_quizzes(request, eid):
-	quizzes = Quiz.objects.filter(student__id=eid)
-	return render(request, "what/cp_students.html", {
-		"quizzes": quizzes,
-		})
+	quizzes = Quiz.objects.filter(student__id=eid).values()
+	return HttpResponse(json.dumps(quizzes[0],default=Utils.date_handler), 
+		content_type="application/json")
 
 @check_login
 def cp_annals(request, eid=None):

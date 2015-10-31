@@ -17,6 +17,10 @@ class Utils:
 	CODE_LENGTH = 8
 
 	@staticmethod
+	def date_handler(obj):
+		return obj.isoformat() if hasattr(obj, 'isoformat') else obj
+
+	@staticmethod
 	def generate_quiz_code():
 		quiz_code = ""
 		random.seed()

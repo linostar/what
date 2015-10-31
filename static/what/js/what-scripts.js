@@ -29,6 +29,18 @@ $(document).ready(function() {
 		});
 	});
 
+	$(".student-nb-quizzes").click(function() {
+		$("#student-id").val($(this).attr("title"));
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: $(this).attr("title") + "/quizzes/",
+			success: function(data) {
+				alert(data.quiz_code);
+			},
+		});
+	});
+
 	$("#delete-selected").click(function() {
 		var confirm_yes = $("#confirm-yes").attr("value");
 		var confirm_no = $("#confirm-no").attr("value");
