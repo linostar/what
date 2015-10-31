@@ -16,13 +16,13 @@ $(document).ready(function() {
 	$("#navbar-rules").click(function() {
 		var rules = $("#rules-hidden").attr("value") || "No rules.";
 		var rules_title = $("#rules-title-hidden").attr("value");
-		var rules_close = $("#close-hidden").attr("value");
+		var dialog_close = $("#close-hidden").attr("value");
 		bootbox.dialog({
 			title: rules_title,
 			message: rules,
 			buttons: {
 				main: {
-					label: rules_close,
+					label: dialog_close,
 					className: "btn-primary"
 				}
 			}
@@ -30,13 +30,37 @@ $(document).ready(function() {
 	});
 
 	$(".student-nb-quizzes").click(function() {
-		$("#student-id").val($(this).attr("title"));
+		var dialog_close = $("#close-hidden").attr("value");
+		var dialog_title = $(this).attr("tag2");
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: $(this).attr("title") + "/quizzes/",
+			url: $(this).attr("tag") + "/quizzes/",
 			success: function(data) {
-				alert(data.quiz_code);
+				var dialog_content = "<table border='0' width='100%'>";
+				dialog_content += "<tr><td width='50%'>Name:</td>";
+				dialog_content += "<td>" + data.annal + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Submitted:</td>";
+				dialog_content += "<td>" + (data.submitted).toString() + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Score:</td>";
+				dialog_content += "<td>" + (data.score).toString() + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Number of questions:</td>";
+				dialog_content += "<td>" + (data.number_of_questions).toString() + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Start time:</td>";
+				dialog_content += "<td>" + (data.start_time).toString() + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Finished in:</td>";
+				dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
+				dialog_content += "</table>";
+				bootbox.dialog({
+					title: dialog_title,
+					message: dialog_content,
+					buttons: {
+						main: {
+							label: dialog_close,
+							className: "btn-primary"
+						}
+					}
+				});
 			},
 		});
 	});

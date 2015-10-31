@@ -27,13 +27,16 @@
 		</tr>
 	</thead>
 	<tbody>
-		<input type="hidden" name="student-id" id="student-id" value=""/>
 		{% for student in students %}
 		<tr>
 			<td><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
 			<td><a href="{{ request.session.site_url }}students/{{ student.id }}/">{{ student.student_name }}</a></td>
 			<td>
-				<a href="#"><span class="student-nb-quizzes" title="{{ student.id }}">{{ student.number_of_quizzes }}</span></a>
+				<a href="#">
+				<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" tag2="{{ student.student_name }}">
+					{{ student.number_of_quizzes }}
+				</span>
+				</a>
 			</td>
 		</tr>
 		{% endfor %}

@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/what-style.css' %}" />
 </head>
 <body role="document" dir="{{ request.session.direction }}">
+		<input type="hidden" id="close-hidden" value='{% trans "Close" %}'>
 		<div class="jumbotron">
 			<div class="container">
 			{% if request.session.site_name %}
