@@ -75,7 +75,7 @@ class AnswerAdmin(admin.ModelAdmin):
 
 
 class TeacherAdmin(admin.ModelAdmin):
-	list_display = ["get_user", "number_of_annals"]
+	list_display = ["get_user", "is_admin", "number_of_annals"]
 
 	def get_user(self, obj):
 		return obj.user.username

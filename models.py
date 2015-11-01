@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class Teacher(models.Model):
 	number_of_annals = models.IntegerField(default=0)
 	user = models.OneToOneField(User)
+	is_admin = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.user.username
