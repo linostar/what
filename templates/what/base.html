@@ -19,6 +19,8 @@
 </head>
 <body role="document" dir="{{ request.session.direction }}">
 		<input type="hidden" id="close-hidden" value='{% trans "Close" %}'>
+		<input type="hidden" id="previous-hidden" value='{% trans "Previous" %}'>
+		<input type="hidden" id="next-hidden" value='{% trans "Next" %}'>
 		<div class="jumbotron">
 			<div class="container">
 			{% if request.session.site_name %}

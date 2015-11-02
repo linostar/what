@@ -6,6 +6,31 @@ $(document).ready(function() {
 			return num + "";
 	}
 
+	function load_student(id) {
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: id.toString() + "/quizzes/",
+			success: function(data) {
+				var dialog_content = "<table border='0' width='100%'>";
+				dialog_content += "<tr><td width='50%'>Name:</td>";
+				dialog_content += "<td>" + data.annal + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Submitted:</td>";
+				dialog_content += "<td>" + (data.submitted).toString() + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Score:</td>";
+				dialog_content += "<td>" + (data.score).toString() + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Number of questions:</td>";
+				dialog_content += "<td>" + (data.number_of_questions).toString() + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Start time:</td>";
+				dialog_content += "<td>" + (data.start_time).toString() + "</td></tr>";
+				dialog_content += "<tr><td width='50%'>Finished in:</td>";
+				dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
+				dialog_content += "</table>";
+				return dialog_content;
+			},
+		});
+	}
+
 	$('.selectpicker').selectpicker();
 
 	$("#select-locale").change(function() {
@@ -30,32 +55,48 @@ $(document).ready(function() {
 	});
 
 	$(".student-nb-quizzes").click(function() {
+		var dialog_previous = $("#previous-hidden").attr("value");
+		var dialog_next = $("#next-hidden").attr("value");
 		var dialog_close = $("#close-hidden").attr("value");
 		var dialog_title = $(this).attr("tag2");
+		var current_id = $(this).attr("tag");
+		var previous_id = $(this).attr("tag-previous");
+		var next_id = $(this).attr("tag-next");
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: $(this).attr("tag") + "/quizzes/",
+			url: current_id + "/quizzes/",
 			success: function(data) {
-				var dialog_content = "<table border='0' width='100%'>";
-				dialog_content += "<tr><td width='50%'>Name:</td>";
-				dialog_content += "<td>" + data.annal + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Submitted:</td>";
-				dialog_content += "<td>" + (data.submitted).toString() + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Score:</td>";
-				dialog_content += "<td>" + (data.score).toString() + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Number of questions:</td>";
-				dialog_content += "<td>" + (data.number_of_questions).toString() + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Start time:</td>";
-				dialog_content += "<td>" + (data.start_time).toString() + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Finished in:</td>";
-				dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
-				dialog_content += "</table>";
+				// var dialog_content = "<table border='0' width='100%'>";
+				// dialog_content += "<tr><td width='50%'>Name:</td>";
+				// dialog_content += "<td>" + data.annal + "</td></tr>";
+				// dialog_content += "<tr><td width='50%'>Submitted:</td>";
+				// dialog_content += "<td>" + (data.submitted).toString() + "</td></tr>";
+				// dialog_content += "<tr><td width='50%'>Score:</td>";
+				// dialog_content += "<td>" + (data.score).toString() + "</td></tr>";
+				// dialog_content += "<tr><td width='50%'>Number of questions:</td>";
+				// dialog_content += "<td>" + (data.number_of_questions).toString() + "</td></tr>";
+				// dialog_content += "<tr><td width='50%'>Start time:</td>";
+				// dialog_content += "<td>" + (data.start_time).toString() + "</td></tr>";
+				// dialog_content += "<tr><td width='50%'>Finished in:</td>";
+				// dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
+				// dialog_content += "</table>";
+				var dialog_content = load_student(current_id);
 				bootbox.dialog({
 					title: dialog_title,
 					message: dialog_content,
 					buttons: {
-						main: {
+						previous: {
+							label: dialog_previous,
+							className: "btn-success",
+							callback: load_student(previous_id)
+						},
+						next: {
+							label: dialog_previous,
+							className: "btn-success",
+							callback: load_student(next_id)
+						},
+						close: {
 							label: dialog_close,
 							className: "btn-primary"
 						}
