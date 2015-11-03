@@ -33,7 +33,8 @@
 			<td><a href="{{ request.session.site_url }}students/{{ student.id }}/">{{ student.student_name }}</a></td>
 			<td>
 				<a href="#">
-				<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" tag-previous="" tag-next="" tag2="{{ student.student_name }}">
+				<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" 
+				tag-current="" tag-previous="" tag-next="" tag2="{{ student.student_name }}">
 					{{ student.number_of_quizzes }}
 				</span>
 				</a>

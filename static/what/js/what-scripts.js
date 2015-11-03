@@ -6,12 +6,14 @@ $(document).ready(function() {
 			return num + "";
 	}
 
-	function load_student(id) {
+	function load_student(id, quiz_index) {
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: id.toString() + "/quizzes/",
+			url: id.toString() + "/quizzes/" + quiz_index.toString() + "/",
 			success: function(data) {
+				if (!data)
+					return "";
 				var dialog_content = "<table border='0' width='100%'>";
 				dialog_content += "<tr><td width='50%'>Name:</td>";
 				dialog_content += "<td>" + data.annal + "</td></tr>";
@@ -59,13 +61,14 @@ $(document).ready(function() {
 		var dialog_next = $("#next-hidden").attr("value");
 		var dialog_close = $("#close-hidden").attr("value");
 		var dialog_title = $(this).attr("tag2");
-		var current_id = $(this).attr("tag");
-		var previous_id = $(this).attr("tag-previous");
-		var next_id = $(this).attr("tag-next");
+		var student_id = $(this).attr("tag");
+		var current_index = $(this).attr("tag-current") || 0;
+		var previous_index = $(this).attr("tag-previous") || 0;
+		var next_index = $(this).attr("tag-next") || 0;
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: current_id + "/quizzes/",
+			url: student_id + "/quizzes/",
 			success: function(data) {
 				// var dialog_content = "<table border='0' width='100%'>";
 				// dialog_content += "<tr><td width='50%'>Name:</td>";
@@ -81,27 +84,32 @@ $(document).ready(function() {
 				// dialog_content += "<tr><td width='50%'>Finished in:</td>";
 				// dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
 				// dialog_content += "</table>";
-				var dialog_content = load_student(current_id);
-				bootbox.dialog({
-					title: dialog_title,
-					message: dialog_content,
-					buttons: {
-						previous: {
-							label: dialog_previous,
-							className: "btn-success",
-							callback: load_student(previous_id)
-						},
-						next: {
-							label: dialog_previous,
-							className: "btn-success",
-							callback: load_student(next_id)
-						},
-						close: {
-							label: dialog_close,
-							className: "btn-primary"
+				var dialog_content = load_student(student_id, current_index);
+				if ($(".modal-dialog").length) {
+					$(".bootbox-body").text(dialog_content);
+				}
+				else {
+					bootbox.dialog({
+						title: dialog_title,
+						message: dialog_content,
+						buttons: {
+							previous: {
+								label: dialog_previous,
+								className: "btn-success",
+								callback: load_student(student_id, previous_index)
+							},
+							next: {
+								label: dialog_previous,
+								className: "btn-success",
+								callback: load_student(student_id, next_index)
+							},
+							close: {
+								label: dialog_close,
+								className: "btn-primary"
+							}
 						}
-					}
-				});
+					});
+				}
 			},
 		});
 	});

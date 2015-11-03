@@ -107,10 +107,10 @@ def cp_students(request, eid=None):
 			})
 
 @check_login
-def cp_student_quizzes(request, eid):
-	quizzes = Quiz.objects.filter(student__id=eid).values("annal", "submitted",
-		"number_of_questions", "start_time", "finish_time", "score", "max_score")
-	for q in quizzes:
+def cp_student_quizzes(request, eid, qindex=0):
+	try:
+		q = Quiz.objects.filter(student__id=eid)[qindex].values("annal", "submitted",
+			"number_of_questions", "start_time", "finish_time", "score", "max_score")
 		if q['max_score']:
 			q['score'] = "{}/100".format(round(100 * q['score'] / q['max_score']))
 		else:
@@ -126,7 +126,9 @@ def cp_student_quizzes(request, eid):
 			q['start_time'] = q['start_time'].strftime("%d/%m/%Y %H:%M")
 		q['submitted'] = _("Yes") if q['submitted'] else _("No")
 		q['finish_time'] = Utils.format_duration(annal[0].annal_duration - q['finish_time'])
-	return HttpResponse(json.dumps(quizzes[0]), content_type="application/json")
+		return HttpResponse(json.dumps(quizzes[0]), content_type="application/json")
+	except:
+		return HttpResponse(json.dumps({}), content_type="application/json")
 
 @check_login
 def cp_annals(request, eid=None):
