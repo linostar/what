@@ -68,7 +68,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: student_id + "/quizzes/",
+			url: student_id + "/quizzes/" + current_index.toString() + "/",
 			success: function(data) {
 				// var dialog_content = "<table border='0' width='100%'>";
 				// dialog_content += "<tr><td width='50%'>Name:</td>";
@@ -84,6 +84,7 @@ $(document).ready(function() {
 				// dialog_content += "<tr><td width='50%'>Finished in:</td>";
 				// dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
 				// dialog_content += "</table>";
+				console.log(current_index);
 				var dialog_content = load_student(student_id, current_index);
 				if ($(".modal-dialog").length) {
 					$(".bootbox-body").text(dialog_content);
