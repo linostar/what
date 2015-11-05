@@ -70,20 +70,6 @@ $(document).ready(function() {
 			dataType: "json",
 			url: student_id + "/quizzes/" + current_index.toString() + "/",
 			success: function(data) {
-				// var dialog_content = "<table border='0' width='100%'>";
-				// dialog_content += "<tr><td width='50%'>Name:</td>";
-				// dialog_content += "<td>" + data.annal + "</td></tr>";
-				// dialog_content += "<tr><td width='50%'>Submitted:</td>";
-				// dialog_content += "<td>" + (data.submitted).toString() + "</td></tr>";
-				// dialog_content += "<tr><td width='50%'>Score:</td>";
-				// dialog_content += "<td>" + (data.score).toString() + "</td></tr>";
-				// dialog_content += "<tr><td width='50%'>Number of questions:</td>";
-				// dialog_content += "<td>" + (data.number_of_questions).toString() + "</td></tr>";
-				// dialog_content += "<tr><td width='50%'>Start time:</td>";
-				// dialog_content += "<td>" + (data.start_time).toString() + "</td></tr>";
-				// dialog_content += "<tr><td width='50%'>Finished in:</td>";
-				// dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
-				// dialog_content += "</table>";
 				console.log(current_index);
 				var dialog_content = load_student(student_id, current_index);
 				if ($(".modal-dialog").length) {
