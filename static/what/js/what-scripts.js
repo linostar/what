@@ -6,13 +6,14 @@ $(document).ready(function() {
 			return num + "";
 	}
 
-	function load_student(id, quiz_index, dialog_content) {
+	function load_student(id, quiz_index) {
+		var dialog_content;
 		$.ajax({
 			type: "GET",
 			dataType: "json",
 			url: id.toString() + "/quizzes/" + quiz_index.toString() + "/",
 			success: function(data) {
-				dialog_content = "<table border='0' width='100%'>";
+				dialog_content = "<table class='table' width='100%'>";
 				dialog_content += "<tr><td width='50%'>Name:</td>";
 				dialog_content += "<td>" + data.annal + "</td></tr>";
 				dialog_content += "<tr><td width='50%'>Submitted:</td>";
@@ -28,6 +29,7 @@ $(document).ready(function() {
 				dialog_content += "</table>";
 			},
 		});
+		return dialog_content;
 	}
 
 	$('.selectpicker').selectpicker();
@@ -67,33 +69,9 @@ $(document).ready(function() {
 			dataType: "json",
 			url: student_id + "/quizzes/" + current_index.toString() + "/",
 			success: function(data) {
-				var dialog_content;
-				load_student(student_id, current_index, dialog_content);
-				if ($(".modal-dialog").length) {
-					$(".bootbox-body").text(dialog_content);
-				}
-				else {
-					bootbox.dialog({
-						title: dialog_title || "title",
-						message: dialog_content || "message",
-						buttons: {
-							previous: {
-								label: dialog_previous,
-								className: "btn-success",
-								callback: load_student(student_id, previous_index, dialog_content)
-							},
-							next: {
-								label: dialog_next,
-								className: "btn-success",
-								callback: load_student(student_id, next_index, dialog_content)
-							},
-							close: {
-								label: dialog_close,
-								className: "btn-primary"
-							}
-						}
-					});
-				}
+				var dialog_content = load_student(student_id, current_index);
+				alert(dialog_content);
+				$("#table-quizzes").text(dialog_content);
 			},
 		});
 	});

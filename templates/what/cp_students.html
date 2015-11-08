@@ -12,35 +12,51 @@
 	<input type="hidden" id="confirm-title" value='{% trans "Confirmation" %}'/>
 	<input type="hidden" id="confirm-message" value='{% trans "Are you sure you want to delete the selected elements?" %}'/>
 	<input type="hidden" name="changelist-action" id="changelist-action" value=""/>
-	<div id="delete-container">
-		<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">Delete selected</button>
+	<br/>
+	<div class="row">
+	<div class="col-sm-4">
+		<div id="delete-container">
+			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">Delete selected</button>
+		</div>
+		<table id="result-list" class="table-bordered">
+		<thead>
+			<tr>
+				<th><input type="checkbox" id="sel-toggle-all"/></th>
+				<th>{% trans "Student name" %}</th>
+				<th>Number of quizzes</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for student in students %}
+			<tr>
+				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
+				<td><a href="{{ request.session.site_url }}students/{{ student.id }}/">{{ student.student_name }}</a></td>
+				<td class="td-centered">
+					<a href="#">
+					<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" 
+					tag-current="" tag-previous="" tag-next="" tag2="{{ student.student_name }}">
+						{{ student.number_of_quizzes }}
+					</span>
+					</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
 	</div>
-	<div class="results">
-	<table id="result-list" class="table-bordered">
-	<thead>
-		<tr>
-			<th><input type="checkbox" id="sel-toggle-all"/></th>
-			<th>{% trans "Student name" %}</th>
-			<th>Number of quizzes</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for student in students %}
-		<tr>
-			<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
-			<td><a href="{{ request.session.site_url }}students/{{ student.id }}/">{{ student.student_name }}</a></td>
-			<td class="td-centered">
-				<a href="#">
-				<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" 
-				tag-current="" tag-previous="" tag-next="" tag2="{{ student.student_name }}">
-					{{ student.number_of_quizzes }}
-				</span>
-				</a>
-			</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-	</table>
+	<div class="col-sm-8">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				{% trans "Quizzes" %}
+			</div>
+			<div class="panel-body">
+				{% trans "Click on <b>number of quizzes</b> of a student to show their quizzes." %}
+			</div>
+			<div id="table-quizzes">
+
+			</div>
+		</div>
+	</div>
 	</div>
 	</form>
 {% endblock %}

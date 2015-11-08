@@ -217,6 +217,14 @@ body {
 	z-index: 10;
 }
 
+#result-list tr:nth-child(odd) {
+	background-color: white;
+}
+
+#result-list tr:nth-child(even) {
+	background-color: #EEEEEE;
+}
+
 #result-list td {
 	padding-top: 0.2em;
 	padding-bottom: 0.2em;
@@ -242,10 +250,10 @@ body {
 }
 
 #delete-container {
-	margin-top: 2em;
 	margin-bottom: 0.5em;
 }
 
 .td-centered {
 	text-align: center;
+	vertical-align: middle;
 }
