@@ -37,7 +37,7 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">{% block navbar-title %}{% trans "Home" %}{% endblock %}</a></li>
+						<li class="active"><a href="{% block navbar-title-url %}#{% endblock %}">{% block navbar-title %}{% trans "Home" %}{% endblock %}</a></li>
 						{% block navbar-rules %}{% endblock %}
 						{% block navbar-cp %}{% endblock %}
 					</ul>

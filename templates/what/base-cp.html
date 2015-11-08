@@ -2,6 +2,7 @@
 {% load i18n %}
 
 {% block navbar-title %}{% trans "Home" %}{% endblock %}
+{% block navbar-title-url %}{{ request.session.site_url }}{% endblock %}
 
 {% if request.session.username %}
 {% block user %}
