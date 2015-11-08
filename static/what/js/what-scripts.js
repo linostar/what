@@ -27,9 +27,13 @@ $(document).ready(function() {
 				dialog_content += "<tr><td width='50%'>Finished in:</td>";
 				dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
 				dialog_content += "</table>";
+				dialog_content += "<nav class='nav-padded'><ul class='pager'>";
+				dialog_content += "<li class='previous'><a href='#' class='pager-previous'><span aria-hidden='true'>&larr;</span> Previous</a></li>";
+				dialog_content += "<li class='next'><a href='#' class='pager-next'>Next <span aria-hidden='true'>&rarr;</span></a></li>";
+				dialog_content += "</ul></nav>";
+				$("#table-quizzes").html(dialog_content);
 			},
 		});
-		return dialog_content;
 	}
 
 	$('.selectpicker').selectpicker();
@@ -64,16 +68,7 @@ $(document).ready(function() {
 		var current_index = $(this).attr("tag-current") || 0;
 		var previous_index = $(this).attr("tag-previous") || 0;
 		var next_index = $(this).attr("tag-next") || 0;
-		$.ajax({
-			type: "GET",
-			dataType: "json",
-			url: student_id + "/quizzes/" + current_index.toString() + "/",
-			success: function(data) {
-				var dialog_content = load_student(student_id, current_index);
-				alert(dialog_content);
-				$("#table-quizzes").text(dialog_content);
-			},
-		});
+		load_student(student_id, current_index);
 	});
 
 	$("#delete-selected").click(function() {

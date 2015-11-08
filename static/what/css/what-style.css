@@ -185,7 +185,7 @@ body {
 
 #table-login td {
 	vertical-align: middle;
-	padding: 0.2em 0.3em 0.2em 0;
+	padding: 0.2em 0.3em 0.2em 0.3em;
 	text-align: start;
 }
 
@@ -226,17 +226,11 @@ body {
 }
 
 #result-list td {
-	padding-top: 0.2em;
-	padding-bottom: 0.2em;
-	padding-left: 0.4em;
-	padding-right: 0.4em;
+	padding: 0.2em 0.4em 0.2em 0.4em;
 }
 
 #result-list th {
-	padding-top: 0.2em;
-	padding-bottom: 0.2em;
-	padding-left: 0.6em;
-	padding-right: 0.6em;
+	padding: 0.2em 0.6em 0.2em 0.6em;
 	background-color: #2E6DCB;
 	color: white;
 }
@@ -256,4 +250,8 @@ body {
 .td-centered {
 	text-align: center;
 	vertical-align: middle;
+}
+
+.nav-padded {
+	padding: 0 0.5em 0 0.5em;
 }
