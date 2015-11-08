@@ -217,8 +217,20 @@ body {
 	z-index: 10;
 }
 
-#result-list td,th {
-	padding: 0.2em;
+#result-list td {
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+}
+
+#result-list th {
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-left: 0.6em;
+	padding-right: 0.6em;
+	background-color: #2E6DCB;
+	color: white;
 }
 
 @media (max-width: 767px) {
@@ -227,4 +239,13 @@ body {
 		width: auto;
 		top: 0;
 	}
+}
+
+#delete-container {
+	margin-top: 2em;
+	margin-bottom: 0.5em;
+}
+
+.td-centered {
+	text-align: center;
 }
