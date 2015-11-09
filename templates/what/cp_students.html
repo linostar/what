@@ -18,12 +18,12 @@
 		<div id="delete-container">
 			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">Delete selected</button>
 		</div>
-		<table id="result-list" class="table-bordered">
+		<table id="result-list" class="table">
 		<thead>
 			<tr>
-				<th><input type="checkbox" id="sel-toggle-all"/></th>
+				<th class="td-centered"><input type="checkbox" id="sel-toggle-all"/></th>
 				<th>{% trans "Student name" %}</th>
-				<th>Number of quizzes</th>
+				<th class="td-centered">Number of quizzes</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,7 +45,7 @@
 		</table>
 	</div>
 	<div class="col-sm-8">
-		<div class="panel panel-success">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				{% trans "Quizzes" %}
 			</div>

@@ -29,6 +29,7 @@ $(document).ready(function() {
 				dialog_content += "</table>";
 				dialog_content += "<nav class='nav-padded'><ul class='pager'>";
 				dialog_content += "<li class='previous'><a href='#' class='pager-previous'><span aria-hidden='true'>&larr;</span> Previous</a></li>";
+				dialog_content += "<li><a href='#'>1 / 1</a></li>";
 				dialog_content += "<li class='next'><a href='#' class='pager-next'>Next <span aria-hidden='true'>&rarr;</span></a></li>";
 				dialog_content += "</ul></nav>";
 				$("#table-quizzes").html(dialog_content);

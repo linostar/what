@@ -217,6 +217,11 @@ body {
 	z-index: 10;
 }
 
+#result-list {
+	box-shadow: 0 0 0 1px #337AB7;
+	border-radius: 4px;
+}
+
 #result-list tr:nth-child(odd) {
 	background-color: white;
 }
@@ -226,12 +231,12 @@ body {
 }
 
 #result-list td {
-	padding: 0.2em 0.4em 0.2em 0.4em;
+	padding: 0.4em 0.4em 0.4em 0.4em;
 }
 
 #result-list th {
-	padding: 0.2em 0.6em 0.2em 0.6em;
-	background-color: #2E6DCB;
+	padding: 0.4em 0.6em 0.4em 0.6em;
+	background-color: #3175B1;
 	color: white;
 }
 
