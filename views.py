@@ -127,6 +127,7 @@ def cp_student_quizzes(request, eid, qindex=0):
 			q['start_time'] = q['start_time'].strftime("%d/%m/%Y %H:%M")
 		q['submitted'] = _("Yes") if q['submitted'] else _("No")
 		q['finish_time'] = Utils.format_duration(annal[0].annal_duration - q['finish_time'])
+		q['student_id'] = eid
 		return HttpResponse(json.dumps(q), content_type="application/json")
 	except:
 		return HttpResponse(json.dumps({}), content_type="application/json")

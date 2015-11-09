@@ -6,14 +6,14 @@ $(document).ready(function() {
 			return num + "";
 	}
 
-	function load_student(id, quiz_index, total_quizzes) {
+	function load_student(id, quiz_index, total_quizzes, student_name) {
 		var dialog_content;
 		$.ajax({
 			type: "GET",
 			dataType: "json",
 			url: id.toString() + "/quizzes/" + quiz_index.toString() + "/",
 			success: function(data) {
-				if (data) {
+				if (!$.isEmptyObject(data)) {
 					$("#st-quiz-name").text(data.annal);
 					$("#st-quiz-submitted").text(data.submitted);
 					$("#st-quiz-score").text(data.score);
@@ -21,6 +21,13 @@ $(document).ready(function() {
 					$("#st-quiz-started").text(data.start_time);
 					$("#st-quiz-finished").text(data.finish_time);
 					$("#st-quiz-total").text(total_quizzes);
+					$("#st-quiz-current").text(quiz_index + 1);
+					$(".pager-previous").attr("tag", data.student_id);
+					$(".pager-next").attr("tag", data.student_id);
+					if (!(typeof student_name === "undefined")) {
+						$("#st-panel-subtitle").text(student_name.toString());
+						$("#st-panel-title").show();
+					}
 					$("#table-quizzes").show();
 				}
 			},
@@ -51,23 +58,27 @@ $(document).ready(function() {
 	});
 
 	$(".student-nb-quizzes").click(function() {
-		var dialog_previous = $("#previous-hidden").attr("value");
-		var dialog_next = $("#next-hidden").attr("value");
-		var dialog_close = $("#close-hidden").attr("value");
-		var dialog_title = $(this).attr("tag2");
-		var student_id = $(this).attr("tag");
-		var current_index = $(this).attr("tag-current") || 0;
-		var previous_index = $(this).attr("tag-previous") || 0;
-		var next_index = $(this).attr("tag-next") || 0;
-		load_student(student_id, current_index, $(this).text());
+		var student_id = parseInt($(this).attr("tag"));
+		var current_index = parseInt($(this).attr("tag-current")) || 0;
+		load_student(student_id, current_index, $(this).text(), $(this).attr("tag-student"));
 	});
 
 	$(".pager-previous").click(function() {
-		alert(1);
+		var student_id = parseInt($(this).attr("tag"));
+		var current_index = (parseInt($("#st-quiz-current").text()) - 1) || 0;
+		if (current_index > 0)
+			current_index--;
+		load_student(student_id, current_index, $("#st-quiz-total").text());
 	});
 
 	$(".pager-next").click(function() {
-		alert(1);
+		var student_id = parseInt($(this).attr("tag"));
+		var current_index = (parseInt($("#st-quiz-current").text()) - 1) || 0;
+		if (current_index < 0)
+			current_index = 0;
+		else
+			current_index++;
+		load_student(student_id, current_index, $("#st-quiz-total").text());
 	});
 
 	$("#delete-selected").click(function() {

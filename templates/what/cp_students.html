@@ -33,7 +33,7 @@
 				<td><a href="{{ request.session.site_url }}students/{{ student.id }}/">{{ student.student_name }}</a></td>
 				<td class="td-centered">
 					<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" 
-					tag-current="" tag-previous="" tag-next="" tag2="{{ student.student_name }}">
+					tag-current="" tag-student="{{ student.student_name }}">
 						{{ student.number_of_quizzes }}
 					</span>
 				</td>
@@ -45,7 +45,7 @@
 	<div class="col-sm-8">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<b>{% trans "Quizzes" %}</b>
+				<b>{% trans "Quizzes" %}<span id="st-panel-title" hidden="true"> | <span class="label label-success" id="st-panel-subtitle"></span></span></b>
 			</div>
 			<div class="panel-body">
 				{% trans "Click on <b>number of quizzes</b> of a student to show their quizzes." %}
@@ -66,9 +66,9 @@
 					<td id="st-quiz-finished"></td></tr>
 				</table>
 				<nav class='nav-padded'><ul class='pager'>
-					<li class='previous'><a href='#' class='pager-previous'><span aria-hidden='true'>&larr;</span> {% trans "Previous" %}</a></li>
+					<li class='previous'><a href='#' class='pager-previous' tag=''><span aria-hidden='true'>&larr;</span> {% trans "Previous" %}</a></li>
 					<li><span><span id="st-quiz-current">1</span> / <span id="st-quiz-total"></span></span></li>
-					<li class='next'><a href='#' class='pager-next'>{% trans "Next" %} <span aria-hidden='true'>&rarr;</span></a></li>
+					<li class='next'><a href='#' class='pager-next' tag=''>{% trans "Next" %} <span aria-hidden='true'>&rarr;</span></a></li>
 				</ul></nav>
 			</div>
 		</div>
