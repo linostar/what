@@ -32,12 +32,10 @@
 				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
 				<td><a href="{{ request.session.site_url }}students/{{ student.id }}/">{{ student.student_name }}</a></td>
 				<td class="td-centered">
-					<a href="#">
 					<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" 
 					tag-current="" tag-previous="" tag-next="" tag2="{{ student.student_name }}">
 						{{ student.number_of_quizzes }}
 					</span>
-					</a>
 				</td>
 			</tr>
 			{% endfor %}
@@ -47,13 +45,31 @@
 	<div class="col-sm-8">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				{% trans "Quizzes" %}
+				<b>{% trans "Quizzes" %}</b>
 			</div>
 			<div class="panel-body">
 				{% trans "Click on <b>number of quizzes</b> of a student to show their quizzes." %}
 			</div>
-			<div id="table-quizzes">
-
+			<div id="table-quizzes" hidden="true">
+				<table class='table' width='100%'>
+					<tr><td width='50%'>{% trans "Name:" %}</td>
+					<td id="st-quiz-name"></td></tr>
+					<tr><td width='50%'>{% trans "Submitted:" %}</td>
+					<td id="st-quiz-submitted"></td></tr>
+					<tr><td width='50%'>{% trans "Score:" %}</td>
+					<td id="st-quiz-score"></td></tr>
+					<tr><td width='50%'>{% trans "Number of questions:" %}</td>
+					<td id="st-quiz-nb-questions"></td></tr>
+					<tr><td width='50%'>{% trans "Start time:" %}</td>
+					<td id="st-quiz-started"></td></tr>
+					<tr><td width='50%'>{% trans "Finished in:" %}</td>
+					<td id="st-quiz-finished"></td></tr>
+				</table>
+				<nav class='nav-padded'><ul class='pager'>
+					<li class='previous'><a href='#' class='pager-previous'><span aria-hidden='true'>&larr;</span> {% trans "Previous" %}</a></li>
+					<li><span><span id="st-quiz-current">1</span> / <span id="st-quiz-total"></span></span></li>
+					<li class='next'><a href='#' class='pager-next'>{% trans "Next" %} <span aria-hidden='true'>&rarr;</span></a></li>
+				</ul></nav>
 			</div>
 		</div>
 	</div>

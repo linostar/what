@@ -260,3 +260,7 @@ body {
 .nav-padded {
 	padding: 0 0.5em 0 0.5em;
 }
+
+.student-nb-quizzes {
+	cursor: pointer;
+}
