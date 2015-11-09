@@ -261,6 +261,6 @@ body {
 	padding: 0 0.5em 0 0.5em;
 }
 
-.student-nb-quizzes {
+.student-nb-quizzes, .pager-previous, .pager-next {
 	cursor: pointer;
 }
