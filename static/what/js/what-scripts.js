@@ -6,33 +6,35 @@ $(document).ready(function() {
 			return num + "";
 	}
 
-	function load_student(id, quiz_index) {
+	function load_student(id, quiz_index, total_quizzes) {
 		var dialog_content;
 		$.ajax({
 			type: "GET",
 			dataType: "json",
 			url: id.toString() + "/quizzes/" + quiz_index.toString() + "/",
 			success: function(data) {
-				dialog_content = "<table class='table' width='100%'>";
-				dialog_content += "<tr><td width='50%'>Name:</td>";
-				dialog_content += "<td>" + data.annal + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Submitted:</td>";
-				dialog_content += "<td>" + (data.submitted).toString() + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Score:</td>";
-				dialog_content += "<td>" + (data.score).toString() + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Number of questions:</td>";
-				dialog_content += "<td>" + (data.number_of_questions).toString() + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Start time:</td>";
-				dialog_content += "<td>" + (data.start_time).toString() + "</td></tr>";
-				dialog_content += "<tr><td width='50%'>Finished in:</td>";
-				dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
-				dialog_content += "</table>";
-				dialog_content += "<nav class='nav-padded'><ul class='pager'>";
-				dialog_content += "<li class='previous'><a href='#' class='pager-previous'><span aria-hidden='true'>&larr;</span> Previous</a></li>";
-				dialog_content += "<li><a href='#'>1 / 1</a></li>";
-				dialog_content += "<li class='next'><a href='#' class='pager-next'>Next <span aria-hidden='true'>&rarr;</span></a></li>";
-				dialog_content += "</ul></nav>";
-				$("#table-quizzes").html(dialog_content);
+				if (data) {
+					dialog_content = "<table class='table' width='100%'>";
+					dialog_content += "<tr><td width='50%'>Name:</td>";
+					dialog_content += "<td>" + data.annal + "</td></tr>";
+					dialog_content += "<tr><td width='50%'>Submitted:</td>";
+					dialog_content += "<td>" + (data.submitted).toString() + "</td></tr>";
+					dialog_content += "<tr><td width='50%'>Score:</td>";
+					dialog_content += "<td>" + (data.score).toString() + "</td></tr>";
+					dialog_content += "<tr><td width='50%'>Number of questions:</td>";
+					dialog_content += "<td>" + (data.number_of_questions).toString() + "</td></tr>";
+					dialog_content += "<tr><td width='50%'>Start time:</td>";
+					dialog_content += "<td>" + (data.start_time).toString() + "</td></tr>";
+					dialog_content += "<tr><td width='50%'>Finished in:</td>";
+					dialog_content += "<td>" + (data.finish_time).toString() + "</td></tr>";
+					dialog_content += "</table>";
+					dialog_content += "<nav class='nav-padded'><ul class='pager'>";
+					dialog_content += "<li class='previous'><a href='#' class='pager-previous'><span aria-hidden='true'>&larr;</span> Previous</a></li>";
+					dialog_content += "<li><a href='#'>1 / " + total_quizzes.toString() + "</a></li>";
+					dialog_content += "<li class='next'><a href='#' class='pager-next'>Next <span aria-hidden='true'>&rarr;</span></a></li>";
+					dialog_content += "</ul></nav>";
+					$("#table-quizzes").html(dialog_content);
+				}
 			},
 		});
 	}
@@ -69,7 +71,11 @@ $(document).ready(function() {
 		var current_index = $(this).attr("tag-current") || 0;
 		var previous_index = $(this).attr("tag-previous") || 0;
 		var next_index = $(this).attr("tag-next") || 0;
-		load_student(student_id, current_index);
+		load_student(student_id, current_index, $(this).text());
+	});
+
+	$(".pager-next").click(function() {
+		alert(1);
 	});
 
 	$("#delete-selected").click(function() {
