@@ -101,8 +101,21 @@ def cp_students(request, eid=None):
 			"student": student,
 			})
 	else:
+		message = ""
+		if request.method == "POST":
+			if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
+				student_ids = []
+				for element in request.POST:
+					if element.startswith("sel-student-") and request.POST[element]:
+						try:
+							student_ids.append(int(element[12:]))
+						except:
+							continue
+				Student.objects.filter(id__in=student_ids).delete()
+				message = "{} student(s) deleted.".format(len(student_ids))
 		students = Student.objects.all().order_by("student_name")
 		return render(request, "what/cp_students.html", {
+			"message": message,
 			"students": students,
 			})
 
