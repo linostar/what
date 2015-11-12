@@ -4,7 +4,16 @@
 {% block title %}{% trans "Students" %}{% endblock %}
 
 {% block content %}
-	<h2>{% trans "Students" %}</h2>
+	<div class="row">
+	<div class="col-sm-3">
+		<h2>{% trans "Students" %}</h2>
+	</div>
+	<div class="col-sm-6">
+		{% if message %}
+			<div id="alert-message" class="alert {{ alert_status }} alert-block">{{ message }}</div>
+		{% endif %}
+	</div>
+	</div>
 	<div id="div-add-student" class="modal fade">
 		<div class="modal-dialog">
 		<div class="modal-content">
@@ -13,9 +22,10 @@
 			<h4 class="modal-title">{% trans "Add student" %}</h4>
 		</div>
 		<div class="modal-body">
-			<form id="form-add-student" name="form-add-student" method="post" class="form-horizontal">
+			<form id="form-add-student" method="post" class="form-horizontal">
 			{% csrf_token %}
 			<input type="hidden" id="msg-student-name-required" value='{% trans "Student name is required." %}'>
+			<input type="hidden" name="student-action" value="add">
 			<div class="form-group">
 				<label for="student-name" class="control-label col-sm-3">{% trans "Student name:" %}</label>
 				<div class="col-sm-7">
@@ -33,7 +43,7 @@
 		</div>
 		</div>
 	</div>
-	<form id="changelist-form" name="changelist-form" action="" method="post" novalidate>
+	<form id="changelist-form" action="" method="post" novalidate>
 	{% csrf_token %}
 	<input type="hidden" id="confirm-yes" value='{% trans "Yes" %}'/>
 	<input type="hidden" id="confirm-no" value='{% trans "No" %}'/>

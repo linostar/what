@@ -144,7 +144,10 @@ $(document).ready(function() {
 	});
 
 	$("#login-success-alert").fadeIn();
-	$("#login-success-alert").delay(3000).fadeOut();
+	$("#login-success-alert").delay(4000).fadeOut();
+
+	$("#alert-message").fadeIn();
+	$("#alert-message").delay(4000).fadeOut();
 
 	$("#sel-toggle-all").change(function() {
 		if (this.checked)

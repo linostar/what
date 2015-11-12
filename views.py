@@ -6,6 +6,8 @@ from django.http import Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.utils.translation import ugettext as _
+from django.db import IntegrityError
+from django.utils.safestring import mark_safe
 
 from what.models import Teacher, Student, Quiz, Question, Answer, Annal, Setting
 from what.utils import Utils
@@ -101,7 +103,7 @@ def cp_students(request, eid=None):
 			"student": student,
 			})
 	else:
-		status = ""
+		alert_status = ""
 		message = ""
 		if request.method == "POST":
 			if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
@@ -114,20 +116,24 @@ def cp_students(request, eid=None):
 							continue
 				Student.objects.filter(id__in=student_ids).delete()
 				message = _("{} student(s) deleted.".format(len(student_ids)))
-				status = "success"
-			elif "form-add-student" in request.POST:
-				try:
-					new_student = Student(student_name=request.POST['student_name'])
-					new_student.save()
-					message = _("Student '{}' successfully added".format(request.POST['student_name']))
-					status = "success"
-				except django.db.IntegrityError:
-					message = _("Student already exists in database.")
-					status = "danger"
+				alert_status = "alert-success"
+			elif "student-action" in request.POST:
+				if request.POST['student-action'] == "add":
+					try:
+						new_student = Student(student_name=request.POST['student_name'])
+						new_student.save()
+						message = _("Student <strong>{}</strong> successfully added.".format(request.POST['student_name']))
+						alert_status = "alert-success"
+					except IntegrityError:
+						message = _("Student already exists in database.")
+						alert_status = "alert-danger"
+					except:
+						message = _("Due to an unknown error, the student could not be saved to database.")
+						alert_status = "alert-danger"
 		students = Student.objects.all().order_by("student_name")
 		return render(request, "what/cp_students.html", {
-			"status": status,
-			"message": message,
+			"alert_status": alert_status,
+			"message": mark_safe(message),
 			"students": students,
 			})
 
