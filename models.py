@@ -70,7 +70,7 @@ class Answer(models.Model):
 
 
 class Student(models.Model):
-	student_name = models.CharField(max_length=64)
+	student_name = models.CharField(max_length=64, unique=True)
 	number_of_quizzes = models.IntegerField(default=0)
 
 	def __str__(self):

@@ -101,6 +101,7 @@ def cp_students(request, eid=None):
 			"student": student,
 			})
 	else:
+		status = ""
 		message = ""
 		if request.method == "POST":
 			if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
@@ -112,9 +113,20 @@ def cp_students(request, eid=None):
 						except:
 							continue
 				Student.objects.filter(id__in=student_ids).delete()
-				message = "{} student(s) deleted.".format(len(student_ids))
+				message = _("{} student(s) deleted.".format(len(student_ids)))
+				status = "success"
+			elif "form-add-student" in request.POST:
+				try:
+					new_student = Student(student_name=request.POST['student_name'])
+					new_student.save()
+					message = _("Student '{}' successfully added".format(request.POST['student_name']))
+					status = "success"
+				except django.db.IntegrityError:
+					message = _("Student already exists in database.")
+					status = "danger"
 		students = Student.objects.all().order_by("student_name")
 		return render(request, "what/cp_students.html", {
+			"status": status,
 			"message": message,
 			"students": students,
 			})
