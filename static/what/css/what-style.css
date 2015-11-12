@@ -235,7 +235,7 @@ body {
 }
 
 #result-list th {
-	padding: 0.4em 0.6em 0.4em 0.6em;
+	padding: 0.5em 0.4em 0.5em 0.4em;
 	background-color: #3175B1;
 	color: white;
 }
@@ -248,8 +248,12 @@ body {
 	}
 }
 
-#delete-container {
-	margin-bottom: 0.5em;
+.add-delete-container {
+	margin-bottom: 0.9em;
+}
+
+.searchbox-container {
+	margin-bottom: 0.6em;
 }
 
 .td-centered {
@@ -263,4 +267,12 @@ body {
 
 .student-nb-quizzes, .pager-previous, .pager-next {
 	cursor: pointer;
+}
+
+[dir="ltr"] .float-end {
+	float: right;
+}
+
+[dir="rtl"] .float-end {
+	float: left;
 }

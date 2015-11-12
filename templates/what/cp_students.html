@@ -15,8 +15,13 @@
 	<br/>
 	<div class="row">
 	<div class="col-sm-4">
-		<div id="delete-container">
-			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">Delete selected</button>
+		<div class="add-delete-container">
+			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">
+				<span class="glyphicon glyphicon-remove"></span> {% trans "Delete selected" %}
+			</button>
+			<button type="button" class="btn btn-sm btn-success float-end" name="add-student" id="add-student">
+				<span class="glyphicon glyphicon-plus"></span> {% trans "Add Student" %}
+			</button>
 		</div>
 		<table id="result-list" class="table">
 		<thead>
@@ -43,6 +48,17 @@
 		</table>
 	</div>
 	<div class="col-sm-8">
+		<div class="row">
+			<div class="col-sm-6">
+			</div>
+			<div class="col-sm-6">
+				<div class="input-group searchbox-container float-end">
+					<input type="text" class="form-control" name="search-student" id="search-student" aria-describedby="basic-addon" 
+					placeholder='{% trans "Enter student name" %}'>
+					<span class="input-group-addon" id="basic-addon"><span class="glyphicon glyphicon-search"></span></span>
+				</div>
+			</div>
+		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<b>{% trans "Quizzes" %}<span id="st-panel-title" hidden="true"> | <span class="label label-success" id="st-panel-subtitle"></span></span></b>
