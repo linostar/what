@@ -34,6 +34,8 @@ $(document).ready(function() {
 		});
 	}
 
+	var msg_student_name_required = $("#msg-student-name-required").val();
+
 	$('.selectpicker').selectpicker();
 
 	$("#select-locale").change(function() {
@@ -79,6 +81,23 @@ $(document).ready(function() {
 		else
 			current_index++;
 		load_student(student_id, current_index, $("#st-quiz-total").text());
+	});
+
+	$("#form-add-student").bootstrapValidator({
+		feedbackIcons: {
+			valid: "glyphicon glyphicon-ok",
+			invalid: "glyphicon glyphicon-remove",
+			validating: "glyphicon glyphicon-refresh"
+		},
+		fields: {
+			student_name: {
+				validators: {
+					notEmpty: {
+						message: msg_student_name_required
+					}
+				}
+			}
+		}
 	});
 
 	$("#delete-selected").click(function() {

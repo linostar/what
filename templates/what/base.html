@@ -15,6 +15,7 @@
 {% if request.session.direction == "rtl" %}
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrap-rtl.min.css' %}" />
 {% endif %}
+	<link rel="stylesheet" type="text/css" href="{% static 'what/css/bootstrapValidator.min.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'what/css/what-style.css' %}" />
 </head>
 <body role="document" dir="{{ request.session.direction }}">
@@ -86,6 +87,7 @@
 	<script src="{% static 'what/js/ie10-viewport-bug-workaround.js' %}"></script>
 	<script src="{% static 'what/js/bootstrap-select.min.js' %}"></script>
 	<script src="{% static 'what/js/bootbox.min.js' %}"></script>
+	<script src="{% static 'what/js/bootstrapValidator.min.js' %}"></script>
 	<script src="{% static 'what/js/what-scripts.js' %}"></script>
 </body>
 </html>

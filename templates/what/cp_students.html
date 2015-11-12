@@ -5,6 +5,34 @@
 
 {% block content %}
 	<h2>{% trans "Students" %}</h2>
+	<div id="div-add-student" class="modal fade">
+		<div class="modal-dialog">
+		<div class="modal-content">
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal">&times;</a>
+			<h4 class="modal-title">{% trans "Add student" %}</h4>
+		</div>
+		<div class="modal-body">
+			<form id="form-add-student" method="post" class="form-horizontal">
+			{% csrf_token %}
+			<input type="hidden" id="msg-student-name-required" value='{% trans "Student name is required." %}'>
+			<div class="form-group">
+				<label for="student-name" class="control-label col-sm-3">{% trans "Student name:" %}</label>
+				<div class="col-sm-7">
+					<input type="text" name="student_name" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-7">
+					<button type="submit" class="btn btn-success" id="form-add-button">{% trans "Add" %}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+				</div>
+			</div>
+			</form>
+		</div>
+		</div>
+		</div>
+	</div>
 	<form id="changelist-form" action="" method="post" novalidate>
 	{% csrf_token %}
 	<input type="hidden" id="confirm-yes" value='{% trans "Yes" %}'/>
@@ -19,9 +47,9 @@
 			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">
 				<span class="glyphicon glyphicon-remove"></span> {% trans "Delete selected" %}
 			</button>
-			<button type="button" class="btn btn-sm btn-success float-end" name="add-student" id="add-student">
+			<a class="btn btn-sm btn-success float-end" name="add-student" id="add-student" data-toggle="modal" href="#div-add-student">
 				<span class="glyphicon glyphicon-plus"></span> {% trans "Add Student" %}
-			</button>
+			</a>
 		</div>
 		<table id="result-list" class="table">
 		<thead>
