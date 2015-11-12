@@ -114,9 +114,13 @@ def cp_students(request, eid=None):
 							student_ids.append(int(element[12:]))
 						except:
 							continue
-				Student.objects.filter(id__in=student_ids).delete()
-				message = _("{} student(s) deleted.".format(len(student_ids)))
-				alert_status = "alert-success"
+				try:
+					Student.objects.filter(id__in=student_ids).delete()
+					message = _("{} student(s) deleted.".format(len(student_ids)))
+					alert_status = "alert-success"
+				except:
+					message = _("Due to an unknown error, the selected student(s) could not be deleted.")
+					alert_status = "alert-danger"
 			elif "student-action" in request.POST:
 				if request.POST['student-action'] == "add":
 					try:

@@ -119,7 +119,7 @@ $(document).ready(function() {
 				},
 				no: {
 					label: confirm_no,
-					className: "btn-primary"
+					className: "btn-default"
 				}
 			}
 		});

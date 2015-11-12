@@ -12,9 +12,9 @@
 		<a href="#"><span class="caret"></span></a>
 	</span>
 	<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user-menu" id="user-drop-list">
-		<li><a href="{{ request.session.site_url }}settings/">{% trans "Settings" %}</a></li>
+		<li><a href="{{ request.session.site_url }}settings/"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;{% trans "Settings" %}</a></li>
 		<li class="divider"></li>
-		<li><a href="{{ request.session.site_url }}logout/">{% trans "Logout" %}</a></li>
+		<li><a href="{{ request.session.site_url }}logout/"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;{% trans "Logout" %}</a></li>
 	</ul>
 </div>
 {% endblock %}
