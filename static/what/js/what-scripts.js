@@ -100,8 +100,9 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#form-add-button").click(function() {
+	$("#add-student").click(function() {
 		$("#student-action").val("add");
+		$("#modal-change-student-title").text($("#student-add-title").val());
 	});
 
 	$("#delete-selected").click(function() {
@@ -127,6 +128,14 @@ $(document).ready(function() {
 				}
 			}
 		});
+	});
+
+	$(".student-edit").click(function() {
+		var stud_name = $.trim($(this).text());
+		$("#student-action").val("edit");
+		$("#modal-change-student-title").text($("#student-edit-title").val() + stud_name);
+		$("#student_id").val($(this).attr("tag"));
+		$("#student_name").val(stud_name);
 	});
 
 	$(".answers").click(function() {

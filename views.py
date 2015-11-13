@@ -106,6 +106,7 @@ def cp_students(request, eid=None):
 		alert_status = ""
 		message = ""
 		if request.method == "POST":
+			print(request.POST)
 			if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
 				student_ids = []
 				for element in request.POST:

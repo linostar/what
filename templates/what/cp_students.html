@@ -14,27 +14,30 @@
 		{% endif %}
 	</div>
 	</div>
-	<div id="div-add-student" class="modal fade">
+	<div id="div-change-student" class="modal fade">
 		<div class="modal-dialog">
 		<div class="modal-content">
 		<div class="modal-header">
 			<a class="close" data-dismiss="modal">&times;</a>
-			<h4 class="modal-title">{% trans "Add student" %}</h4>
+			<h4 class="modal-title" id="modal-change-student-title"></h4>
 		</div>
 		<div class="modal-body">
 			<form id="form-change-student" method="post" class="form-horizontal">
 			{% csrf_token %}
+			<input type="hidden" id="student-add-title" value='{% trans "Add new student" %}'>
+			<input type="hidden" id="student-edit-title" value='{% trans "Edit student: " %}'>
 			<input type="hidden" id="msg-student-name-required" value='{% trans "Student name is required." %}'>
-			<input type="hidden" name="student-action" id="student-action" value="add">
+			<input type="hidden" name="student-action" id="student-action" value="">
+			<input type="hidden" name="student_id" id="student_id" value="">
 			<div class="form-group">
 				<label for="student-name" class="control-label col-sm-3">{% trans "Student name:" %}</label>
 				<div class="col-sm-7">
-					<input type="text" name="student_name" class="form-control">
+					<input type="text" name="student_name" id="student_name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-7">
-					<button type="submit" class="btn btn-success" id="form-add-button">{% trans "Add" %}</button>
+					<button type="submit" class="btn btn-success" id="form-add-button">{% trans "Save" %}</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
 				</div>
 			</div>
@@ -48,7 +51,7 @@
 	<input type="hidden" id="confirm-yes" value='{% trans "Yes" %}'/>
 	<input type="hidden" id="confirm-no" value='{% trans "No" %}'/>
 	<input type="hidden" id="confirm-title" value='{% trans "Confirmation" %}'/>
-	<input type="hidden" id="confirm-message" value='{% trans "Are you sure you want to delete the selected elements?" %}'/>
+	<input type="hidden" id="confirm-message" value='{% trans "Are you sure you want to delete the selected element(s)?" %}'/>
 	<input type="hidden" name="changelist-action" id="changelist-action" value=""/>
 	<br/>
 	<div class="row">
@@ -57,7 +60,7 @@
 			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">
 				<span class="glyphicon glyphicon-remove"></span> {% trans "Delete selected" %}
 			</button>
-			<a class="btn btn-sm btn-success float-end" name="add-student" id="add-student" data-toggle="modal" href="#div-add-student">
+			<a class="btn btn-sm btn-success float-end" name="add-student" id="add-student" data-toggle="modal" href="#div-change-student">
 				<span class="glyphicon glyphicon-plus"></span> {% trans "Add Student" %}
 			</a>
 		</div>
@@ -73,7 +76,9 @@
 			{% for student in students %}
 			<tr>
 				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
-				<td><a class="cursor-pointer">{{ student.student_name }}</a></td>
+				<td><a class="student-edit cursor-pointer" tag="{{ student.id }}" data-toggle="modal" href="#div-change-student">
+					{{ student.student_name }}
+				</a></td>
 				<td class="td-centered">
 					<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" 
 					tag-current="" tag-student="{{ student.student_name }}">
