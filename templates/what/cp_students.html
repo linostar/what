@@ -22,10 +22,10 @@
 			<h4 class="modal-title">{% trans "Add student" %}</h4>
 		</div>
 		<div class="modal-body">
-			<form id="form-add-student" method="post" class="form-horizontal">
+			<form id="form-change-student" method="post" class="form-horizontal">
 			{% csrf_token %}
 			<input type="hidden" id="msg-student-name-required" value='{% trans "Student name is required." %}'>
-			<input type="hidden" name="student-action" value="add">
+			<input type="hidden" name="student-action" id="student-action" value="add">
 			<div class="form-group">
 				<label for="student-name" class="control-label col-sm-3">{% trans "Student name:" %}</label>
 				<div class="col-sm-7">
@@ -73,7 +73,7 @@
 			{% for student in students %}
 			<tr>
 				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-student-{{ student.id }}"/></td>
-				<td><a href="{{ request.session.site_url }}students/{{ student.id }}/">{{ student.student_name }}</a></td>
+				<td><a class="cursor-pointer">{{ student.student_name }}</a></td>
 				<td class="td-centered">
 					<span class="label label-success student-nb-quizzes" tag="{{ student.id }}" 
 					tag-current="" tag-student="{{ student.student_name }}">

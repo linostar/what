@@ -83,7 +83,7 @@ $(document).ready(function() {
 		load_student(student_id, current_index, $("#st-quiz-total").text());
 	});
 
-	$("#form-add-student").bootstrapValidator({
+	$("#form-change-student").bootstrapValidator({
 		feedbackIcons: {
 			valid: "glyphicon glyphicon-ok",
 			invalid: "glyphicon glyphicon-remove",
@@ -98,6 +98,10 @@ $(document).ready(function() {
 				}
 			}
 		}
+	});
+
+	$("#form-add-button").click(function() {
+		$("#student-action").val("add");
 	});
 
 	$("#delete-selected").click(function() {

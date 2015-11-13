@@ -134,6 +134,15 @@ def cp_students(request, eid=None):
 					except:
 						message = _("Due to an unknown error, the student could not be saved to database.")
 						alert_status = "alert-danger"
+				elif request.POST['student-action'] == "edit":
+					try:
+						pass
+					except IntegrityError:
+						message = _("Student with same name already exists in database.")
+						alert_status = "alert-danger"
+					except:
+						message = _("Due to an unknown error, the student could not be saved to database.")
+						alert_status = "alert-danger"
 		students = Student.objects.all().order_by("student_name")
 		return render(request, "what/cp_students.html", {
 			"alert_status": alert_status,
