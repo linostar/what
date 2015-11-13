@@ -106,7 +106,6 @@ def cp_students(request, eid=None):
 		alert_status = ""
 		message = ""
 		if request.method == "POST":
-			print(request.POST)
 			if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
 				student_ids = []
 				for element in request.POST:
@@ -137,7 +136,12 @@ def cp_students(request, eid=None):
 						alert_status = "alert-danger"
 				elif request.POST['student-action'] == "edit":
 					try:
-						pass
+						# no need to check for teacher access on changing students
+						edited_student = Student(id=request.POST['student_id'])
+						edited_student.student_name = request.POST['student_name']
+						edited_student.save()
+						message = _("Student successfully saved.")
+						alert_status = "alert-success"
 					except IntegrityError:
 						message = _("Student with same name already exists in database.")
 						alert_status = "alert-danger"
