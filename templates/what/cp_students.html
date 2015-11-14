@@ -6,7 +6,7 @@
 {% block content %}
 	<div class="row">
 	<div class="col-sm-3">
-		<h2>{% trans "Students" %}</h2>
+		<a href="{{ request.session.site_url }}students/"><div class="cp-heading cursor-pointer">{% trans "Students" %}</div></a>
 	</div>
 	<div class="col-sm-6">
 		{% if message %}
