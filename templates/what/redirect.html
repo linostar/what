@@ -23,9 +23,12 @@
 	</div>
 	<div class="col-sm-6">
 		<div class="well">
-		
+		{% if message == "login_success" %}
 			<p>{% trans "Welcome," %} <b>{{ request.session.username }}</b>.</p>
-			<p>{% blocktrans %}We will take you to your dashboard in a moment.{% endblocktrans %}</p>
+		{% elif message == "logout_success" %}
+			<p>{% trans "You have successfully logged out." %}</p>
+		{% endif %}
+			<p>{% blocktrans %}You will be redirected to <a href="{{ redirect_url }}">your destination</a> in a moment.{% endblocktrans %}</p>
 		</div>
 	</div>
 </div>
