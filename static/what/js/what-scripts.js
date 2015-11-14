@@ -156,6 +156,10 @@ $(document).ready(function() {
 		$("#form-submit").submit();
 	});
 
+	$("#student-search-icon").click(function() {
+		$("#form-search-student").submit();
+	});
+
 	$("#login-success-alert").fadeIn();
 	$("#login-success-alert").delay(4000).fadeOut();
 

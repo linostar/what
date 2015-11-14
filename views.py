@@ -106,7 +106,20 @@ def cp_students(request, eid=None):
 		alert_status = ""
 		message = ""
 		if request.method == "POST":
-			if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
+			if "search-student" in request.POST and request.POST['search-student']:
+				students = Student.objects.filter(student_name__icontains=request.POST['search-student'])
+				if students:
+					message = _("<strong>{} students</strong> found matching your search.".format(len(students)))
+					alert_status = "alert-info"
+				else:
+					message = _("<strong>No students</strong> found matching your search.")
+					alert_status = "alert-warning"
+				return render(request, "what/cp_students.html", {
+					"message": mark_safe(message),
+					"alert_status": alert_status,
+					"students": students,
+					})
+			elif "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
 				student_ids = []
 				for element in request.POST:
 					if element.startswith("sel-student-") and request.POST[element]:

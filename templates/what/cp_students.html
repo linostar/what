@@ -22,7 +22,7 @@
 			<h4 class="modal-title" id="modal-change-student-title"></h4>
 		</div>
 		<div class="modal-body">
-			<form id="form-change-student" method="post" class="form-horizontal">
+			<form id="form-change-student" method="post" class="form-horizontal" action="{{ request.session.site_url }}students/">
 			{% csrf_token %}
 			<input type="hidden" id="student-add-title" value='{% trans "Add new student" %}'>
 			<input type="hidden" id="student-edit-title" value='{% trans "Edit student: " %}'>
@@ -46,16 +46,16 @@
 		</div>
 		</div>
 	</div>
-	<form id="changelist-form" action="" method="post" novalidate>
+	<br/>
+	<div class="row">
+	<div class="col-sm-4">
+	<form id="changelist-form" action="{{ request.session.site_url }}students/" method="post" novalidate>
 	{% csrf_token %}
 	<input type="hidden" id="confirm-yes" value='{% trans "Yes" %}'/>
 	<input type="hidden" id="confirm-no" value='{% trans "No" %}'/>
 	<input type="hidden" id="confirm-title" value='{% trans "Confirmation" %}'/>
 	<input type="hidden" id="confirm-message" value='{% trans "Are you sure you want to delete the selected element(s)?" %}'/>
 	<input type="hidden" name="changelist-action" id="changelist-action" value=""/>
-	<br/>
-	<div class="row">
-	<div class="col-sm-4">
 		<div class="add-delete-container">
 			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">
 				<span class="glyphicon glyphicon-remove"></span> {% trans "Delete selected" %}
@@ -87,19 +87,28 @@
 				</td>
 			</tr>
 			{% endfor %}
+			{% if not students %}
+			<tr>
+				<td colspan="3" style="text-align: center">{% trans "Empty" %}</td>
+			</tr>
+			{% endif %}
 		</tbody>
 		</table>
+	</form>
 	</div>
 	<div class="col-sm-8">
 		<div class="row">
 			<div class="col-sm-6">
 			</div>
 			<div class="col-sm-6">
+				<form action="{{ request.session.site_url }}students/search/" name="form-search-student" id="form-search-student" method="post">
+				{% csrf_token %}
 				<div class="input-group searchbox-container float-end">
-					<input type="text" class="form-control" name="search-student" id="search-student" aria-describedby="basic-addon" 
-					placeholder='{% trans "Enter student name" %}'>
-					<span class="input-group-addon" id="basic-addon"><span class="glyphicon glyphicon-search"></span></span>
+						<input type="text" class="form-control" name="search-student" id="search-student" aria-describedby="student-search-icon" 
+						placeholder='{% trans "Enter student name" %}'>
+						<span class="input-group-addon cursor-pointer" id="student-search-icon"><span class="glyphicon glyphicon-search"></span></span>
 				</div>
+				</form>
 			</div>
 		</div>
 		<div class="panel panel-primary">
@@ -133,5 +142,4 @@
 		</div>
 	</div>
 	</div>
-	</form>
 {% endblock %}
