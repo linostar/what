@@ -208,15 +208,6 @@ body {
 	top: 2.15em;
 }
 
-#login-success-alert {
-	position: absolute;
-	text-align: center;
-	top: -1em;
-	left: 0;
-	width: 100%;
-	z-index: 10;
-}
-
 #result-list {
 	box-shadow: 0 0 0 1px #337AB7;
 	border-radius: 4px;

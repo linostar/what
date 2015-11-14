@@ -63,7 +63,7 @@ def signin(request):
 					request.session['username'] = user.username
 					request.session['userid'] = user.id
 					return render(request, "what/redirect.html", {
-						"redirect_url": Utils.get_app_url() + "?message=login_success",
+						"redirect_url": Utils.get_app_url(),
 						})
 				elif user:
 					# account exists but is disabled
