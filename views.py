@@ -96,77 +96,75 @@ def signout(request):
 	return render(request, "what/logout.html", {"message": "logout_success"})
 
 @check_login
-def cp_students(request, eid=None):
-	if eid:
-		student = get_object_or_404(Student, id=eid)
-		return render(request, "what/cp_students.html", {
-			"student": student,
-			})
-	else:
-		alert_status = ""
-		message = ""
-		if request.method == "POST":
-			if "search-student" in request.POST and request.POST['search-student']:
-				students = Student.objects.filter(student_name__icontains=request.POST['search-student'])
-				if students:
-					message = _("<strong>{} students</strong> found matching your search.".format(len(students)))
-					alert_status = "alert-info"
-				else:
-					message = _("<strong>No students</strong> found matching your search.")
-					alert_status = "alert-warning"
-				return render(request, "what/cp_students.html", {
-					"message": mark_safe(message),
-					"alert_status": alert_status,
-					"students": students,
-					})
-			elif "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
-				student_ids = []
-				for element in request.POST:
-					if element.startswith("sel-student-") and request.POST[element]:
-						try:
-							student_ids.append(int(element[12:]))
-						except:
-							continue
+def cp_students(request):
+	alert_status = ""
+	message = ""
+	if request.method == "POST":
+		# search student
+		if "search-student" in request.POST and request.POST['search-student']:
+			students = Student.objects.filter(student_name__icontains=request.POST['search-student'])
+			if students:
+				message = _("<strong>{} students</strong> found matching your search.".format(len(students)))
+				alert_status = "alert-info"
+			else:
+				message = _("<strong>No students</strong> found matching your search.")
+				alert_status = "alert-warning"
+			return render(request, "what/cp_students.html", {
+				"message": mark_safe(message),
+				"alert_status": alert_status,
+				"students": students,
+				})
+		# delete student
+		elif "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
+			student_ids = []
+			for element in request.POST:
+				if element.startswith("sel-student-") and request.POST[element]:
+					try:
+						student_ids.append(int(element[12:]))
+					except:
+						continue
+			try:
+				Student.objects.filter(id__in=student_ids).delete()
+				message = _("{} student(s) deleted.".format(len(student_ids)))
+				alert_status = "alert-success"
+			except:
+				message = _("Due to an unknown error, the selected student(s) could not be deleted.")
+				alert_status = "alert-danger"
+		elif "student-action" in request.POST:
+			# add student
+			if request.POST['student-action'] == "add":
 				try:
-					Student.objects.filter(id__in=student_ids).delete()
-					message = _("{} student(s) deleted.".format(len(student_ids)))
+					new_student = Student(student_name=(request.POST['student_name']).strip())
+					new_student.save()
+					message = _("Student <strong>{}</strong> successfully added.".format(request.POST['student_name']))
 					alert_status = "alert-success"
-				except:
-					message = _("Due to an unknown error, the selected student(s) could not be deleted.")
+				except IntegrityError:
+					message = _("Student already exists in database.")
 					alert_status = "alert-danger"
-			elif "student-action" in request.POST:
-				if request.POST['student-action'] == "add":
-					try:
-						new_student = Student(student_name=request.POST['student_name'])
-						new_student.save()
-						message = _("Student <strong>{}</strong> successfully added.".format(request.POST['student_name']))
-						alert_status = "alert-success"
-					except IntegrityError:
-						message = _("Student already exists in database.")
-						alert_status = "alert-danger"
-					except:
-						message = _("Due to an unknown error, the student could not be saved to database.")
-						alert_status = "alert-danger"
-				elif request.POST['student-action'] == "edit":
-					try:
-						# no need to check for teacher access on changing students
-						edited_student = Student(id=request.POST['student_id'])
-						edited_student.student_name = request.POST['student_name']
-						edited_student.save()
-						message = _("Student successfully saved.")
-						alert_status = "alert-success"
-					except IntegrityError:
-						message = _("Student with same name already exists in database.")
-						alert_status = "alert-danger"
-					except:
-						message = _("Due to an unknown error, the student could not be saved to database.")
-						alert_status = "alert-danger"
-		students = Student.objects.all().order_by("student_name")
-		return render(request, "what/cp_students.html", {
-			"alert_status": alert_status,
-			"message": mark_safe(message),
-			"students": students,
-			})
+				except:
+					message = _("Due to an unknown error, the student could not be saved to database.")
+					alert_status = "alert-danger"
+			# edit student
+			elif request.POST['student-action'] == "edit":
+				try:
+					# no need to check for teacher access on changing students
+					edited_student = Student(id=request.POST['student_id'])
+					edited_student.student_name = request.POST['student_name']
+					edited_student.save()
+					message = _("Student successfully saved.")
+					alert_status = "alert-success"
+				except IntegrityError:
+					message = _("Student with same name already exists in database.")
+					alert_status = "alert-danger"
+				except:
+					message = _("Due to an unknown error, the student could not be saved to database.")
+					alert_status = "alert-danger"
+	students = Student.objects.all().order_by("student_name")
+	return render(request, "what/cp_students.html", {
+		"alert_status": alert_status,
+		"message": mark_safe(message),
+		"students": students,
+		})
 
 @check_login
 def cp_student_quizzes(request, eid, qindex=0):
