@@ -134,9 +134,15 @@
 					<td id="st-quiz-finished"></td></tr>
 				</table>
 				<nav class='nav-padded'><ul class='pager'>
+					{% if request.session.direction == "rtl" %}
+					<li class='previous'><a class='pager-previous' tag=''><span aria-hidden='true'>&rarr;</span> {% trans "Previous" %}</a></li>
+					<li><span><span id="st-quiz-current">1</span> / <span id="st-quiz-total"></span></span></li>
+					<li class='next'><a class='pager-next' tag=''>{% trans "Next" %} <span aria-hidden='true'>&larr;</span></a></li>
+					{% else %}
 					<li class='previous'><a class='pager-previous' tag=''><span aria-hidden='true'>&larr;</span> {% trans "Previous" %}</a></li>
 					<li><span><span id="st-quiz-current">1</span> / <span id="st-quiz-total"></span></span></li>
 					<li class='next'><a class='pager-next' tag=''>{% trans "Next" %} <span aria-hidden='true'>&rarr;</span></a></li>
+					{% endif %}
 				</ul></nav>
 			</div>
 		</div>

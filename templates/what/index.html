@@ -7,15 +7,17 @@
 
 {% if request.session.username %}
 {% block user %}
-{% trans "Hello," %} <b>{{ request.session.username }}</b>
 <div class="user-dropdown-arrow dropdown">
-	<span id="dropdown-user-menu" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		<a href="#"><span class="caret"></span></a>
+	<span id="user-welcome" class="dropdown-toggle cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		{% trans "Hello," %} <b>{{ request.session.username }}</b>
 	</span>
-	<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user-menu" id="user-drop-list">
-		<li><a href="{{ request.session.site_url }}settings/">{% trans "Settings" %}</a></li>
+	<span id="dropdown-user-menu" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<span class="caret"></span>
+	</span>
+	<ul class="dropdown-menu" aria-labelledby="dropdown-user-menu user-welcome" id="user-drop-list">
+		<li><a href="{{ request.session.site_url }}settings/"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;{% trans "Settings" %}</a></li>
 		<li class="divider"></li>
-		<li><a href="{{ request.session.site_url }}logout/">{% trans "Logout" %}</a></li>
+		<li><a href="{{ request.session.site_url }}logout/"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;{% trans "Logout" %}</a></li>
 	</ul>
 </div>
 {% endblock %}
