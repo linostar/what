@@ -98,6 +98,37 @@
 	<nav>
 		<div class="td-centered">
 		<ul class="pagination" id="student-pages">
+		{% if search_term %}
+			{% if previous_page == page_num %}
+			<li class="disabled"><a aria-label="previous-page">
+				<span aria-hidden="true">&laquo;</span>
+			</a></li>
+			{% else %}
+			<li title='{% trans "Previous" %}'>
+				<a href="{{ request.session.site_url }}students/search/?q={{ search_term }}&page={{ previous_page }}" aria-label="previous-page">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			{% endif %}
+			{% for p in displayed_pages %}
+			{% if p == page_num %}
+			<li class="active"><a>{{ p }}</a></li>
+			{% else %}
+			<li><a href="{{ request.session.site_url }}students/search/?q={{ search_term }}&page={{ p }}">{{ p }}</a></li>
+			{% endif %}
+			{% endfor %}
+			{% if next_page == page_num %}
+			<li class="disabled"><a aria-label="next-page">
+				<span aria-hidden="true">&raquo;</span>
+			</a></li>
+			{% else %}
+			<li title='{% trans "Next" %}'>
+				<a href="{{ request.session.site_url }}students/search/?q={{ search_term }}&page={{ next_page }}" aria-label="next-page">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+			{% endif %}
+		{% else %}
 			{% if previous_page == page_num %}
 			<li class="disabled"><a aria-label="previous-page">
 				<span aria-hidden="true">&laquo;</span>
@@ -123,6 +154,7 @@
 				<span aria-hidden="true">&raquo;</span>
 			</a></li>
 			{% endif %}
+		{% endif %}
 		</ul>
 		</div>
 	</nav>
@@ -132,10 +164,9 @@
 			<div class="col-sm-6">
 			</div>
 			<div class="col-sm-6">
-				<form action="{{ request.session.site_url }}students/search/" name="form-search-student" id="form-search-student" method="post">
-				{% csrf_token %}
+				<form action="{{ request.session.site_url }}students/search/" name="form-search-student" id="form-search-student" method="get">
 				<div class="input-group searchbox-container float-end">
-						<input type="text" class="form-control" name="search-student" id="search-student" aria-describedby="student-search-icon" 
+						<input type="text" class="form-control" name="q" id="q" aria-describedby="student-search-icon" 
 						placeholder='{% trans "Enter student name" %}'>
 						<span class="input-group-addon cursor-pointer" id="student-search-icon"><span class="glyphicon glyphicon-search"></span></span>
 				</div>

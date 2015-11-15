@@ -103,10 +103,10 @@ def signout(request):
 def cp_students(request):
 	alert_status = ""
 	message = ""
-	if request.method == "POST":
+	if request.method == "GET":
 		# search student
-		if "search-student" in request.POST and request.POST['search-student']:
-			students = Student.objects.filter(student_name__icontains=request.POST['search-student'])
+		if "q" in request.GET and request.GET['q']:
+			students = Student.objects.filter(student_name__icontains=request.GET['q'])
 			if students:
 				message = _("<strong>{} students</strong> found matching your search.".format(len(students)))
 				alert_status = "alert-info"
@@ -125,10 +125,12 @@ def cp_students(request):
 				"previous_page": max(1, page_num - 1),
 				"next_page": min(pages_count, page_num + 1),
 				"displayed_pages": Utils.get_displayed_pages(pages_count, page_num),
+				"search_term": request.GET['q'],
 				"students": students,
 				})
+	elif request.method == "POST":
 		# delete student
-		elif "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
+		if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
 			student_ids = []
 			for element in request.POST:
 				if element.startswith("sel-student-") and request.POST[element]:
