@@ -113,9 +113,18 @@ def cp_students(request):
 			else:
 				message = _("<strong>No students</strong> found matching your search.")
 				alert_status = "alert-warning"
+			try:
+				page_num = int(request.GET['page'])
+			except:
+				page_num = 1
+			[pages_count, page_num, students] = Utils.get_from_page(students, page_num)
 			return render(request, "what/cp_students.html", {
 				"message": mark_safe(message),
 				"alert_status": alert_status,
+				"page_num": page_num,
+				"previous_page": max(1, page_num - 1),
+				"next_page": min(pages_count, page_num + 1),
+				"displayed_pages": Utils.get_displayed_pages(pages_count, page_num),
 				"students": students,
 				})
 		# delete student
@@ -164,9 +173,18 @@ def cp_students(request):
 					message = _("Due to an unknown error, the student could not be saved to database.")
 					alert_status = "alert-danger"
 	students = Student.objects.all().order_by("student_name")
+	try:
+		page_num = int(request.GET['page'])
+	except:
+		page_num = 1
+	[pages_count, page_num, students] = Utils.get_from_page(students, page_num)
 	return render(request, "what/cp_students.html", {
 		"alert_status": alert_status,
 		"message": mark_safe(message),
+		"page_num": page_num,
+		"previous_page": max(1, page_num - 1),
+		"next_page": min(pages_count, page_num + 1),
+		"displayed_pages": Utils.get_displayed_pages(pages_count, page_num),
 		"students": students,
 		})
 

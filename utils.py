@@ -1,6 +1,7 @@
 import os
 import string
 import random
+import math
 
 from datetime import datetime, timedelta, timezone
 
@@ -15,6 +16,8 @@ class Utils:
 
 	SITE_URL = settings.SITE_URL
 	CODE_LENGTH = 8
+	ELEMENTS_PER_PAGE = 10
+	MAX_PAGES_DISPLAY = 5
 
 	@staticmethod
 	def date_handler(obj):
@@ -95,3 +98,32 @@ class Utils:
 		request.session['locales'] = locales
 		request.session['site_url'] = Utils.get_app_url()
 		return request
+
+	@staticmethod
+	def get_from_page(elements, page_num):
+		"""returns [pages_count, rect_page_num, spliced_list_of_elements]"""
+		elen = len(elements)
+		if elen <= Utils.ELEMENTS_PER_PAGE:
+			return [1, 1, elements]
+		pages_count = math.ceil(elen / Utils.ELEMENTS_PER_PAGE)
+		if page_num < 1:
+			return [pages_count, 1, elements[0:Utils.ELEMENTS_PER_PAGE]]
+		if page_num >= pages_count:
+			return [pages_count, page_count, elements[(pages_count-1)*Utils.ELEMENTS_PER_PAGE:]]
+		return [pages_count, page_num, elements[(page_num-1)*Utils.ELEMENTS_PER_PAGE:Utils.ELEMENTS_PER_PAGE]]
+
+	@staticmethod
+	def get_displayed_pages(pages_count, page_num):
+		"""returns a generator of page numbers to be displayed"""
+		total_displayed = min(pages_count, Utils.MAX_PAGES_DISPLAY)
+		half_displayed = total_displayed // 2
+		if page_num < 3:
+			pages = range(1, total_displayed + 1)
+		elif page_num > pages_count - half_displayed:
+			pages = range(max(1, pages_count - total_displayed + 1), pages_count + 1)
+		else:
+			if total_displayed % 2:
+				pages = range(max(1, page_num - half_displayed), min(pages_count, page_num + half_displayed + 1))
+			else:
+				pages = range(max(1, page_num - half_displayed), min(pages_count, page_num + half_displayed))
+		return pages
