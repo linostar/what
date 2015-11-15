@@ -22,6 +22,7 @@
 		<input type="hidden" id="close-hidden" value='{% trans "Close" %}'>
 		<input type="hidden" id="previous-hidden" value='{% trans "Previous" %}'>
 		<input type="hidden" id="next-hidden" value='{% trans "Next" %}'>
+		<input type="hidden" name="site_url" id="site_url" value="{{ request.session.site_url }}">
 		<div class="jumbotron">
 			<div class="container">
 			{% if request.session.site_name %}

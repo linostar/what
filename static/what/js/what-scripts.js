@@ -8,10 +8,11 @@ $(document).ready(function() {
 
 	function load_student(id, quiz_index, total_quizzes, student_name) {
 		var dialog_content;
+		var url_prefix = $("#site_url").val() + "students/";
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: id.toString() + "/quizzes/" + quiz_index.toString() + "/",
+			url: url_prefix + id.toString() + "/quizzes/" + quiz_index.toString() + "/",
 			success: function(data) {
 				if (!$.isEmptyObject(data)) {
 					$("#st-quiz-name").text(data.annal);
