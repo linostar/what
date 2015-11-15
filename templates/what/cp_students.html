@@ -98,11 +98,31 @@
 	<nav>
 		<div class="td-centered">
 		<ul class="pagination" id="student-pages">
-			<li><a href="#" aria-label="previous-page"><span aria-hidden="true">&laquo;</span></a></li>
-			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#" aria-label="next-page"><span aria-hidden="true">&raquo;</span></a></li>
+			{% if previous_page == page_num %}
+			<li class="disabled"><a aria-label="previous-page">
+				<span aria-hidden="true">&laquo;</span>
+			</a></li>
+			{% else %}
+			<li title='{% trans "Previous" %}'><a href="{{ request.session.site_url }}students/?page={{ previous_page }}" aria-label="previous-page">
+				<span aria-hidden="true">&laquo;</span>
+			</a></li>
+			{% endif %}
+			{% for p in displayed_pages %}
+			{% if p == page_num %}
+			<li class="active"><a>{{ p }}</a></li>
+			{% else %}
+			<li><a href="{{ request.session.site_url }}students/?page={{ p }}">{{ p }}</a></li>
+			{% endif %}
+			{% endfor %}
+			{% if next_page == page_num %}
+			<li class="disabled"><a aria-label="next-page">
+				<span aria-hidden="true">&raquo;</span>
+			</a></li>
+			{% else %}
+			<li title='{% trans "Next" %}'><a href="{{ request.session.site_url }}students/?page={{ next_page }}" aria-label="next-page">
+				<span aria-hidden="true">&raquo;</span>
+			</a></li>
+			{% endif %}
 		</ul>
 		</div>
 	</nav>

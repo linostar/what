@@ -109,8 +109,8 @@ class Utils:
 		if page_num < 1:
 			return [pages_count, 1, elements[0:Utils.ELEMENTS_PER_PAGE]]
 		if page_num >= pages_count:
-			return [pages_count, page_count, elements[(pages_count-1)*Utils.ELEMENTS_PER_PAGE:]]
-		return [pages_count, page_num, elements[(page_num-1)*Utils.ELEMENTS_PER_PAGE:Utils.ELEMENTS_PER_PAGE]]
+			return [pages_count, pages_count, elements[(pages_count-1)*Utils.ELEMENTS_PER_PAGE:]]
+		return [pages_count, page_num, elements[(page_num-1)*Utils.ELEMENTS_PER_PAGE:page_num*Utils.ELEMENTS_PER_PAGE]]
 
 	@staticmethod
 	def get_displayed_pages(pages_count, page_num):
