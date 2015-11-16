@@ -291,3 +291,8 @@ body {
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 }
+
+.hilighted-searchbox {
+	font-weight: bold;
+	background-color: #ffff99;
+}

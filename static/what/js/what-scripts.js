@@ -161,6 +161,10 @@ $(document).ready(function() {
 		$("#form-search-student").submit();
 	});
 
+	$("#student-remove-search").click(function() {
+		window.location.href = $("#site_url").val() + "students/";
+	});
+
 	$("#login-success-alert").fadeIn();
 	$("#login-success-alert").delay(4000).fadeOut();
 

@@ -166,9 +166,15 @@
 			<div class="col-sm-6">
 				<form action="{{ request.session.site_url }}students/search/" name="form-search-student" id="form-search-student" method="get">
 				<div class="input-group searchbox-container float-end">
+						{% if search_term %}
+						<input type="text" class="form-control hilighted-searchbox" name="q" id="q" aria-describedby="student-remove-search" 
+						placeholder='{% trans "Enter student name" %}' value="{{ request.GET.q }}">
+						<span class="input-group-addon cursor-pointer" id="student-remove-search"><span class="glyphicon glyphicon-remove"></span></span>
+						{% else %}
 						<input type="text" class="form-control" name="q" id="q" aria-describedby="student-search-icon" 
 						placeholder='{% trans "Enter student name" %}'>
 						<span class="input-group-addon cursor-pointer" id="student-search-icon"><span class="glyphicon glyphicon-search"></span></span>
+						{% endif %}
 				</div>
 				</form>
 			</div>
