@@ -119,6 +119,7 @@ def cp_students(request):
 				page_num = 1
 			[pages_count, page_num, students] = Utils.get_from_page(students, page_num)
 			return render(request, "what/cp_students.html", {
+				"not_index_page": True,
 				"message": mark_safe(message),
 				"alert_status": alert_status,
 				"page_num": page_num,
@@ -181,6 +182,7 @@ def cp_students(request):
 		page_num = 1
 	[pages_count, page_num, students] = Utils.get_from_page(students, page_num)
 	return render(request, "what/cp_students.html", {
+		"not_index_page": True,
 		"alert_status": alert_status,
 		"message": mark_safe(message),
 		"page_num": page_num,
@@ -192,6 +194,7 @@ def cp_students(request):
 
 @check_login
 def cp_student_quizzes(request, eid, qindex=0):
+	"""for AJAX calls"""
 	quizzes = Quiz.objects.filter(student__id=eid).values("annal", "submitted",
 		"number_of_questions", "start_time", "finish_time", "score", "max_score")
 	try:
@@ -226,24 +229,33 @@ def cp_annals(request, eid=None):
 	else:
 		annals = Annal.objects.all().order_by("annal_name")
 		return render(request, "what/cp_annals.html", {
+			"not_index_page": True,
 			"annals": annals,
 			})
 
 @check_login
 def cp_questions(request, eid=None):
-	return render(request, "what/cp_questions.html", {})
+	return render(request, "what/cp_questions.html", {
+		"not_index_page": True,
+		})
 
 @check_login
 def cp_quizzes(request, eid=None):
-	return render(request, "what/cp_quizzes.html", {})
+	return render(request, "what/cp_quizzes.html", {
+		"not_index_page": True,
+		})
 
 @check_login
 def cp_teachers(request, eid=None):
-	return render(request, "what/cp_teachers.html", {})
+	return render(request, "what/cp_teachers.html", {
+		"not_index_page": True,
+		})
 
 @check_login
 def cp_settings(request, eid=None):
-	return render(request, "what/cp_settings.html", {})
+	return render(request, "what/cp_settings.html", {
+		"not_index_page": True,
+		})
 
 @prep_request
 def quiz(request, quiz_code):
