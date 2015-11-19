@@ -127,3 +127,8 @@ class Utils:
 			else:
 				pages = range(max(1, page_num - half_displayed), min(pages_count, page_num + half_displayed))
 		return pages
+
+	@staticmethod
+	def process_annals(annals):
+		for a in annals:
+			setattr(a, "annal_duration", Utils.format_duration(getattr(a, "annal_duration")))

@@ -223,12 +223,14 @@ body {
 
 #result-list td {
 	padding: 0.4em 0.4em 0.4em 0.4em;
+	vertical-align: middle;
 }
 
 #result-list th {
 	padding: 0.5em 0.4em 0.5em 0.4em;
 	background-color: #3175B1;
 	color: white;
+	vertical-align: middle;
 }
 
 @media (max-width: 767px) {

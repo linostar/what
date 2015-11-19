@@ -238,6 +238,7 @@ def cp_annals(request):
 			except:
 				page_num = 1
 			[pages_count, page_num, annals] = Utils.get_from_page(annals, page_num)
+			Utils.process_annals(annals)
 			return render(request, "what/cp_annals.html", {
 				"not_index_page": True,
 				"message": mark_safe(message),
@@ -295,6 +296,7 @@ def cp_annals(request):
 	except:
 		page_num = 1
 	[pages_count, page_num, annals] = Utils.get_from_page(annals, page_num)
+	Utils.process_annals(annals)
 	return render(request, "what/cp_annals.html", {
 		"not_index_page": True,
 		"alert_status": alert_status,

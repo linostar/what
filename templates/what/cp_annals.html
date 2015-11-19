@@ -48,7 +48,7 @@
 	</div>
 	<br/>
 	<div class="row">
-	<div class="col-sm-4">
+	<div class="col-sm-12">
 	<form id="changelist-form" action="{{ request.session.site_url }}annals/" method="post" novalidate>
 	{% csrf_token %}
 	<input type="hidden" id="confirm-yes" value='{% trans "Yes" %}'/>
@@ -56,24 +56,44 @@
 	<input type="hidden" id="confirm-title" value='{% trans "Confirmation" %}'/>
 	<input type="hidden" id="confirm-message" value='{% trans "Are you sure you want to delete the selected element(s)?" %}'/>
 	<input type="hidden" name="changelist-action" id="changelist-action" value=""/>
-		<div class="add-delete-container">
-			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">
-				<span class="glyphicon glyphicon-remove"></span> {% trans "Delete selected" %}
-			</button>
-			<a class="btn btn-sm btn-success float-end" name="add-annal" id="add-annal" data-toggle="modal" href="#div-change-annal">
-				<span class="glyphicon glyphicon-plus"></span> {% trans "Add Annal" %}
-			</a>
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="add-delete-container">
+					<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">
+						<span class="glyphicon glyphicon-remove"></span> {% trans "Delete selected" %}
+					</button>
+					&nbsp;
+					<a class="btn btn-sm btn-success" name="add-annal" id="add-annal" data-toggle="modal" href="#div-change-annal">
+						<span class="glyphicon glyphicon-plus"></span> {% trans "Add Annal" %}
+					</a>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<form action="{{ request.session.site_url }}annals/search/" name="form-search-annal" id="form-search-annal" method="get">
+				<div class="input-group searchbox-container float-end">
+						{% if search_term %}
+						<input type="text" class="form-control hilighted-searchbox" name="q" id="q" aria-describedby="annal-remove-search" 
+						placeholder='{% trans "Enter annal name" %}' value="{{ request.GET.q }}">
+						<span class="input-group-addon cursor-pointer" id="annal-remove-search"><span class="glyphicon glyphicon-remove"></span></span>
+						{% else %}
+						<input type="text" class="form-control" name="q" id="q" aria-describedby="annal-search-icon" 
+						placeholder='{% trans "Enter annal name" %}'>
+						<span class="input-group-addon cursor-pointer" id="annal-search-icon"><span class="glyphicon glyphicon-search"></span></span>
+						{% endif %}
+				</div>
+				</form>
+			</div>
 		</div>
 		<table id="result-list" class="table">
 		<thead>
 			<tr>
 				<th class="td-centered"><input type="checkbox" id="sel-toggle-all"/></th>
 				<th>{% trans "Annal name" %}</th>
-				<th>{% trans "Enabled" %}</th>
-				<th>{% trans "Teacher" %}</th>
-				<th>{% trans "Created on" %}</th>
-				<th>{% trans "Auto enable on" %}</th>
-				<th>{% trans "Auto disable on" %}</th>
+				<th class="td-centered">{% trans "Enabled" %}</th>
+				<th class="td-centered">{% trans "Teacher" %}</th>
+				<th class="td-centered">{% trans "Created on" %}</th>
+				<th class="td-centered">{% trans "Auto enable on" %}</th>
+				<th class="td-centered">{% trans "Auto disable on" %}</th>
 				<th class="td-centered">{% trans "Duration" %}</th>
 				<th class="td-centered">{% trans "Number of questions" %}</th>
 			</tr>
@@ -85,27 +105,27 @@
 				<td><a class="annal-edit cursor-pointer" tag="{{ annal.id }}" data-toggle="modal" href="#div-change-annal">
 					{{ annal.annal_name }}
 				</a></td>
-				<td>
+				<td class="td-centered">
 					{% if annal.enabled %}
 					<span class="option_enabled"></span>
 					{% else %}
 					<span class="option_disabled"></span>
 					{% endif %}
 				</td>
-				<td>
+				<td class="td-centered">
 					{{ annal.teacher }}
 				</td>
-				<td>
+				<td class="td-centered">
 					{{ annal.created_on }}
 				</td>
-				<td>
+				<td class="td-centered">
 					{% if annal.auto_enable %}
 					<span>{{ annal.auto_enable_date }}</span>
 					{% else %}
 					<span>{% trans "None" %}</span>
 					{% endif %}
 				</td>
-				<td>
+				<td class="td-centered">
 					{% if annal.auto_disable %}
 					<span>{{ annal.auto_disable_date }}</span>
 					{% else %}
@@ -116,10 +136,12 @@
 					{{ annal.annal_duration }}
 				</td>
 				<td class="td-centered">
+					<a href="{{ request.session.site_url }}annals/{{ annal.id }}/questions">
 					<span class="label label-success annal-nb-quizzes" tag="{{ annal.id }}" 
 					tag-current="" tag-annal="{{ annal.annal_name }}">
 						{{ annal.number_of_questions }}
 					</span>
+					</a>
 				</td>
 			</tr>
 			{% endfor %}
@@ -194,62 +216,6 @@
 		</ul>
 		</div>
 	</nav>
-	</div>
-	<div class="col-sm-8">
-		<div class="row">
-			<div class="col-sm-6">
-			</div>
-			<div class="col-sm-6">
-				<form action="{{ request.session.site_url }}annals/search/" name="form-search-annal" id="form-search-annal" method="get">
-				<div class="input-group searchbox-container float-end">
-						{% if search_term %}
-						<input type="text" class="form-control hilighted-searchbox" name="q" id="q" aria-describedby="annal-remove-search" 
-						placeholder='{% trans "Enter annal name" %}' value="{{ request.GET.q }}">
-						<span class="input-group-addon cursor-pointer" id="annal-remove-search"><span class="glyphicon glyphicon-remove"></span></span>
-						{% else %}
-						<input type="text" class="form-control" name="q" id="q" aria-describedby="annal-search-icon" 
-						placeholder='{% trans "Enter annal name" %}'>
-						<span class="input-group-addon cursor-pointer" id="annal-search-icon"><span class="glyphicon glyphicon-search"></span></span>
-						{% endif %}
-				</div>
-				</form>
-			</div>
-		</div>
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<b>{% trans "Quizzes" %}<span id="st-panel-title" hidden="true"> | <span class="label label-success" id="st-panel-subtitle"></span></span></b>
-			</div>
-			<div class="panel-body">
-				{% trans "Click on <b>number of quizzes</b> of a student to show their quizzes." %}
-			</div>
-			<div id="table-quizzes" hidden="true">
-				<table class='table' width='100%'>
-					<tr><td width='50%'>{% trans "Name:" %}</td>
-					<td id="st-quiz-name"></td></tr>
-					<tr><td width='50%'>{% trans "Submitted:" %}</td>
-					<td id="st-quiz-submitted"></td></tr>
-					<tr><td width='50%'>{% trans "Score:" %}</td>
-					<td id="st-quiz-score"></td></tr>
-					<tr><td width='50%'>{% trans "Number of questions:" %}</td>
-					<td id="st-quiz-nb-questions"></td></tr>
-					<tr><td width='50%'>{% trans "Start time:" %}</td>
-					<td id="st-quiz-started"></td></tr>
-					<tr><td width='50%'>{% trans "Finished in:" %}</td>
-					<td id="st-quiz-finished"></td></tr>
-				</table>
-				<nav class='nav-padded'><ul class='pager'>
-					{% if request.session.direction == "rtl" %}
-					<li class='previous'><a class='pager-previous' tag=''><span aria-hidden='true'>&rarr;</span> {% trans "Previous" %}</a></li>
-					<li><span><span id="st-quiz-current">1</span> / <span id="st-quiz-total"></span></span></li>
-					<li class='next'><a class='pager-next' tag=''>{% trans "Next" %} <span aria-hidden='true'>&larr;</span></a></li>
-					{% else %}
-					<li class='previous'><a class='pager-previous' tag=''><span aria-hidden='true'>&larr;</span> {% trans "Previous" %}</a></li>
-					<li><span><span id="st-quiz-current">1</span> / <span id="st-quiz-total"></span></span></li>
-					<li class='next'><a class='pager-next' tag=''>{% trans "Next" %} <span aria-hidden='true'>&rarr;</span></a></li>
-					{% endif %}
-				</ul></nav>
-			</div>
-		</div>
 	</div>
 	</div>
 {% endblock %}
