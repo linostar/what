@@ -220,18 +220,91 @@ def cp_student_quizzes(request, eid, qindex=0):
 		return HttpResponse(json.dumps({}), content_type="application/json")
 
 @check_login
-def cp_annals(request, eid=None):
-	if eid:
-		annal = get_object_or_404(Annal, id=eid)
-		return render(request, "what/cp_annals.html", {
-			"annal": annal,
-			})
-	else:
-		annals = Annal.objects.all().order_by("annal_name")
-		return render(request, "what/cp_annals.html", {
-			"not_index_page": True,
-			"annals": annals,
-			})
+def cp_annals(request):
+	alert_status = ""
+	message = ""
+	if request.method == "GET":
+		# search annal
+		if "q" in request.GET and request.GET['q']:
+			annals = Annal.objects.filter(annal_name__icontains=request.GET['q'])
+			if annals:
+				message = _("<strong>{} annals</strong> found matching your search.".format(len(annals)))
+				alert_status = "alert-info"
+			else:
+				message = _("<strong>No annals</strong> found matching your search.")
+				alert_status = "alert-warning"
+			try:
+				page_num = int(request.GET['page'])
+			except:
+				page_num = 1
+			[pages_count, page_num, annals] = Utils.get_from_page(annals, page_num)
+			return render(request, "what/cp_annals.html", {
+				"not_index_page": True,
+				"message": mark_safe(message),
+				"alert_status": alert_status,
+				"page_num": page_num,
+				"previous_page": max(1, page_num - 1),
+				"next_page": min(pages_count, page_num + 1),
+				"displayed_pages": Utils.get_displayed_pages(pages_count, page_num),
+				"search_term": request.GET['q'],
+				"annals": annals,
+				})
+	elif request.method == "POST":
+		# delete annal
+		if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
+			annal_ids = []
+			for element in request.POST:
+				if element.startswith("sel-annal-") and request.POST[element]:
+					try:
+						annal_ids.append(int(element[12:]))
+					except:
+						continue
+			try:
+				Annal.objects.filter(id__in=annal_ids).delete()
+				message = _("{} annal(s) deleted.".format(len(annal_ids)))
+				alert_status = "alert-success"
+			except:
+				message = _("Due to an unknown error, the selected annal(s) could not be deleted.")
+				alert_status = "alert-danger"
+		elif "annal-action" in request.POST:
+			# add annal
+			if request.POST['annal-action'] == "add":
+				try:
+					new_annal = Annal(annal_name=(request.POST['annal_name']).strip())
+					new_annal.save()
+					message = _("Annal <strong>{}</strong> successfully added.".format(request.POST['annal_name']))
+					alert_status = "alert-success"
+				except:
+					message = _("Due to an unknown error, the annal could not be saved to database.")
+					alert_status = "alert-danger"
+			# edit annal
+			elif request.POST['annal-action'] == "edit":
+				try:
+					# no need to check for teacher access on changing students
+					edited_annal = Annal(id=request.POST['annal_id'])
+					edited_annal.annal_name = request.POST['annal_name']
+					edited_annal.save()
+					message = _("Annal successfully saved.")
+					alert_status = "alert-success"
+				except:
+					message = _("Due to an unknown error, the annal could not be saved to database.")
+					alert_status = "alert-danger"
+	annals = Annal.objects.all().order_by("annal_name")
+	try:
+		page_num = int(request.GET['page'])
+	except:
+		page_num = 1
+	[pages_count, page_num, annals] = Utils.get_from_page(annals, page_num)
+	return render(request, "what/cp_annals.html", {
+		"not_index_page": True,
+		"alert_status": alert_status,
+		"message": mark_safe(message),
+		"page_num": page_num,
+		"previous_page": max(1, page_num - 1),
+		"next_page": min(pages_count, page_num + 1),
+		"displayed_pages": Utils.get_displayed_pages(pages_count, page_num),
+		"annals": annals,
+		})
 
 @check_login
 def cp_questions(request, eid=None):
