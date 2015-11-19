@@ -296,3 +296,15 @@ body {
 	font-weight: bold;
 	background-color: #ffff99;
 }
+
+.option_enabled:before {
+	content: " \25CF";
+	font-size: 2em;
+	color: green;
+}
+
+.option_disabled:before {
+	content: " \25CF";
+	font-size: 2em;
+	color: red;
+}

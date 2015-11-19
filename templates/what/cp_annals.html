@@ -1,0 +1,255 @@
+{% extends "what/base-cp.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Annals" %}{% endblock %}
+
+{% block content %}
+	<div class="row">
+	<div class="col-sm-3">
+		<a href="{{ request.session.site_url }}annals/"><div class="cp-heading cursor-pointer">{% trans "Annals" %}</div></a>
+	</div>
+	<div class="col-sm-6">
+		{% if message %}
+			<div id="alert-message" class="alert {{ alert_status }} alert-block">{{ message }}</div>
+		{% endif %}
+	</div>
+	</div>
+	<div id="div-change-annal" class="modal fade">
+		<div class="modal-dialog">
+		<div class="modal-content">
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal">&times;</a>
+			<h4 class="modal-title" id="modal-change-annal-title"></h4>
+		</div>
+		<div class="modal-body">
+			<form id="form-change-annal" method="post" class="form-horizontal" action="{{ request.session.site_url }}annals/">
+			{% csrf_token %}
+			<input type="hidden" id="annal-add-title" value='{% trans "Add new annal" %}'>
+			<input type="hidden" id="annal-edit-title" value='{% trans "Edit annal: " %}'>
+			<input type="hidden" id="msg-annal-name-required" value='{% trans "annal name is required." %}'>
+			<input type="hidden" name="annal-action" id="annal-action" value="">
+			<input type="hidden" name="annal_id" id="annal_id" value="">
+			<div class="form-group">
+				<label for="annal-name" class="control-label col-sm-3">{% trans "Annal name:" %}</label>
+				<div class="col-sm-7">
+					<input type="text" name="annal_name" id="annal_name" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-7">
+					<button type="submit" class="btn btn-success" id="form-add-button">{% trans "Save" %}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+				</div>
+			</div>
+			</form>
+		</div>
+		</div>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+	<div class="col-sm-4">
+	<form id="changelist-form" action="{{ request.session.site_url }}annals/" method="post" novalidate>
+	{% csrf_token %}
+	<input type="hidden" id="confirm-yes" value='{% trans "Yes" %}'/>
+	<input type="hidden" id="confirm-no" value='{% trans "No" %}'/>
+	<input type="hidden" id="confirm-title" value='{% trans "Confirmation" %}'/>
+	<input type="hidden" id="confirm-message" value='{% trans "Are you sure you want to delete the selected element(s)?" %}'/>
+	<input type="hidden" name="changelist-action" id="changelist-action" value=""/>
+		<div class="add-delete-container">
+			<button type="button" class="btn btn-sm btn-danger" name="delete-selected" id="delete-selected">
+				<span class="glyphicon glyphicon-remove"></span> {% trans "Delete selected" %}
+			</button>
+			<a class="btn btn-sm btn-success float-end" name="add-annal" id="add-annal" data-toggle="modal" href="#div-change-annal">
+				<span class="glyphicon glyphicon-plus"></span> {% trans "Add Annal" %}
+			</a>
+		</div>
+		<table id="result-list" class="table">
+		<thead>
+			<tr>
+				<th class="td-centered"><input type="checkbox" id="sel-toggle-all"/></th>
+				<th>{% trans "Annal name" %}</th>
+				<th>{% trans "Enabled" %}</th>
+				<th>{% trans "Teacher" %}</th>
+				<th>{% trans "Created on" %}</th>
+				<th>{% trans "Auto enable on" %}</th>
+				<th>{% trans "Auto disable on" %}</th>
+				<th class="td-centered">{% trans "Duration" %}</th>
+				<th class="td-centered">{% trans "Number of questions" %}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for annal in annals %}
+			<tr>
+				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-annal-{{ annal.id }}"/></td>
+				<td><a class="annal-edit cursor-pointer" tag="{{ annal.id }}" data-toggle="modal" href="#div-change-annal">
+					{{ annal.annal_name }}
+				</a></td>
+				<td>
+					{% if annal.enabled %}
+					<span class="option_enabled"></span>
+					{% else %}
+					<span class="option_disabled"></span>
+					{% endif %}
+				</td>
+				<td>
+					{{ annal.teacher }}
+				</td>
+				<td>
+					{{ annal.created_on }}
+				</td>
+				<td>
+					{% if annal.auto_enable %}
+					<span>{{ annal.auto_enable_date }}</span>
+					{% else %}
+					<span>{% trans "None" %}</span>
+					{% endif %}
+				</td>
+				<td>
+					{% if annal.auto_disable %}
+					<span>{{ annal.auto_disable_date }}</span>
+					{% else %}
+					<span>{% trans "None" %}</span>
+					{% endif %}
+				</td>
+				<td class="td-centered">
+					{{ annal.annal_duration }}
+				</td>
+				<td class="td-centered">
+					<span class="label label-success annal-nb-quizzes" tag="{{ annal.id }}" 
+					tag-current="" tag-annal="{{ annal.annal_name }}">
+						{{ annal.number_of_questions }}
+					</span>
+				</td>
+			</tr>
+			{% endfor %}
+			{% if not annals %}
+			<tr>
+				<td colspan="9" style="text-align: center">{% trans "Empty" %}</td>
+			</tr>
+			{% endif %}
+		</tbody>
+		</table>
+	</form>
+	<nav>
+		<div class="td-centered">
+		<ul class="pagination" id="annal-pages">
+		{% if search_term %}
+			{% if previous_page == page_num %}
+			<li class="disabled"><a aria-label="previous-page">
+				<span aria-hidden="true">&laquo;</span>
+			</a></li>
+			{% else %}
+			<li title='{% trans "Previous" %}'>
+				<a href="{{ request.session.site_url }}annals/search/?q={{ search_term }}&page={{ previous_page }}" aria-label="previous-page">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			{% endif %}
+			{% for p in displayed_pages %}
+			{% if p == page_num %}
+			<li class="active"><a>{{ p }}</a></li>
+			{% else %}
+			<li><a href="{{ request.session.site_url }}annals/search/?q={{ search_term }}&page={{ p }}">{{ p }}</a></li>
+			{% endif %}
+			{% endfor %}
+			{% if next_page == page_num %}
+			<li class="disabled"><a aria-label="next-page">
+				<span aria-hidden="true">&raquo;</span>
+			</a></li>
+			{% else %}
+			<li title='{% trans "Next" %}'>
+				<a href="{{ request.session.site_url }}annals/search/?q={{ search_term }}&page={{ next_page }}" aria-label="next-page">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+			{% endif %}
+		{% else %}
+			{% if previous_page == page_num %}
+			<li class="disabled"><a aria-label="previous-page">
+				<span aria-hidden="true">&laquo;</span>
+			</a></li>
+			{% else %}
+			<li title='{% trans "Previous" %}'><a href="{{ request.session.site_url }}annals/?page={{ previous_page }}" aria-label="previous-page">
+				<span aria-hidden="true">&laquo;</span>
+			</a></li>
+			{% endif %}
+			{% for p in displayed_pages %}
+			{% if p == page_num %}
+			<li class="active"><a>{{ p }}</a></li>
+			{% else %}
+			<li><a href="{{ request.session.site_url }}annals/?page={{ p }}">{{ p }}</a></li>
+			{% endif %}
+			{% endfor %}
+			{% if next_page == page_num %}
+			<li class="disabled"><a aria-label="next-page">
+				<span aria-hidden="true">&raquo;</span>
+			</a></li>
+			{% else %}
+			<li title='{% trans "Next" %}'><a href="{{ request.session.site_url }}annals/?page={{ next_page }}" aria-label="next-page">
+				<span aria-hidden="true">&raquo;</span>
+			</a></li>
+			{% endif %}
+		{% endif %}
+		</ul>
+		</div>
+	</nav>
+	</div>
+	<div class="col-sm-8">
+		<div class="row">
+			<div class="col-sm-6">
+			</div>
+			<div class="col-sm-6">
+				<form action="{{ request.session.site_url }}annals/search/" name="form-search-annal" id="form-search-annal" method="get">
+				<div class="input-group searchbox-container float-end">
+						{% if search_term %}
+						<input type="text" class="form-control hilighted-searchbox" name="q" id="q" aria-describedby="annal-remove-search" 
+						placeholder='{% trans "Enter annal name" %}' value="{{ request.GET.q }}">
+						<span class="input-group-addon cursor-pointer" id="annal-remove-search"><span class="glyphicon glyphicon-remove"></span></span>
+						{% else %}
+						<input type="text" class="form-control" name="q" id="q" aria-describedby="annal-search-icon" 
+						placeholder='{% trans "Enter annal name" %}'>
+						<span class="input-group-addon cursor-pointer" id="annal-search-icon"><span class="glyphicon glyphicon-search"></span></span>
+						{% endif %}
+				</div>
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<b>{% trans "Quizzes" %}<span id="st-panel-title" hidden="true"> | <span class="label label-success" id="st-panel-subtitle"></span></span></b>
+			</div>
+			<div class="panel-body">
+				{% trans "Click on <b>number of quizzes</b> of a student to show their quizzes." %}
+			</div>
+			<div id="table-quizzes" hidden="true">
+				<table class='table' width='100%'>
+					<tr><td width='50%'>{% trans "Name:" %}</td>
+					<td id="st-quiz-name"></td></tr>
+					<tr><td width='50%'>{% trans "Submitted:" %}</td>
+					<td id="st-quiz-submitted"></td></tr>
+					<tr><td width='50%'>{% trans "Score:" %}</td>
+					<td id="st-quiz-score"></td></tr>
+					<tr><td width='50%'>{% trans "Number of questions:" %}</td>
+					<td id="st-quiz-nb-questions"></td></tr>
+					<tr><td width='50%'>{% trans "Start time:" %}</td>
+					<td id="st-quiz-started"></td></tr>
+					<tr><td width='50%'>{% trans "Finished in:" %}</td>
+					<td id="st-quiz-finished"></td></tr>
+				</table>
+				<nav class='nav-padded'><ul class='pager'>
+					{% if request.session.direction == "rtl" %}
+					<li class='previous'><a class='pager-previous' tag=''><span aria-hidden='true'>&rarr;</span> {% trans "Previous" %}</a></li>
+					<li><span><span id="st-quiz-current">1</span> / <span id="st-quiz-total"></span></span></li>
+					<li class='next'><a class='pager-next' tag=''>{% trans "Next" %} <span aria-hidden='true'>&larr;</span></a></li>
+					{% else %}
+					<li class='previous'><a class='pager-previous' tag=''><span aria-hidden='true'>&larr;</span> {% trans "Previous" %}</a></li>
+					<li><span><span id="st-quiz-current">1</span> / <span id="st-quiz-total"></span></span></li>
+					<li class='next'><a class='pager-next' tag=''>{% trans "Next" %} <span aria-hidden='true'>&rarr;</span></a></li>
+					{% endif %}
+				</ul></nav>
+			</div>
+		</div>
+	</div>
+	</div>
+{% endblock %}
