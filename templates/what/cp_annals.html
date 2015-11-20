@@ -30,9 +30,45 @@
 			<input type="hidden" name="annal-action" id="annal-action" value="">
 			<input type="hidden" name="annal_id" id="annal_id" value="">
 			<div class="form-group">
-				<label for="annal-name" class="control-label col-sm-3">{% trans "Annal name:" %}</label>
+				<div class="btn-group col-sm-offset-1" data-toggle="buttons">
+					<label class="btn btn-default">
+						<input type="checkbox" name="annal_enabled" id="annal_enabled" autocomplete="off">
+						{% trans "Enabled" %}
+					</label>
+					<label class="btn btn-default">
+						<input type="checkbox" name="annal_reveal_answers" id="annal_reveal_answers" autocomplete="off">
+						{% trans "Reveal answers on finish" %}
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="annal_name" class="control-label col-sm-3">{% trans "Annal name:" %}</label>
 				<div class="col-sm-7">
 					<input type="text" name="annal_name" id="annal_name" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="annal_duration" class="control-label col-sm-3">{% trans "Duration:" %}</label>
+				<div class="col-sm-7">
+					<input type="text" name="annal_duration" id="annal_duration" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="annal_starts_on" class="control-label col-sm-3">{% trans "Starts on:" %}</label>
+				<div class="col-sm-7">
+					<input type="text" name="annal_starts_on" id="annal_starts_on" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="annal_ends_on" class="control-label col-sm-3">{% trans "Ends on:" %}</label>
+				<div class="col-sm-7">
+					<input type="text" name="annal_ends_on" id="annal_ends_on" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="annal_rules" class="control-label col-sm-3">{% trans "Rules:" %}</label>
+				<div class="col-sm-7">
+					<textarea name="annal_rules" id="annal_rules" class="form-control"></textarea>
 				</div>
 			</div>
 			<div class="form-group">
