@@ -37,7 +37,8 @@ $(document).ready(function() {
 
 	var msg_student_name_required = $("#msg-student-name-required").val();
 
-	$('.selectpicker').selectpicker();
+	$(".selectpicker").selectpicker();
+	$(".datetimebox").datetimepicker({locale: "en"});
 
 	$("#select-locale").change(function() {
 		$("#locale-hidden").val($("#select-locale").find("option:selected").val());
