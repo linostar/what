@@ -120,6 +120,21 @@ $(document).ready(function() {
 		}
 	});
 
+	$(".checkbox_button").change(function() {
+		var disabled_caption = $("#disabled_caption").val();
+		var enabled_caption = $("#enabled_caption").val();
+		if ($(this).is(":checked")) {
+			$(this).removeClass("btn-success");
+			$(this).addClass("btn-default");
+			$(this).parent().find(".checkbox_caption").text(disabled_caption);
+		}
+		else {
+			$(this).removeClass("btn-default");
+			$(this).addClass("btn-success");
+			$(this).parent().find(".checkbox_caption").text(enabled_caption);
+		}
+	});
+
 	$("#add-student").click(function() {
 		$("#student-action").val("add");
 		$("#modal-change-student-title").text($("#student-add-title").val());
@@ -202,6 +217,7 @@ $(document).ready(function() {
 			$(".sel-item").prop("checked", false);
 	});
 
+	// for countdown timer in quizzes
 	var timer = setInterval(function() {
 		var ending_soon = false;
 		var remaining_time = parseInt($("#remaining-time-hidden").attr("value"));

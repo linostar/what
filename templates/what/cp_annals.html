@@ -27,17 +27,19 @@
 			<input type="hidden" id="annal-add-title" value='{% trans "Add new annal" %}'>
 			<input type="hidden" id="annal-edit-title" value='{% trans "Edit annal: " %}'>
 			<input type="hidden" id="msg-annal-name-required" value='{% trans "annal name is required." %}'>
+			<input type="hidden" id="disabled_caption" value='{% trans "Disabled" %}'>
+			<input type="hidden" id="enabled_caption" value='{% trans "Enabled" %}'>
 			<input type="hidden" name="annal-action" id="annal-action" value="">
 			<input type="hidden" name="annal_id" id="annal_id" value="">
 			<div class="form-group">
 				<div class="btn-group col-sm-offset-1" data-toggle="buttons">
 					<label class="btn btn-default">
-						<input type="checkbox" name="annal_enabled" id="annal_enabled" autocomplete="off">
-						{% trans "Enabled" %}
+						<input type="checkbox" name="annal_enabled" id="annal_enabled" class="checkbox_button" autocomplete="off">
+						<span class="checkbox_caption">{% trans "Enabled" %}</span>
 					</label>
 					<label class="btn btn-default">
-						<input type="checkbox" name="annal_reveal_answers" id="annal_reveal_answers" autocomplete="off">
-						{% trans "Reveal answers on finish" %}
+						<input type="checkbox" name="annal_reveal_answers" id="annal_reveal_answers" class="checkbox_button" autocomplete="off">
+						<span class="checkbox_caption">{% trans "Reveal answers on finish" %}</span>
 					</label>
 				</div>
 			</div>
