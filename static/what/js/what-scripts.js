@@ -36,6 +36,7 @@ $(document).ready(function() {
 	}
 
 	var msg_student_name_required = $("#msg-student-name-required").val();
+	var msg_annal_name_required = $("#msg-annal-name-required").val();
 
 	$(".selectpicker").selectpicker();
 	$(".datetimebox").datetimepicker({locale: "en"});
@@ -102,9 +103,31 @@ $(document).ready(function() {
 		}
 	});
 
+	$("#form-change-annal").bootstrapValidator({
+		feedbackIcons: {
+			valid: "glyphicon glyphicon-ok",
+			invalid: "glyphicon glyphicon-remove",
+			validating: "glyphicon glyphicon-refresh"
+		},
+		fields: {
+			annal_name: {
+				validators: {
+					notEmpty: {
+						message: msg_annal_name_required
+					}
+				}
+			}
+		}
+	});
+
 	$("#add-student").click(function() {
 		$("#student-action").val("add");
 		$("#modal-change-student-title").text($("#student-add-title").val());
+	});
+
+	$("#add-annal").click(function() {
+		$("#annal-action").val("add");
+		$("#modal-change-annal-title").text($("#annal-add-title").val());
 	});
 
 	$("#delete-selected").click(function() {
