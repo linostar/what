@@ -37,6 +37,7 @@ $(document).ready(function() {
 
 	var msg_student_name_required = $("#msg-student-name-required").val();
 	var msg_annal_name_required = $("#msg-annal-name-required").val();
+	var msg_annal_duration_required = $("#msg-annal-duration-required").val();
 
 	$(".selectpicker").selectpicker();
 	$(".datetimebox").datetimepicker({locale: "en"});
@@ -116,6 +117,13 @@ $(document).ready(function() {
 						message: msg_annal_name_required
 					}
 				}
+			},
+			annal_duration: {
+				validators: {
+					notEmpty: {
+						message: msg_annal_duration_required
+					}
+				}
 			}
 		}
 	});
@@ -123,15 +131,23 @@ $(document).ready(function() {
 	$(".checkbox_button").change(function() {
 		var disabled_caption = $("#disabled_caption").val();
 		var enabled_caption = $("#enabled_caption").val();
+		var reveal_caption = $("#reveal_caption").val();
+		var no_reveal_caption = $("#no_reveal_caption").val();
 		if ($(this).is(":checked")) {
-			$(this).removeClass("btn-success");
-			$(this).addClass("btn-default");
-			$(this).parent().find(".checkbox_caption").text(disabled_caption);
+			$(this).parent().removeClass("btn-default");
+			$(this).parent().addClass("btn-primary");
+			if ($(this).attr("id") == "annal_reveal_answers")
+				$(this).parent().find(".checkbox_caption").text(reveal_caption);
+			else
+				$(this).parent().find(".checkbox_caption").text(enabled_caption);
 		}
 		else {
-			$(this).removeClass("btn-default");
-			$(this).addClass("btn-success");
-			$(this).parent().find(".checkbox_caption").text(enabled_caption);
+			$(this).parent().removeClass("btn-primary");
+			$(this).parent().addClass("btn-default");
+			if ($(this).attr("id") == "annal_reveal_answers")
+				$(this).parent().find(".checkbox_caption").text(no_reveal_caption);
+			else
+				$(this).parent().find(".checkbox_caption").text(disabled_caption);
 		}
 	});
 

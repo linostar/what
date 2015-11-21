@@ -26,20 +26,23 @@
 			{% csrf_token %}
 			<input type="hidden" id="annal-add-title" value='{% trans "Add new annal" %}'>
 			<input type="hidden" id="annal-edit-title" value='{% trans "Edit annal: " %}'>
-			<input type="hidden" id="msg-annal-name-required" value='{% trans "annal name is required." %}'>
+			<input type="hidden" id="msg-annal-name-required" value='{% trans "Annal name is required." %}'>
+			<input type="hidden" id="msg-annal-duration-required" value='{% trans "Annal duration is required." %}'>
 			<input type="hidden" id="disabled_caption" value='{% trans "Disabled" %}'>
 			<input type="hidden" id="enabled_caption" value='{% trans "Enabled" %}'>
+			<input type="hidden" id="no_reveal_caption" value='{% trans "Do not reveal answers on finish" %}'>
+			<input type="hidden" id="reveal_caption" value='{% trans "Reveal answers on finish" %}'>
 			<input type="hidden" name="annal-action" id="annal-action" value="">
 			<input type="hidden" name="annal_id" id="annal_id" value="">
 			<div class="form-group">
-				<div class="btn-group col-sm-offset-1" data-toggle="buttons">
+				<div class="btn-group btn-group-justified col-sm-3" data-toggle="buttons">
 					<label class="btn btn-default">
 						<input type="checkbox" name="annal_enabled" id="annal_enabled" class="checkbox_button" autocomplete="off">
 						<span class="checkbox_caption">{% trans "Enabled" %}</span>
 					</label>
 					<label class="btn btn-default">
 						<input type="checkbox" name="annal_reveal_answers" id="annal_reveal_answers" class="checkbox_button" autocomplete="off">
-						<span class="checkbox_caption">{% trans "Reveal answers on finish" %}</span>
+						<span class="checkbox_caption">{% trans "Do not reveal answers on finish" %}</span>
 					</label>
 				</div>
 			</div>
@@ -80,7 +83,7 @@
 			<div class="form-group">
 				<label for="annal_rules" class="control-label col-sm-3">{% trans "Rules:" %}</label>
 				<div class="col-sm-7">
-					<textarea name="annal_rules" id="annal_rules" class="form-control"></textarea>
+					<textarea name="annal_rules" id="annal_rules" class="form-control" cols="50" rows="5"></textarea>
 				</div>
 			</div>
 			<div class="form-group">
