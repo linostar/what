@@ -42,6 +42,8 @@ $(document).ready(function() {
 	$(".selectpicker").selectpicker();
 	$(".datetimebox").datetimepicker({locale: "en"});
 
+	$(".bs_switch").bootstrapSwitch();
+
 	$("#select-locale").change(function() {
 		$("#locale-hidden").val($("#select-locale").find("option:selected").val());
 		$("#form-change-locale").submit();
@@ -61,6 +63,14 @@ $(document).ready(function() {
 				}
 			}
 		});
+	});
+
+	$("#annal_starts_on_checkbox").on("switchChange.bootstrapSwitch", function(event, state) {
+		$("#annal_starts_on_text").prop("disabled", !state);
+	});
+
+	$("#annal_ends_on_checkbox").on("switchChange.bootstrapSwitch", function(event, state) {
+		$("#annal_ends_on_text").prop("disabled", !state);
 	});
 
 	$(".student-nb-quizzes").click(function() {

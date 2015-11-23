@@ -59,10 +59,12 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="annal_starts_on" class="control-label col-sm-3">{% trans "Starts on:" %}</label>
-				<div class="col-sm-7">
+				<label for="annal_starts_on" class="control-label col-sm-3">{% trans "Auto start:" %}</label>
+				<input type="checkbox" name="annal_starts_on_checkbox" id="annal_starts_on_checkbox" class="bs_switch col-sm-2"
+				data-on-text='{% trans "ON" %}' data-off-text='{% trans "OFF" %}' data-label-width="10">
+				<div class="col-sm-5">					
 					<div class="input-group date datetimebox" id="annal_starts_on" name="annal_starts_on">
-						<input type="text" class="form-control" />
+						<input type="text" class="form-control" id="annal_starts_on_text" name="annal_starts_on_text" disabled/>
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
@@ -71,9 +73,11 @@
 			</div>
 			<div class="form-group">
 				<label for="annal_ends_on" class="control-label col-sm-3">{% trans "Ends on:" %}</label>
-				<div class="col-sm-7">
+				<input type="checkbox" name="annal_ends_on_checkbox" id="annal_ends_on_checkbox" class="bs_switch col-sm-2"
+				data-on-text='{% trans "ON" %}' data-off-text='{% trans "OFF" %}' data-label-width="10">
+				<div class="col-sm-5">
 					<div class="input-group date datetimebox" id="annal_ends_on" name="annal_ends_on">
-						<input type="text" class="form-control" />
+						<input type="text" class="form-control" id="annal_ends_on_text" name="annal_ends_on_text" disabled/>
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
