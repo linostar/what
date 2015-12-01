@@ -67,10 +67,12 @@ $(document).ready(function() {
 
 	$("#annal_starts_on_checkbox").on("switchChange.bootstrapSwitch", function(event, state) {
 		$("#annal_starts_on_text").prop("disabled", !state);
+		$("#annal_starts_on_hidden").val(state);
 	});
 
 	$("#annal_ends_on_checkbox").on("switchChange.bootstrapSwitch", function(event, state) {
 		$("#annal_ends_on_text").prop("disabled", !state);
+		$("#annal_ends_on_hidden").val(state);
 	});
 
 	$(".student-nb-quizzes").click(function() {

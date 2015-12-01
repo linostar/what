@@ -1,4 +1,5 @@
 import json
+import html
 from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -158,7 +159,7 @@ def cp_students(request):
 					message = _("Student already exists in database.")
 					alert_status = "alert-danger"
 				except:
-					message = _("Due to an unknown error, the student could not be saved to database.")
+					message = _("Due to an unknown error, the student could not be created.")
 					alert_status = "alert-danger"
 			# edit student
 			elif request.POST['student-action'] == "edit":
@@ -271,12 +272,40 @@ def cp_annals(request):
 			# add annal
 			if request.POST['annal-action'] == "add":
 				try:
-					new_annal = Annal(annal_name=(request.POST['annal_name']).strip())
+					this_teacher = Teacher.objects.get(user__username=request.session['username'])
+					if "annal_enabled" in request.POST and request.POST['annal_enabled'] == 'on':
+						enabled = True
+					else:
+						enabled = False
+					# TODO: use html.escape for 'rules' and allow markdown or rst instead of html
+					rules = request.POST['annal_rules']
+					# TODO: convert from different units of times to seconds for 'duration'
+					duration = request.POST['annal_duration']
+					if "annal_reveal_answers" in request.POST and request.POST['annal_reveal_answers'] == 'on':
+						show_answers = True
+					else:
+						show_answers = False
+					if "annal_starts_on_hidden" in request.POST and request.POST['annal_starts_on_hidden']:
+						auto_enable = True
+						auto_enable_date = Utils.convert_datetime(request.POST['annal_starts_on_text'])
+					else:
+						auto_enable = False
+						auto_enable_date = datetime
+					if "annal_ends_on_hidden" in request.POST and request.POST['annal_ends_on_hidden']:
+						auto_disable = True
+						auto_disable_date = Utils.convert_datetime(request.POST['annal_ends_on_text'])
+					else:
+						auto_disable = False
+						auto_disable_date = datetime
+					new_annal = Annal(annal_name=(request.POST['annal_name']).strip(), teacher=this_teacher,
+						enabled=enabled, rules=rules, annal_duration=duration, show_correct_answers_at_end=show_answers,
+						auto_enable=auto_enable, auto_enable_date=auto_enable_date,
+						auto_disable=auto_disable, auto_disable_date=auto_disable_date)
 					new_annal.save()
 					message = _("Annal <strong>{}</strong> successfully added.".format(request.POST['annal_name']))
 					alert_status = "alert-success"
 				except:
-					message = _("Due to an unknown error, the annal could not be saved to database.")
+					message = _("Due to an unknown error, the annal could not be created.")
 					alert_status = "alert-danger"
 			# edit annal
 			elif request.POST['annal-action'] == "edit":

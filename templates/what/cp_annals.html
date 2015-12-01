@@ -38,7 +38,7 @@
 				<div class="btn-group btn-group-justified col-sm-3" data-toggle="buttons">
 					<label class="btn btn-default">
 						<input type="checkbox" name="annal_enabled" id="annal_enabled" class="checkbox_button" autocomplete="off">
-						<span class="checkbox_caption">{% trans "Enabled" %}</span>
+						<span class="checkbox_caption">{% trans "Disabled" %}</span>
 					</label>
 					<label class="btn btn-default">
 						<input type="checkbox" name="annal_reveal_answers" id="annal_reveal_answers" class="checkbox_button" autocomplete="off">
@@ -59,6 +59,7 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<input type="hidden" name="annal_starts_on_hidden" id="annal_starts_on_hidden" value="">
 				<label for="annal_starts_on" class="control-label col-sm-3">{% trans "Auto start:" %}</label>
 				<input type="checkbox" name="annal_starts_on_checkbox" id="annal_starts_on_checkbox" class="bs_switch col-sm-2"
 				data-on-text='{% trans "ON" %}' data-off-text='{% trans "OFF" %}' data-label-width="10">
@@ -72,6 +73,7 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<input type="hidden" name="annal_ends_on_hidden" id="annal_ends_on_hidden" value="">
 				<label for="annal_ends_on" class="control-label col-sm-3">{% trans "Ends on:" %}</label>
 				<input type="checkbox" name="annal_ends_on_checkbox" id="annal_ends_on_checkbox" class="bs_switch col-sm-2"
 				data-on-text='{% trans "ON" %}' data-off-text='{% trans "OFF" %}' data-label-width="10">

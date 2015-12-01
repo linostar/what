@@ -132,3 +132,7 @@ class Utils:
 	def process_annals(annals):
 		for a in annals:
 			setattr(a, "annal_duration", Utils.format_duration(getattr(a, "annal_duration")))
+
+	@staticmethod
+	def convert_datetime(d):
+		return datetime.strftime(datetime.strptime(d, "%m/%d/%Y %I:%M %p"), "%Y-%m-%d %H:%M")
