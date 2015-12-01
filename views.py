@@ -290,13 +290,13 @@ def cp_annals(request):
 						auto_enable_date = Utils.convert_datetime(request.POST['annal_starts_on_text'])
 					else:
 						auto_enable = False
-						auto_enable_date = datetime
+						auto_enable_date = None
 					if "annal_ends_on_hidden" in request.POST and request.POST['annal_ends_on_hidden']:
 						auto_disable = True
 						auto_disable_date = Utils.convert_datetime(request.POST['annal_ends_on_text'])
 					else:
 						auto_disable = False
-						auto_disable_date = datetime
+						auto_disable_date = None
 					new_annal = Annal(annal_name=(request.POST['annal_name']).strip(), teacher=this_teacher,
 						enabled=enabled, rules=rules, annal_duration=duration, show_correct_answers_at_end=show_answers,
 						auto_enable=auto_enable, auto_enable_date=auto_enable_date,
