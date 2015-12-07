@@ -106,7 +106,9 @@
 	<br/>
 	<div class="row">
 	<div class="col-sm-12">
-	<form id="changelist-form" action="{{ request.session.site_url }}annals/" method="post" novalidate>
+	<form action="{{ request.session.site_url }}annals/search/" name="form-search-annal" id="form-search-annal" method="get">
+	</form>
+	<form id="changelist-form" name="changelist-form" action="{{ request.session.site_url }}annals/" method="post" novalidate>
 	{% csrf_token %}
 	<input type="hidden" id="confirm-yes" value='{% trans "Yes" %}'/>
 	<input type="hidden" id="confirm-no" value='{% trans "No" %}'/>
@@ -126,19 +128,17 @@
 				</div>
 			</div>
 			<div class="col-sm-4">
-				<form action="{{ request.session.site_url }}annals/search/" name="form-search-annal" id="form-search-annal" method="get">
 				<div class="input-group searchbox-container float-end">
 						{% if search_term %}
 						<input type="text" class="form-control hilighted-searchbox" name="q" id="q" aria-describedby="annal-remove-search" 
-						placeholder='{% trans "Enter annal name" %}' value="{{ request.GET.q }}">
+						placeholder='{% trans "Enter annal name" %}' value="{{ request.GET.q }}" form="form-search-annal">
 						<span class="input-group-addon cursor-pointer" id="annal-remove-search"><span class="glyphicon glyphicon-remove"></span></span>
 						{% else %}
 						<input type="text" class="form-control" name="q" id="q" aria-describedby="annal-search-icon" 
-						placeholder='{% trans "Enter annal name" %}'>
+						placeholder='{% trans "Enter annal name" %}' form="form-search-annal">
 						<span class="input-group-addon cursor-pointer" id="annal-search-icon"><span class="glyphicon glyphicon-search"></span></span>
 						{% endif %}
 				</div>
-				</form>
 			</div>
 		</div>
 		<table id="result-list" class="table">
@@ -158,7 +158,7 @@
 		<tbody>
 			{% for annal in annals %}
 			<tr>
-				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-annal-{{ annal.id }}"/></td>
+				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-annal-{{ annal.id }}" id="sel-annal-{{ annal.id }}"/></td>
 				<td><a class="annal-edit cursor-pointer" tag="{{ annal.id }}" data-toggle="modal" href="#div-change-annal">
 					{{ annal.annal_name }}
 				</a></td>

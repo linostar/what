@@ -251,14 +251,14 @@ def cp_annals(request):
 				"search_term": request.GET['q'],
 				"annals": annals,
 				})
-	elif request.method == "POST":
+	if request.method == "POST":
 		# delete annal
 		if "changelist-action" in request.POST and request.POST['changelist-action'] == "delete":
 			annal_ids = []
 			for element in request.POST:
 				if element.startswith("sel-annal-") and request.POST[element]:
 					try:
-						annal_ids.append(int(element[12:]))
+						annal_ids.append(int(element[10:]))
 					except:
 						continue
 			try:
