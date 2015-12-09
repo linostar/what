@@ -131,6 +131,7 @@ class Utils:
 	@staticmethod
 	def process_annals(annals):
 		for a in annals:
+			setattr(a, "num_duration", getattr(a, "annal_duration"))
 			setattr(a, "annal_duration", Utils.format_duration(getattr(a, "annal_duration")))
 
 	@staticmethod

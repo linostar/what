@@ -159,7 +159,8 @@
 			{% for annal in annals %}
 			<tr>
 				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-annal-{{ annal.id }}" id="sel-annal-{{ annal.id }}"/></td>
-				<td><a class="annal-edit cursor-pointer" tag="{{ annal.id }}" data-toggle="modal" href="#div-change-annal">
+				<td><a class="annal-edit cursor-pointer" tag="{{ annal.id }}" data-toggle="modal" href="#div-change-annal" 
+				tag-enabled="{{ annal.enabled }}" tag-reveal-answers="{{ annal.show_correct_answers_at_end }}" tag-duration="{{ annal.num_duration }}">
 					{{ annal.annal_name }}
 				</a></td>
 				<td class="td-centered">

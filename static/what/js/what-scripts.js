@@ -206,6 +206,17 @@ $(document).ready(function() {
 		$("#student_name").val(stud_name);
 	});
 
+	$(".annal-edit").click(function() {
+		var annal_name = $.trim($(this).text());
+		$("#annal-action").val("edit");
+		$("#modal-change-annal-title").text($("#annal-edit-title").val() + annal_name);
+		$("#annal_id").val($(this).attr("tag"));
+		$("#annal_name").val(annal_name);
+		$("#annal_enabled").val($(this).attr("tag-enabled"));
+		$("#annal_reveal_answers").val($(this).attr("tag-reveal-answers"));
+		$("#annal_duration").val($(this).attr("tag-duration"));
+	});
+
 	$(".answers").click(function() {
 		if ($(this).hasClass("yellow")) {
 			$(this).removeClass("yellow");

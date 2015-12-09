@@ -271,6 +271,7 @@ def cp_annals(request):
 		elif "annal-action" in request.POST:
 			# add annal
 			if request.POST['annal-action'] == "add":
+				# TODO: check for teacher access
 				try:
 					this_teacher = Teacher.objects.get(user__username=request.session['username'])
 					if "annal_enabled" in request.POST and request.POST['annal_enabled'] == 'on':
@@ -310,9 +311,20 @@ def cp_annals(request):
 			# edit annal
 			elif request.POST['annal-action'] == "edit":
 				try:
-					# no need to check for teacher access on changing students
+					# TODO: check for teacher access
+					this_teacher = Teacher.objects.get(user__username=request.session['username'])
 					edited_annal = Annal(id=request.POST['annal_id'])
 					edited_annal.annal_name = request.POST['annal_name']
+					if "annal_enabled" in request.POST:
+						edited_annal.enabled = request.POST['annal_enabled']
+					else:
+						edited_annal.enabled = False
+					if "annal_reveal_answers" in request.POST:
+						edited_annal.show_correct_answers_at_end = request.POST['annal_reveal_answers']
+					else:
+						edited_annal.show_correct_answers_at_end = False
+					edited_annal.annal_duration = int(request.POST['annal_duration'])
+					edited_annal.teacher = this_teacher
 					edited_annal.save()
 					message = _("Annal successfully saved.")
 					alert_status = "alert-success"
