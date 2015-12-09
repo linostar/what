@@ -212,8 +212,35 @@ $(document).ready(function() {
 		$("#modal-change-annal-title").text($("#annal-edit-title").val() + annal_name);
 		$("#annal_id").val($(this).attr("tag"));
 		$("#annal_name").val(annal_name);
-		$("#annal_enabled").val($(this).attr("tag-enabled"));
-		$("#annal_reveal_answers").val($(this).attr("tag-reveal-answers"));
+		if ($(this).attr("tag-enabled") == "True") {
+			$("#annal_enabled").attr("checked", true);
+			$("#annal_enabled").parent().removeClass("btn-default");
+			$("#annal_enabled").parent().addClass("btn-primary");
+			$("#annal_enabled").parent().addClass("active");
+			$("#annal_enabled").next().text($("#enabled_caption").val());
+		}
+		else {
+			$("#annal_enabled").attr("checked", false);
+			$("#annal_enabled").parent().removeClass("active");
+			$("#annal_enabled").parent().removeClass("btn-primary");
+			$("#annal_enabled").parent().addClass("btn-default");
+			$("#annal_enabled").next().text($("#disabled_caption").val());
+		}
+		if ($(this).attr("tag-reveal-answers") == "True") {
+			$("#annal_reveal_answers").attr("checked", true);
+			$("#annal_reveal_answers").parent().removeClass("btn-default");
+			$("#annal_reveal_answers").parent().addClass("btn-primary");
+			$("#annal_reveal_answers").parent().addClass("active");
+			$("#annal_reveal_answers").next().text($("#reveal_caption").val());
+		}
+		else {
+			$("#annal_reveal_answers").attr("checked", false);
+			$("#annal_reveal_answers").parent().removeClass("active");
+			$("#annal_reveal_answers").parent().removeClass("btn-primary");
+			$("#annal_reveal_answers").parent().addClass("btn-default");
+			$("#annal_reveal_answers").next().text($("#no_reveal_caption").val());
+		}
+		$("#annal_reveal_answers").attr("checked", $(this).attr("tag-reveal-answers"));
 		$("#annal_duration").val($(this).attr("tag-duration"));
 	});
 
