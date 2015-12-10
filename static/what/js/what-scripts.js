@@ -240,10 +240,32 @@ $(document).ready(function() {
 			$("#annal_reveal_answers").parent().addClass("btn-default");
 			$("#annal_reveal_answers").next().text($("#no_reveal_caption").val());
 		}
+		if ($(this).attr("tag-starts-on") == "True") {
+			$("#annal_starts_on_text").prop("disabled", false);
+			$("#annal_starts_on_hidden").val(true);
+			$("#annal_starts_on_checkbox").bootstrapSwitch("state", true);
+		}
+		else {
+			$("#annal_starts_on_text").prop("disabled", true);
+			$("#annal_starts_on_hidden").val(false);
+			$("#annal_starts_on_checkbox").bootstrapSwitch("state", false);
+		}
+		if ($(this).attr("tag-ends-on") == "True") {
+			$("#annal_ends_on_text").prop("disabled", false);
+			$("#annal_ends_on_hidden").val(true);
+			$("#annal_ends_on_checkbox").bootstrapSwitch("state", true);
+		}
+		else {
+			$("#annal_ends_on_text").prop("disabled", true);
+			$("#annal_ends_on_hidden").val(false);
+			$("#annal_ends_on_checkbox").bootstrapSwitch("state", false);
+		}
 		$("#annal_reveal_answers").attr("checked", $(this).attr("tag-reveal-answers"));
 		$("#annal_duration").val($(this).attr("tag-duration"));
+		$("#annal_rules").val($(this).attr("tag-rules"));
 	});
 
+	// Quiz page
 	$(".answers").click(function() {
 		if ($(this).hasClass("yellow")) {
 			$(this).removeClass("yellow");
@@ -270,12 +292,14 @@ $(document).ready(function() {
 		window.location.href = $("#site_url").val() + "students/";
 	});
 
+	// Alerts
 	$("#login-success-alert").fadeIn();
 	$("#login-success-alert").delay(4000).fadeOut();
 
 	$("#alert-message").fadeIn();
 	$("#alert-message").delay(4000).fadeOut();
 
+	// Select All toggle
 	$("#sel-toggle-all").change(function() {
 		if (this.checked)
 			$(".sel-item").prop("checked", true);

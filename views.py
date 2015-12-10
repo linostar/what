@@ -324,6 +324,16 @@ def cp_annals(request):
 					else:
 						edited_annal.show_correct_answers_at_end = False
 					edited_annal.annal_duration = int(request.POST['annal_duration'])
+					# TODO: safely escape 'rules' content
+					edited_annal.rules = request.POST['annal_rules']
+					if "annal_starts_on_hidden" in request.POST:
+						edited_annal.auto_enable = (request.POST['annal_starts_on_hidden'] == "true")
+					else:
+						edited_annal.auto_enable = False
+					if "annal_ends_on_hidden" in request.POST:
+						edited_annal.auto_disable = (request.POST['annal_ends_on_hidden'] == "true")
+					else:
+						edited_annal.auto_disable = False
 					edited_annal.teacher = this_teacher
 					edited_annal.save()
 					message = _("Annal successfully saved.")
