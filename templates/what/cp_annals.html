@@ -161,7 +161,8 @@
 				<td class="td-centered"><input type="checkbox" class="sel-item" name="sel-annal-{{ annal.id }}" id="sel-annal-{{ annal.id }}"/></td>
 				<td><a class="annal-edit cursor-pointer" tag="{{ annal.id }}" data-toggle="modal" href="#div-change-annal" 
 				tag-enabled="{{ annal.enabled }}" tag-reveal-answers="{{ annal.show_correct_answers_at_end }}" tag-duration="{{ annal.num_duration }}" 
-				tag-rules="{{ annal.rules }}" tag-starts-on="{{ annal.auto_enable }}" tag-ends-on="{{ annal.auto_disable }}">
+				tag-rules="{{ annal.rules }}" tag-starts-on="{{ annal.auto_enable }}" tag-ends-on="{{ annal.auto_disable }}" 
+				tag-starts-on-date="{{ annal.auto_enable_date }}" tag-ends-on-date="{{ annal.auto_disable_date }}">
 					{{ annal.annal_name }}
 				</a></td>
 				<td class="td-centered">

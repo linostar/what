@@ -311,6 +311,7 @@ def cp_annals(request):
 			# edit annal
 			elif request.POST['annal-action'] == "edit":
 				try:
+					print(request.POST)
 					# TODO: check for teacher access
 					this_teacher = Teacher.objects.get(user__username=request.session['username'])
 					edited_annal = Annal(id=request.POST['annal_id'])
@@ -325,13 +326,22 @@ def cp_annals(request):
 						edited_annal.show_correct_answers_at_end = False
 					edited_annal.annal_duration = int(request.POST['annal_duration'])
 					# TODO: safely escape 'rules' content
+					# TODO: deal with different datetime formats
 					edited_annal.rules = request.POST['annal_rules']
-					if "annal_starts_on_hidden" in request.POST:
-						edited_annal.auto_enable = (request.POST['annal_starts_on_hidden'] == "true")
+					if "annal_starts_on_checkbox" in request.POST:
+						if request.POST['annal_starts_on_checkbox'] == "on":
+							edited_annal.auto_enable = True
+							edited_annal.auto_enable_date = datetime.strptime(request.POST['annal_starts_on_text'], "%m/%d/%Y %I:%M %p")
+						else:
+							edited_annal.auto_enable = False
 					else:
 						edited_annal.auto_enable = False
-					if "annal_ends_on_hidden" in request.POST:
-						edited_annal.auto_disable = (request.POST['annal_ends_on_hidden'] == "true")
+					if "annal_ends_on_checkbox" in request.POST:
+						if request.POST['annal_ends_on_checkbox'] == "on":
+							edited_annal.auto_disable = True
+							edited_annal.auto_disable_date = datetime.strptime(request.POST['annal_ends_on_text'], "%m/%d/%Y %I:%M %p")
+						else:
+							edited_annal.auto_disable = False
 					else:
 						edited_annal.auto_disable = False
 					edited_annal.teacher = this_teacher
