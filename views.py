@@ -330,7 +330,8 @@ def cp_annals(request):
 					if "annal_starts_on_checkbox" in request.POST:
 						if request.POST['annal_starts_on_checkbox'] == "on":
 							edited_annal.auto_enable = True
-							edited_annal.auto_enable_date = datetime.strptime(request.POST['annal_starts_on_text'], "%m/%d/%Y %I:%M %p")
+							starts_on_date = request.POST['annal_starts_on_text'].replace("midnight", "12:00 am")
+							edited_annal.auto_enable_date = datetime.strptime(starts_on_date, "%m/%d/%Y %I:%M %p")
 						else:
 							edited_annal.auto_enable = False
 					else:
@@ -338,7 +339,8 @@ def cp_annals(request):
 					if "annal_ends_on_checkbox" in request.POST:
 						if request.POST['annal_ends_on_checkbox'] == "on":
 							edited_annal.auto_disable = True
-							edited_annal.auto_disable_date = datetime.strptime(request.POST['annal_ends_on_text'], "%m/%d/%Y %I:%M %p")
+							ends_on_date = request.POST['annal_ends_on_text'].replace("midnight", "12:00 am")
+							edited_annal.auto_disable_date = datetime.strptime(ends_on_date, "%m/%d/%Y %I:%M %p")
 						else:
 							edited_annal.auto_disable = False
 					else:

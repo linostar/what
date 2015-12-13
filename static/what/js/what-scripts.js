@@ -244,7 +244,7 @@ $(document).ready(function() {
 			$("#annal_starts_on_text").prop("disabled", false);
 			$("#annal_starts_on_hidden").val(true);
 			$("#annal_starts_on_checkbox").bootstrapSwitch("state", true);
-			$("#annal_starts_on_text").val(moment($(this).attr("tag-starts-on-date"), "MMM DD, YYYY, hh:mm A"));
+			$("#annal_starts_on_text").val(moment($(this).attr("tag-starts-on-date"), "MM/DD/YYYY, hh:mm A")._i);
 		}
 		else {
 			$("#annal_starts_on_text").prop("disabled", true);
@@ -255,7 +255,7 @@ $(document).ready(function() {
 			$("#annal_ends_on_text").prop("disabled", false);
 			$("#annal_ends_on_hidden").val(true);
 			$("#annal_ends_on_checkbox").bootstrapSwitch("state", true);
-			$("#annal_ends_on_text").val(moment($(this).attr("tag-ends-on-date"), "MMM DD, YYYY, hh:mm A"));
+			$("#annal_ends_on_text").val(moment($(this).attr("tag-ends-on-date"), "MM/DD/YYYY, hh:mm A")._i);
 		}
 		else {
 			$("#annal_ends_on_text").prop("disabled", true);

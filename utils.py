@@ -129,11 +129,20 @@ class Utils:
 		return pages
 
 	@staticmethod
+	def convert_datetime(d):
+		return datetime.strftime(datetime.strptime(d, "%m/%d/%Y %I:%M %p"), "%Y-%m-%d %H:%M")
+
+	@staticmethod
+	def format_datetime(d):
+		return datetime.strftime(d, "%m/%d/%Y %I:%M %p")
+
+	@staticmethod
 	def process_annals(annals):
 		for a in annals:
 			setattr(a, "num_duration", getattr(a, "annal_duration"))
 			setattr(a, "annal_duration", Utils.format_duration(getattr(a, "annal_duration")))
-
-	@staticmethod
-	def convert_datetime(d):
-		return datetime.strftime(datetime.strptime(d, "%m/%d/%Y %I:%M %p"), "%Y-%m-%d %H:%M")
+			setattr(a, "created_on", Utils.format_datetime(getattr(a, "created_on")))
+			if getattr(a, "auto_enable_date"):
+				setattr(a, "auto_enable_date", Utils.format_datetime(getattr(a, "auto_enable_date")))
+			if getattr(a, "auto_disable_date"):
+				setattr(a, "auto_disable_date", Utils.format_datetime(getattr(a, "auto_disable_date")))
