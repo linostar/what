@@ -153,7 +153,7 @@ def cp_students(request):
 				try:
 					new_student = Student(student_name=(request.POST['student_name']).strip())
 					new_student.save()
-					message = _("Student <strong>{}</strong> successfully added.".format(request.POST['student_name']))
+					message = _("Student <strong>{}</strong> is successfully added.".format(request.POST['student_name']))
 					alert_status = "alert-success"
 				except IntegrityError:
 					message = _("Student already exists in database.")
@@ -168,7 +168,7 @@ def cp_students(request):
 					edited_student = Student(id=request.POST['student_id'])
 					edited_student.student_name = request.POST['student_name']
 					edited_student.save()
-					message = _("Student successfully saved.")
+					message = _("Student <strong>{}</strong> is successfully saved.".format(request.POST['annal_name']))
 					alert_status = "alert-success"
 				except IntegrityError:
 					message = _("Student with same name already exists in database.")
@@ -303,7 +303,7 @@ def cp_annals(request):
 						auto_enable=auto_enable, auto_enable_date=auto_enable_date,
 						auto_disable=auto_disable, auto_disable_date=auto_disable_date)
 					new_annal.save()
-					message = _("Annal <strong>{}</strong> successfully added.".format(request.POST['annal_name']))
+					message = _("Annal <strong>{}</strong> is successfully added.".format(request.POST['annal_name']))
 					alert_status = "alert-success"
 				except:
 					message = _("Due to an unknown error, the annal could not be created.")
@@ -311,7 +311,6 @@ def cp_annals(request):
 			# edit annal
 			elif request.POST['annal-action'] == "edit":
 				try:
-					print(request.POST)
 					# TODO: check for teacher access
 					this_teacher = Teacher.objects.get(user__username=request.session['username'])
 					edited_annal = Annal(id=request.POST['annal_id'])
@@ -346,7 +345,7 @@ def cp_annals(request):
 						edited_annal.auto_disable = False
 					edited_annal.teacher = this_teacher
 					edited_annal.save()
-					message = _("Annal successfully saved.")
+					message = _("Annal <strong>{}</strong> is successfully saved.".format(request.POST['annal_name']))
 					alert_status = "alert-success"
 				except:
 					message = _("Due to an unknown error, the annal could not be saved to database.")
